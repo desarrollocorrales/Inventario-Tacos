@@ -1,0 +1,7 @@
+D:\Github\Inventario-Tacos\InvenTacos\bin\Debug\InvenTacos.exe
+D:\Github\Inventario-Tacos\InvenTacos\bin\Debug\InvenTacos.pdb
+D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.GUIs.Frm_Principal.resources
+D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.Properties.Resources.resources
+D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.csproj.GenerateResource.Cache
+D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.exe
+D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.pdb
