@@ -5,3 +5,12 @@ D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.Properties.Resour
 D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.csproj.GenerateResource.Cache
 D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.exe
 D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.pdb
+D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.exe.licenses
+D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.csprojResolveAssemblyReference.cache
+D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.GUIs.Frm_ConfigDB.resources
+D:\Github\Inventario-Tacos\InvenTacos\bin\Debug\InvenTacos.exe.config
+D:\Github\Inventario-Tacos\InvenTacos\bin\Debug\DatosInvenTacos.dll
+D:\Github\Inventario-Tacos\InvenTacos\bin\Debug\DatosInvenTacos.pdb
+D:\Github\Inventario-Tacos\InvenTacos\bin\Debug\recursos\cargando.gif
+D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.GUIs.Frm_ImportarInsumos.resources
+D:\Github\Inventario-Tacos\InvenTacos\obj\x86\Debug\InvenTacos.GUIs.Frm_ConfigrarInsumos.resources

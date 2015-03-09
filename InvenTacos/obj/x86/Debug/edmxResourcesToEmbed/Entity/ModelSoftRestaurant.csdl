@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="softrestaurant8ProModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="SoftRestaurantEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="insumos" EntityType="softrestaurant8ProModel.insumos" />
+    <EntitySet Name="insumospresentaciones" EntityType="softrestaurant8ProModel.insumospresentaciones" />
+  </EntityContainer>
+  <EntityType Name="insumos">
+    <Key>
+      <PropertyRef Name="idinsumo" />
+    </Key>
+    <Property Name="idinsumo" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="descripcion" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+    <Property Name="idgruposi" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="unidad" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="elaborado" Type="Boolean" />
+    <Property Name="rendimientoelaborado" Type="Decimal" Precision="10" Scale="4" />
+  </EntityType>
+  <EntityType Name="insumospresentaciones">
+    <Key>
+      <PropertyRef Name="idinsumospresentaciones" />
+    </Key>
+    <Property Name="idinsumospresentaciones" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="descripcion" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+    <Property Name="idinsumo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="idgruposi" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="rendimiento" Type="Decimal" Precision="12" Scale="4" />
+  </EntityType>
+</Schema>

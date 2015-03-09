@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TacosInventariosModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="TacosInventariosModelStoreContainer">
+    <EntitySet Name="insumos" EntityType="TacosInventariosModel.Store.insumos" store:Type="Tables" Schema="tacos_inventarios" />
+    <EntitySet Name="inventdiarios" EntityType="TacosInventariosModel.Store.inventdiarios" store:Type="Tables" Schema="tacos_inventarios" />
+  </EntityContainer>
+  <EntityType Name="insumos">
+    <Key>
+      <PropertyRef Name="idinsumo" />
+    </Key>
+    <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="descripcion" Type="varchar" Nullable="false" MaxLength="60" />
+    <Property Name="unidad" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="rendimiento" Type="decimal" Precision="4" Scale="3" />
+  </EntityType>
+  <EntityType Name="inventdiarios">
+    <Key>
+      <PropertyRef Name="idinsumo" />
+      <PropertyRef Name="fecha" />
+    </Key>
+    <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="cantidad_crudo" Type="decimal" Nullable="false" Precision="7" Scale="3" />
+    <Property Name="cantidad_cocido" Type="decimal" Nullable="false" Precision="7" Scale="3" />
+    <Property Name="cantidad_total" Type="decimal" Nullable="false" Precision="7" Scale="3" />
+    <Property Name="fecha" Type="date" Nullable="false" />
+  </EntityType>
+</Schema>

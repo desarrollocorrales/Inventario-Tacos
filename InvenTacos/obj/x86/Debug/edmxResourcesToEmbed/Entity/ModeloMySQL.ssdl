@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TacosInventariosModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="TacosInventariosModelStoreContainer">
+    <EntitySet Name="insumos" EntityType="TacosInventariosModel.Store.insumos" store:Type="Tables" Schema="tacos_inventarios" />
+    <EntitySet Name="rendimiento" EntityType="TacosInventariosModel.Store.rendimiento" store:Type="Tables" Schema="tacos_inventarios" />
+    <AssociationSet Name="fk_insumo" Association="TacosInventariosModel.Store.fk_insumo">
+      <End Role="insumos" EntitySet="insumos" />
+      <End Role="rendimiento" EntitySet="rendimiento" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="insumos">
+    <Key>
+      <PropertyRef Name="idinsumo" />
+    </Key>
+    <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="descripcion" Type="varchar" Nullable="false" MaxLength="60" />
+    <Property Name="unidad" Type="varchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="rendimiento">
+    <Key>
+      <PropertyRef Name="idinsumo" />
+    </Key>
+    <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="rendimiento" Type="decimal" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_insumo">
+    <End Role="insumos" Type="TacosInventariosModel.Store.insumos" Multiplicity="1" />
+    <End Role="rendimiento" Type="TacosInventariosModel.Store.rendimiento" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="insumos">
+        <PropertyRef Name="idinsumo" />
+      </Principal>
+      <Dependent Role="rendimiento">
+        <PropertyRef Name="idinsumo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

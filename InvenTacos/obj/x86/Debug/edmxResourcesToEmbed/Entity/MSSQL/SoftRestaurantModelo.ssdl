@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SoftRestaurantModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="SoftRestaurantModelStoreContainer">
+    <EntitySet Name="insumos" EntityType="SoftRestaurantModel.Store.insumos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="insumospresentaciones" EntityType="SoftRestaurantModel.Store.insumospresentaciones" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="insumos">
+    <Key>
+      <PropertyRef Name="idinsumo" />
+    </Key>
+    <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="descripcion" Type="varchar" MaxLength="60" />
+    <Property Name="idgruposi" Type="varchar" MaxLength="5" />
+    <Property Name="unidad" Type="varchar" MaxLength="10" />
+    <Property Name="elaborado" Type="bit" />
+    <Property Name="rendimientoelaborado" Type="numeric" Precision="10" Scale="4" />
+  </EntityType>
+  <EntityType Name="insumospresentaciones">
+    <Key>
+      <PropertyRef Name="idinsumospresentaciones" />
+    </Key>
+    <Property Name="idinsumospresentaciones" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="descripcion" Type="varchar" MaxLength="60" />
+    <Property Name="idinsumo" Type="varchar" MaxLength="15" />
+    <Property Name="idgruposi" Type="varchar" MaxLength="5" />
+    <Property Name="rendimiento" Type="numeric" Precision="12" Scale="4" />
+  </EntityType>
+</Schema>

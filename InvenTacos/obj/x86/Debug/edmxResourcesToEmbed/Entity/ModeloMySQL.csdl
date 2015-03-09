@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TacosInventariosModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="TacosInventariosEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="insumos" EntityType="TacosInventariosModel.insumos" />
+    <EntitySet Name="rendimiento" EntityType="TacosInventariosModel.rendimiento" />
+    <AssociationSet Name="fk_insumo" Association="TacosInventariosModel.fk_insumo">
+      <End Role="insumos" EntitySet="insumos" />
+      <End Role="rendimiento" EntitySet="rendimiento" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="insumos">
+    <Key>
+      <PropertyRef Name="idinsumo" />
+    </Key>
+    <Property Type="String" Name="idinsumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="descripcion" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="unidad" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="rendimiento" Relationship="TacosInventariosModel.fk_insumo" FromRole="insumos" ToRole="rendimiento" />
+  </EntityType>
+  <EntityType Name="rendimiento">
+    <Key>
+      <PropertyRef Name="idinsumo" />
+    </Key>
+    <Property Type="String" Name="idinsumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="rendimiento1" Nullable="false" />
+    <NavigationProperty Name="insumos" Relationship="TacosInventariosModel.fk_insumo" FromRole="rendimiento" ToRole="insumos" />
+  </EntityType>
+  <Association Name="fk_insumo">
+    <End Type="TacosInventariosModel.insumos" Role="insumos" Multiplicity="1" />
+    <End Type="TacosInventariosModel.rendimiento" Role="rendimiento" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="insumos">
+        <PropertyRef Name="idinsumo" />
+      </Principal>
+      <Dependent Role="rendimiento">
+        <PropertyRef Name="idinsumo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TacosInventariosModelStoreContainer" CdmEntityContainer="TacosInventariosEntities">
+    <EntitySetMapping Name="insumos">
+      <EntityTypeMapping TypeName="TacosInventariosModel.insumos">
+        <MappingFragment StoreEntitySet="insumos">
+          <ScalarProperty Name="unidad" ColumnName="unidad" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rendimiento">
+      <EntityTypeMapping TypeName="TacosInventariosModel.rendimiento">
+        <MappingFragment StoreEntitySet="rendimiento">
+          <ScalarProperty Name="rendimiento1" ColumnName="rendimiento" />
+          <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

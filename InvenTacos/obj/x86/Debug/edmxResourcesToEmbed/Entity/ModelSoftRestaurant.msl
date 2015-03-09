@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="softrestaurant8ProModelStoreContainer" CdmEntityContainer="SoftRestaurantEntities">
+    <EntitySetMapping Name="insumos">
+      <EntityTypeMapping TypeName="softrestaurant8ProModel.insumos">
+        <MappingFragment StoreEntitySet="insumos">
+          <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idgruposi" ColumnName="idgruposi" />
+          <ScalarProperty Name="unidad" ColumnName="unidad" />
+          <ScalarProperty Name="elaborado" ColumnName="elaborado" />
+          <ScalarProperty Name="rendimientoelaborado" ColumnName="rendimientoelaborado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insumospresentaciones">
+      <EntityTypeMapping TypeName="softrestaurant8ProModel.insumospresentaciones">
+        <MappingFragment StoreEntitySet="insumospresentaciones">
+          <ScalarProperty Name="idinsumospresentaciones" ColumnName="idinsumospresentaciones" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
+          <ScalarProperty Name="idgruposi" ColumnName="idgruposi" />
+          <ScalarProperty Name="rendimiento" ColumnName="rendimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
