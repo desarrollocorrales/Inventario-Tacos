@@ -47,12 +47,16 @@ namespace InvenTacos.GUIs
 
             MessageBox.Show(sb.ToString());
         }
-
-        private void OpcConfigurar_Click(object sender, EventArgs e)
+        private bool RevisarPermisos()
         {
-            new Frm_ConfigDB().ShowDialog();
-        }
+            bool Autorizado = false;
+            Frm_Permitir frmPermitir = new Frm_Permitir();
+            frmPermitir.ShowDialog();
+            Autorizado = frmPermitir.Autorizado;
 
+            return Autorizado;
+        }
+       
         private void btnIniciarCaptura_Click(object sender, EventArgs e)
         {
             IniciarCaptura();
@@ -98,6 +102,15 @@ namespace InvenTacos.GUIs
         {
             try
             {
+                DateTime FechaServer = DateTime.Today.Date;
+                if (FechaServer < dtpFecha.Value.Date)
+                {
+                    MessageBox.Show("La fecha seleccionada es incorrecta...", "Error", 
+                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                dtpFecha.Enabled = false;
                 pbCargando.Visible = true;
                 Application.DoEvents();
 
@@ -122,6 +135,7 @@ namespace InvenTacos.GUIs
                     filaCaptura.ClaveInsumo = myInsumo.idinsumo;
                     filaCaptura.NombreInsumo = myInsumo.descripcion;
                     filaCaptura.Rendimiento = Convert.ToDecimal(myInsumo.rendimiento);
+                    filaCaptura.Unidad = myInsumo.unidad;
                     lstGridPRD.Add(filaCaptura);
                 }
 
@@ -137,37 +151,57 @@ namespace InvenTacos.GUIs
             }
         }
 
+        private void OpcConfigurar_Click(object sender, EventArgs e)
+        {
+            if (RevisarPermisos() == true)
+            {
+                new Frm_ConfigDB().ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Acceso denegado...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void importarInsumosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Frm_ImportarInsumos().ShowDialog();
+            if (RevisarPermisos() == true)
+            {
+                new Frm_ImportarInsumos().ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Acceso denegado...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }            
         }
-
         private void configurarInsumosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            if (RevisarPermisos() == true)
             {
-                pbCargando.Visible = true;
-                Application.DoEvents();
-                List<insumos> lstInsumostodos = ObtenerTodosLosInsumos();
-                new Frm_ConfigrarInsumos(lstInsumostodos).ShowDialog();
-                pbCargando.Visible = false;
+                try
+                {
+                    pbCargando.Visible = true;
+                    Application.DoEvents();
+                    List<insumos> lstInsumostodos = ObtenerTodosLosInsumos();
+                    new Frm_ConfigrarInsumos(lstInsumostodos).ShowDialog();
+                    pbCargando.Visible = false;
+                }
+                catch (Exception ex)
+                {
+                    MostrarExcepcion(ex);
+                }
             }
-            catch(Exception ex)
+            else
             {
-                MostrarExcepcion(ex);
-            }
+                MessageBox.Show("Acceso denegado...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }              
         }
+        
         private List<insumos> ObtenerTodosLosInsumos()
         {
             TacosInventariosEntities MyContext = new TacosInventariosEntities(ConnectionStrings.MySQL);
             List<insumos> lstInsumos = MyContext.insumos.ToList();
             MyContext.Dispose();
             return lstInsumos;
-        }
-
-        private void Frm_Principal_Load(object sender, EventArgs e)
-        {
-            ValidarListaDeInsumosConfigurados();
         }
 
         private bool Validar()
@@ -178,8 +212,11 @@ namespace InvenTacos.GUIs
                 return false;
             }
 
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("¿Los datos son correctos?");
+            sb.AppendLine(string.Format("FECHA: {0}",dtpFecha.Value.ToString("dddd dd/MMMM/yyyy").ToUpper()));
             DialogResult dr =
-                MessageBox.Show("¿Los datos son correctos?", "Validar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                MessageBox.Show(sb.ToString(), "Validar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (dr == DialogResult.Yes)
                 return true;
@@ -199,12 +236,15 @@ namespace InvenTacos.GUIs
                     sb.Append(dtpFecha.Value.ToString("dddd dd/MMMM/yyyy"));
                     sb.Append(" ha sido guardado con exito!!!");
                     MessageBox.Show(sb.ToString(), "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                 }
             }
             catch (Exception ex)
             {
                 MostrarExcepcion(ex);
             }
+
+            dtpFecha.Enabled = true;
         }
         private void GuardarInventario()
         {
@@ -251,7 +291,12 @@ namespace InvenTacos.GUIs
                 MyContext.Dispose();
 
                 throw ex;
-            }            
+            }
+        }
+
+        private void Frm_Principal_Load(object sender, EventArgs e)
+        {
+            ValidarListaDeInsumosConfigurados();
         }
     }
 }

@@ -167,6 +167,9 @@ namespace InvenTacos.GUIs
                     Properties.Settings.Default.MSSQL.Usuario = txbUserMSSQL.Text;
                     Properties.Settings.Default.MSSQL.Contraseña = txbPassMSSQL.Text;
                     Properties.Settings.Default.MSSQL.BaseDeDatos = Convert.ToString(cbDBMSSQL.SelectedItem);
+
+                    MessageBox.Show("La configuración para MSSQL SERVER se ha guardado con exito...", "Guardar",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
 
                 case TipoBaseDeDatos.MySQL:
@@ -175,10 +178,13 @@ namespace InvenTacos.GUIs
                     Properties.Settings.Default.MySQL.Contraseña = txbPassMySQL.Text;
                     Properties.Settings.Default.MySQL.Puerto = (int)nudPuertoMySQL.Value;
                     Properties.Settings.Default.MySQL.BaseDeDatos = Convert.ToString(cbDBMySQL.SelectedItem);
+
+                    MessageBox.Show("La configuración para MySQL se ha guardado con exito...", "Guardar",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
             }
 
-            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Save();            
         }
 
         #endregion      

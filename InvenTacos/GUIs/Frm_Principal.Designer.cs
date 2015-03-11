@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlTitulo = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -35,6 +36,7 @@
             this.importarInsumosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpcConfigurar = new System.Windows.Forms.ToolStripMenuItem();
             this.gridCapturaInventario = new DevExpress.XtraGrid.GridControl();
+            this.capturaDeinventarioBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gvCapturaInventario = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colClaveInsumo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNombreInsumo = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -42,6 +44,7 @@
             this.colRendimiento = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCantidadCocido = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCantidadTotal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUnidad = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,6 +57,7 @@
             this.pnlTitulo.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridCapturaInventario)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.capturaDeinventarioBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvCapturaInventario)).BeginInit();
             this.pnlFooter.SuspendLayout();
             this.pnlFecha.SuspendLayout();
@@ -119,6 +123,7 @@
             // 
             // gridCapturaInventario
             // 
+            this.gridCapturaInventario.DataSource = this.capturaDeinventarioBindingSource;
             this.gridCapturaInventario.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridCapturaInventario.Location = new System.Drawing.Point(0, 98);
             this.gridCapturaInventario.MainView = this.gvCapturaInventario;
@@ -127,6 +132,10 @@
             this.gridCapturaInventario.TabIndex = 3;
             this.gridCapturaInventario.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvCapturaInventario});
+            // 
+            // capturaDeinventarioBindingSource
+            // 
+            this.capturaDeinventarioBindingSource.DataSource = typeof(InvenTacos.Modelos.CapturaDeinventario);
             // 
             // gvCapturaInventario
             // 
@@ -271,7 +280,8 @@
             this.colCantidadCrudo,
             this.colRendimiento,
             this.colCantidadCocido,
-            this.colCantidadTotal});
+            this.colCantidadTotal,
+            this.colUnidad});
             this.gvCapturaInventario.GridControl = this.gridCapturaInventario;
             this.gvCapturaInventario.Name = "gvCapturaInventario";
             this.gvCapturaInventario.OptionsCustomization.AllowFilter = false;
@@ -335,6 +345,14 @@
             this.colCantidadTotal.OptionsColumn.AllowEdit = false;
             this.colCantidadTotal.Visible = true;
             this.colCantidadTotal.VisibleIndex = 5;
+            // 
+            // colUnidad
+            // 
+            this.colUnidad.FieldName = "Unidad";
+            this.colUnidad.Name = "colUnidad";
+            this.colUnidad.OptionsColumn.AllowEdit = false;
+            this.colUnidad.Visible = true;
+            this.colUnidad.VisibleIndex = 6;
             // 
             // pnlFooter
             // 
@@ -451,6 +469,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridCapturaInventario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.capturaDeinventarioBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvCapturaInventario)).EndInit();
             this.pnlFooter.ResumeLayout(false);
             this.pnlFooter.PerformLayout();
@@ -487,5 +506,7 @@
         private System.Windows.Forms.PictureBox pbCargando;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.BindingSource capturaDeinventarioBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn colUnidad;
     }
 }

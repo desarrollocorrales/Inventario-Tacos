@@ -20,5 +20,6 @@ namespace InvenTacos.Modelos
                 return Total;
             }
         }
+        public string Unidad { set; get; }
     }
 }

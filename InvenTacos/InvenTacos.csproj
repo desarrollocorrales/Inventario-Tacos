@@ -83,6 +83,12 @@
     <Compile Include="GUIs\Frm_ImportarInsumos.Designer.cs">
       <DependentUpon>Frm_ImportarInsumos.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIs\Frm_Permitir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIs\Frm_Permitir.Designer.cs">
+      <DependentUpon>Frm_Permitir.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIs\Frm_Principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\Frm_ImportarInsumos.resx">
       <DependentUpon>Frm_ImportarInsumos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIs\Frm_Permitir.resx">
+      <DependentUpon>Frm_Permitir.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\Frm_Principal.resx">
       <DependentUpon>Frm_Principal.cs</DependentUpon>
