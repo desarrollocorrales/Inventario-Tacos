@@ -71,7 +71,7 @@ namespace InvenTacos.GUIs
 
         private List<inventario_insumos> ObtenerInsumosConfigurados()
         {
-            TacosInventarioEntities MyContext = new TacosInventarioEntities();
+            TacosInventarioEntities MyContext = new TacosInventarioEntities(ConnectionStrings.MySQL);
             
             List<inventario_insumos> lstInsumosSeleccionados = new List<inventario_insumos>();            
             List<string> lstIDsConfigurados = ObtenerIDsConfigurados();
@@ -121,7 +121,7 @@ namespace InvenTacos.GUIs
                 if (lstInsumos.Count == 0)
                 {
                     StringBuilder sb = new StringBuilder();
-
+                    sb.AppendLine("No hay insumos configurados...");
                     MessageBox.Show(sb.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -248,7 +248,7 @@ namespace InvenTacos.GUIs
         }
         private void GuardarInventario()
         {
-            TacosInventarioEntities MyContext = new TacosInventarioEntities();
+            TacosInventarioEntities MyContext = new TacosInventarioEntities(ConnectionStrings.MySQL);
             MyContext.Connection.Open();
             IDbTransaction Transaccion = MyContext.Connection.BeginTransaction();
 

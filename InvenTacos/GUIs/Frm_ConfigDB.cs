@@ -208,7 +208,7 @@ namespace InvenTacos.GUIs
         private void ObtenerBasesDeDatosMSSQL()
         {
             List<string> lstBasesDeDatos = new List<string>();
-            Entity.MSSQL.SoftRestaurantEntities MSContext = new Entity.MSSQL.SoftRestaurantEntities();
+            Entity.MSSQL.SoftRestaurantEntities MSContext = new Entity.MSSQL.SoftRestaurantEntities(ConnectionStrings.MSSQL);
 
             lstBasesDeDatos = MSContext.ExecuteStoreQuery<string>("SELECT name FROM master..sysdatabases").ToList();
 
@@ -224,7 +224,7 @@ namespace InvenTacos.GUIs
         private void ObtenerBasesDeDatosMySQL()
         {
             List<string> lstBasesDeDatos = new List<string>();
-            Entity.MySQL.TacosInventarioEntities MyContext = new Entity.MySQL.TacosInventarioEntities();
+            Entity.MySQL.TacosInventarioEntities MyContext = new Entity.MySQL.TacosInventarioEntities(ConnectionStrings.MySQL);
 
             lstBasesDeDatos = MyContext.ExecuteStoreQuery<string>("Show Databases").ToList();
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Mysql = InvenTacos.Entity.MySQL;
 using SqlServer = InvenTacos.Entity.MSSQL;
+using InvenTacos.Modelos;
 
 namespace InvenTacos.GUIs
 {
@@ -42,10 +43,10 @@ namespace InvenTacos.GUIs
                 MostrarAccion("Iniciando importación de insumos y rendimientos....");
                 
                 MostrarAccion("Conectando a la base de datos de la aplicación....");
-                Mysql.TacosInventarioEntities MyContexto = new Mysql.TacosInventarioEntities();
+                Mysql.TacosInventarioEntities MyContexto = new Mysql.TacosInventarioEntities(ConnectionStrings.MySQL);
 
                 MostrarAccion("Conectando a la base de datos de SoftRestaurant....");
-                SqlServer.SoftRestaurantEntities MSContexto = new SqlServer.SoftRestaurantEntities();
+                SqlServer.SoftRestaurantEntities MSContexto = new SqlServer.SoftRestaurantEntities(ConnectionStrings.MSSQL);
 
                 List<SqlServer.insumos> lstMSInsumos = MSContexto.insumos.ToList(); ;
                 List<SqlServer.insumospresentaciones> lstMSPresentaciones = MSContexto.insumospresentaciones.ToList();

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Collections.Specialized;
 using InvenTacos.Entity.MySQL;
 using DevExpress.XtraGrid.Views.Grid;
-
+using InvenTacos.Modelos;
 namespace InvenTacos.GUIs
 {
     public partial class Frm_ConfigrarInsumos : Form
@@ -46,7 +46,7 @@ namespace InvenTacos.GUIs
         }
         private void LlenarListaInsumosSeleccionados()
         {
-            TacosInventarioEntities MyContext = new TacosInventarioEntities();
+            TacosInventarioEntities MyContext = new TacosInventarioEntities(ConnectionStrings.MySQL);
             List<string> lstIDsConfigurados = ObtenerIDsInsumosConfigurados();
             
             var InsumosConfigurados = from buscaInsumos in MyContext.inventario_insumos
