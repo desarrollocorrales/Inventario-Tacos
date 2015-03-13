@@ -42,7 +42,7 @@ namespace InvenTacos.GUIs
                 MostrarAccion("Iniciando importación de insumos y rendimientos....");
                 
                 MostrarAccion("Conectando a la base de datos de la aplicación....");
-                Mysql.TacosInventariosEntities MyContexto = new Mysql.TacosInventariosEntities();
+                Mysql.TacosInventarioEntities MyContexto = new Mysql.TacosInventarioEntities();
 
                 MostrarAccion("Conectando a la base de datos de SoftRestaurant....");
                 SqlServer.SoftRestaurantEntities MSContexto = new SqlServer.SoftRestaurantEntities();
@@ -50,13 +50,13 @@ namespace InvenTacos.GUIs
                 List<SqlServer.insumos> lstMSInsumos = MSContexto.insumos.ToList(); ;
                 List<SqlServer.insumospresentaciones> lstMSPresentaciones = MSContexto.insumospresentaciones.ToList();
 
-                Mysql.insumos myInsumo;
+                Mysql.inventario_insumos myInsumo;
                 SqlServer.insumospresentaciones presentacion;
                 MostrarAccion("Inicia la importación....");
                 BorrarInsumos(MyContexto);
                 foreach (SqlServer.insumos MsSqlInsumo in lstMSInsumos)
                 {
-                    myInsumo = new Mysql.insumos();
+                    myInsumo = new Mysql.inventario_insumos();
                     myInsumo.idinsumo = MsSqlInsumo.idinsumo;
                     myInsumo.descripcion = MsSqlInsumo.descripcion;
                     myInsumo.unidad = MsSqlInsumo.unidad;
@@ -64,7 +64,7 @@ namespace InvenTacos.GUIs
                     presentacion = lstMSPresentaciones.FirstOrDefault(o => o.idinsumo == MsSqlInsumo.idinsumo);
                     myInsumo.rendimiento = presentacion == null ? null : presentacion.rendimiento; 
 
-                    MyContexto.insumos.AddObject(myInsumo);
+                    MyContexto.inventario_insumos.AddObject(myInsumo);
                     MostrarAccion(string.Format("   ID: {0} | Insumo: {1} | unidad: {2} | rendimiento: {3}", 
                                                     myInsumo.idinsumo, myInsumo.descripcion,
                                                     myInsumo.unidad, myInsumo.rendimiento));
@@ -84,7 +84,7 @@ namespace InvenTacos.GUIs
                 MostrarExcepcion(ex);
             }
         }
-        private void BorrarInsumos(Mysql.TacosInventariosEntities Contexto)
+        private void BorrarInsumos(Mysql.TacosInventarioEntities Contexto)
         {
             Contexto.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 0;");
             Contexto.ExecuteStoreCommand("TRUNCATE TABLE insumos");

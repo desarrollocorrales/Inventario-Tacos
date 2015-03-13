@@ -117,9 +117,9 @@ namespace InvenTacos.GUIs
         private void ProbarMySQL()
         {
             StringBuilder ConnectionString = new StringBuilder();
-            ConnectionString.Append("metadata=res://*/Entity.MySQL.Model1.csdl|");
-            ConnectionString.Append("res://*/Entity.MySQL.Model1.ssdl|");
-            ConnectionString.Append("res://*/Entity.MySQL.Model1.msl;");
+            ConnectionString.Append("metadata=res://*/Entity.MySQL.TacosInventarioModel.csdl|");
+            ConnectionString.Append("res://*/Entity.MySQL.TacosInventarioModel.ssdl|");
+            ConnectionString.Append("res://*/Entity.MySQL.TacosInventarioModel.msl;");
             ConnectionString.Append("provider=MySql.Data.MySqlClient;");
             ConnectionString.Append("provider connection string=");
             ConnectionString.Append(string.Format("'server={0};", txbServerMySQL.Text));
@@ -129,7 +129,7 @@ namespace InvenTacos.GUIs
 
             try
             {
-                Entity.MySQL.TacosInventariosEntities MyContext = new Entity.MySQL.TacosInventariosEntities(ConnectionString.ToString());
+                Entity.MySQL.TacosInventarioEntities MyContext = new Entity.MySQL.TacosInventarioEntities(ConnectionString.ToString());
                 MyContext.Connection.Open();
                 MyContext.Connection.Close();
 
@@ -224,7 +224,7 @@ namespace InvenTacos.GUIs
         private void ObtenerBasesDeDatosMySQL()
         {
             List<string> lstBasesDeDatos = new List<string>();
-            Entity.MySQL.TacosInventariosEntities MyContext = new Entity.MySQL.TacosInventariosEntities();
+            Entity.MySQL.TacosInventarioEntities MyContext = new Entity.MySQL.TacosInventarioEntities();
 
             lstBasesDeDatos = MyContext.ExecuteStoreQuery<string>("Show Databases").ToList();
 

@@ -14,10 +14,10 @@ namespace InvenTacos.GUIs
 {
     public partial class Frm_ConfigrarInsumos : Form
     {
-        private List<insumos> lstInsumosTodos;
-        private List<insumos> lstInsumosSeleccioados;
+        private List<inventario_insumos> lstInsumosTodos;
+        private List<inventario_insumos> lstInsumosSeleccioados;
 
-        public Frm_ConfigrarInsumos(List<insumos> lstInsumosTodos)
+        public Frm_ConfigrarInsumos(List<inventario_insumos> lstInsumosTodos)
         {
             InitializeComponent();
             this.lstInsumosTodos = lstInsumosTodos;
@@ -46,16 +46,16 @@ namespace InvenTacos.GUIs
         }
         private void LlenarListaInsumosSeleccionados()
         {
-            TacosInventariosEntities MyContext = new TacosInventariosEntities();
+            TacosInventarioEntities MyContext = new TacosInventarioEntities();
             List<string> lstIDsConfigurados = ObtenerIDsInsumosConfigurados();
             
-            var InsumosConfigurados = from buscaInsumos in MyContext.insumos
+            var InsumosConfigurados = from buscaInsumos in MyContext.inventario_insumos
                                       where (lstIDsConfigurados.Contains(buscaInsumos.idinsumo))
                                       select buscaInsumos;
 
             if (InsumosConfigurados.Count() == 0)
             {
-                lstInsumosSeleccioados = new List<insumos>();
+                lstInsumosSeleccioados = new List<inventario_insumos>();
             }
             else
             {
@@ -89,10 +89,10 @@ namespace InvenTacos.GUIs
             LlenarListaInsumosSeleccionados();
         }
 
-        private insumos ObtenerInsumoSeleccionado(GridView gv)
+        private inventario_insumos ObtenerInsumoSeleccionado(GridView gv)
         {
             int index = gv.GetSelectedRows()[0];
-            insumos insumo = (insumos)gv.GetRow(index);
+            inventario_insumos insumo = (inventario_insumos)gv.GetRow(index);
             return insumo;
         }
 
@@ -100,7 +100,7 @@ namespace InvenTacos.GUIs
         {
             try
             {
-                insumos insumo = ObtenerInsumoSeleccionado(gvInsumosTodos);
+                inventario_insumos insumo = ObtenerInsumoSeleccionado(gvInsumosTodos);
                 Agregar(insumo);
             }
             catch (Exception ex)
@@ -114,7 +114,7 @@ namespace InvenTacos.GUIs
             {
                 if (lstInsumosSeleccioados.Count != 0)
                 {
-                    insumos insumo = ObtenerInsumoSeleccionado(gvInsumosSeleccionados);
+                    inventario_insumos insumo = ObtenerInsumoSeleccionado(gvInsumosSeleccionados);
                     Quitar(insumo);
                 }
             }
@@ -127,7 +127,7 @@ namespace InvenTacos.GUIs
         {
             try
             {
-                insumos insumo = ObtenerInsumoSeleccionado(gvInsumosTodos);
+                inventario_insumos insumo = ObtenerInsumoSeleccionado(gvInsumosTodos);
                 Agregar(insumo);
             }
             catch (Exception ex)
@@ -141,7 +141,7 @@ namespace InvenTacos.GUIs
             {
                 if (lstInsumosSeleccioados.Count != 0)
                 {
-                    insumos insumo = ObtenerInsumoSeleccionado(gvInsumosSeleccionados);
+                    inventario_insumos insumo = ObtenerInsumoSeleccionado(gvInsumosSeleccionados);
                     Quitar(insumo);
                 }
             }
@@ -151,7 +151,7 @@ namespace InvenTacos.GUIs
             }
         }
 
-        private void Agregar(insumos insumo)
+        private void Agregar(inventario_insumos insumo)
         {
             lstInsumosSeleccioados.Add(insumo);
             lstInsumosSeleccioados = lstInsumosSeleccioados.Distinct().ToList();
@@ -159,7 +159,7 @@ namespace InvenTacos.GUIs
             gridInsumosSeleccionados.DataSource = lstInsumosSeleccioados;
             gvInsumosSeleccionados.BestFitColumns();
         }
-        private void Quitar(insumos insumo)
+        private void Quitar(inventario_insumos insumo)
         {
             lstInsumosSeleccioados.Remove(insumo);
             lstInsumosSeleccioados = lstInsumosSeleccioados.Distinct().ToList();
@@ -183,7 +183,7 @@ namespace InvenTacos.GUIs
         {
             Properties.Settings.Default.LstInsumosConfigurados = new StringCollection();
             
-            foreach (insumos insumo in lstInsumosSeleccioados)
+            foreach (inventario_insumos insumo in lstInsumosSeleccioados)
             {
                 Properties.Settings.Default.LstInsumosConfigurados.Add(insumo.idinsumo);
             }

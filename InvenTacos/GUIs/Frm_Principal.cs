@@ -69,14 +69,14 @@ namespace InvenTacos.GUIs
             }
         }
 
-        private List<insumos> ObtenerInsumosConfigurados()
+        private List<inventario_insumos> ObtenerInsumosConfigurados()
         {
-            TacosInventariosEntities MyContext = new TacosInventariosEntities();
+            TacosInventarioEntities MyContext = new TacosInventarioEntities();
             
-            List<insumos> lstInsumosSeleccionados = new List<insumos>();            
+            List<inventario_insumos> lstInsumosSeleccionados = new List<inventario_insumos>();            
             List<string> lstIDsConfigurados = ObtenerIDsConfigurados();
 
-            var InsumosConfigurados = from buscaInsumos in MyContext.insumos
+            var InsumosConfigurados = from buscaInsumos in MyContext.inventario_insumos
                                       where (lstIDsConfigurados.Contains(buscaInsumos.idinsumo))
                                       select buscaInsumos;
             
@@ -114,9 +114,9 @@ namespace InvenTacos.GUIs
                 pbCargando.Visible = true;
                 Application.DoEvents();
 
-                TacosInventariosEntities MyContext = new TacosInventariosEntities(ConnectionStrings.MySQL);
+                TacosInventarioEntities MyContext = new TacosInventarioEntities(ConnectionStrings.MySQL);
 
-                List<insumos> lstInsumos = ObtenerInsumosConfigurados();
+                List<inventario_insumos> lstInsumos = ObtenerInsumosConfigurados();
                 
                 if (lstInsumos.Count == 0)
                 {
@@ -129,7 +129,7 @@ namespace InvenTacos.GUIs
                 List<CapturaDeinventario> lstGridPRD = new List<CapturaDeinventario>();
 
                 CapturaDeinventario filaCaptura;
-                foreach (insumos myInsumo in lstInsumos)
+                foreach (inventario_insumos myInsumo in lstInsumos)
                 {
                     filaCaptura = new CapturaDeinventario();
                     filaCaptura.ClaveInsumo = myInsumo.idinsumo;
@@ -181,7 +181,7 @@ namespace InvenTacos.GUIs
                 {
                     pbCargando.Visible = true;
                     Application.DoEvents();
-                    List<insumos> lstInsumostodos = ObtenerTodosLosInsumos();
+                    List<inventario_insumos> lstInsumostodos = ObtenerTodosLosInsumos();
                     new Frm_ConfigrarInsumos(lstInsumostodos).ShowDialog();
                     pbCargando.Visible = false;
                 }
@@ -196,10 +196,10 @@ namespace InvenTacos.GUIs
             }              
         }
         
-        private List<insumos> ObtenerTodosLosInsumos()
+        private List<inventario_insumos> ObtenerTodosLosInsumos()
         {
-            TacosInventariosEntities MyContext = new TacosInventariosEntities(ConnectionStrings.MySQL);
-            List<insumos> lstInsumos = MyContext.insumos.ToList();
+            TacosInventarioEntities MyContext = new TacosInventarioEntities(ConnectionStrings.MySQL);
+            List<inventario_insumos> lstInsumos = MyContext.inventario_insumos.ToList();
             MyContext.Dispose();
             return lstInsumos;
         }
@@ -248,7 +248,7 @@ namespace InvenTacos.GUIs
         }
         private void GuardarInventario()
         {
-            TacosInventariosEntities MyContext = new TacosInventariosEntities();
+            TacosInventarioEntities MyContext = new TacosInventarioEntities();
             MyContext.Connection.Open();
             IDbTransaction Transaccion = MyContext.Connection.BeginTransaction();
 
@@ -256,17 +256,17 @@ namespace InvenTacos.GUIs
             {
                 List<CapturaDeinventario> lstInventarioCapturado = (List<CapturaDeinventario>)gridCapturaInventario.DataSource;
 
-                inventdiarios RegistroBD;
+                inventario_diarios RegistroBD;
                 foreach (CapturaDeinventario Registro in lstInventarioCapturado)
                 {
-                    RegistroBD = new inventdiarios();
+                    RegistroBD = new inventario_diarios();
                     RegistroBD.idinsumo = Registro.ClaveInsumo;
                     RegistroBD.cantidad_cocido = Registro.CantidadCocido;
                     RegistroBD.cantidad_crudo = Registro.CantidadCrudo;
                     RegistroBD.cantidad_total = Registro.CantidadTotal;
                     RegistroBD.fecha = dtpFecha.Value.Date;
 
-                    MyContext.inventdiarios.AddObject(RegistroBD);
+                    MyContext.inventario_diarios.AddObject(RegistroBD);
                     MyContext.SaveChanges();
                 }
 

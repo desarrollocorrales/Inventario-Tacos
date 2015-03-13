@@ -107,7 +107,7 @@
             // 
             // InsumosTodos
             // 
-            this.InsumosTodos.DataSource = typeof(InvenTacos.Entity.MySQL.insumos);
+            this.InsumosTodos.DataSource = typeof(InvenTacos.Entity.MySQL.inventario_insumos);
             // 
             // gvInsumosTodos
             // 
@@ -331,7 +331,7 @@
             // 
             // InsumosConfigurados
             // 
-            this.InsumosConfigurados.DataSource = typeof(InvenTacos.Entity.MySQL.insumos);
+            this.InsumosConfigurados.DataSource = typeof(InvenTacos.Entity.MySQL.inventario_insumos);
             // 
             // gvInsumosSeleccionados
             // 
@@ -581,6 +581,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblTitulo);
             this.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_ConfigrarInsumos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

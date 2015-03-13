@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>invetarios Tacos.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v11.1, Version=11.1.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v11.1.Core, Version=11.1.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -60,10 +63,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SoftRestaurantModelo.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Entity\MySQL\Model1.Designer.cs">
+    <Compile Include="Entity\MySQL\TacosInventarioModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>TacosInventarioModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="GUIs\Frm_ConfigDB.cs">
       <SubType>Form</SubType>
@@ -131,9 +134,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SoftRestaurantModelo.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <EntityDeploy Include="Entity\MySQL\Model1.edmx">
+    <EntityDeploy Include="Entity\MySQL\TacosInventarioModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>TacosInventarioModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Properties\DataSources\InvenTacos.Entity.MySQL.insumos.datasource" />
     <None Include="Properties\DataSources\InvenTacos.Modelos.CapturaDeinventario.datasource" />
@@ -155,6 +158,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="invetarios Tacos.ico" />
     <Content Include="recursos\cargando.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

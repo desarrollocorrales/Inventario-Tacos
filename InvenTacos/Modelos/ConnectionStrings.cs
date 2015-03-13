@@ -19,9 +19,9 @@ namespace InvenTacos.Modelos
             string.Format(" password={0};'", Properties.Settings.Default.MSSQL.Contraseña);
 
         public static string MySQL =
-            "metadata=res://*/Entity.MySQL.Model1.csdl|" +
-            "res://*/Entity.MySQL.Model1.ssdl|" +
-            "res://*/Entity.MySQL.Model1.msl;" +
+            "metadata=res://*/Entity.MySQL.TacosInventarioModel.csdl|" +
+            "res://*/Entity.MySQL.TacosInventarioModel.ssdl|" +
+            "res://*/Entity.MySQL.TacosInventarioModel.msl;" +
             "provider=MySql.Data.MySqlClient;" +
             "provider connection string=" +
             string.Format("'server={0};", Properties.Settings.Default.MySQL.Servidor) +
