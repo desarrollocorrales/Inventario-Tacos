@@ -95,7 +95,6 @@
             this.Name = "Frm_ImportarInsumos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Importar Insumos";
-            this.Load += new System.EventHandler(this.Frm_ImportarInsumos_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

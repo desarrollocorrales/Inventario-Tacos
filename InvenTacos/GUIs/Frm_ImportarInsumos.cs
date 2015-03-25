@@ -88,8 +88,9 @@ namespace InvenTacos.GUIs
         private void BorrarInsumos(Mysql.TacosInventarioEntities Contexto)
         {
             Contexto.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 0;");
-            Contexto.ExecuteStoreCommand("TRUNCATE TABLE insumos");
+            Contexto.ExecuteStoreCommand("TRUNCATE TABLE inventario_insumos");
             Contexto.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 1;");
+            Contexto.SaveChanges();
         }
 
         private void MostrarAccion(string mensaje)
@@ -98,9 +99,5 @@ namespace InvenTacos.GUIs
             Application.DoEvents();
         }
 
-        private void Frm_ImportarInsumos_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

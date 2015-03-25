@@ -4,11 +4,36 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SoftRestaurantModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="SoftRestaurantModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SoftRestaurantModelStoreContainer">
+          <EntitySet Name="compras" EntityType="SoftRestaurantModel.Store.compras" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="insumos" EntityType="SoftRestaurantModel.Store.insumos" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="insumospresentaciones" EntityType="SoftRestaurantModel.Store.insumospresentaciones" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
+        <EntityType Name="compras">
+          <Key>
+            <PropertyRef Name="idcompra" />
+          </Key>
+          <Property Name="idcompra" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="idempresa" Type="varchar" MaxLength="15" />
+          <Property Name="folio" Type="varchar" MaxLength="15" />
+          <Property Name="fechaaplicacion" Type="datetime" />
+          <Property Name="idproveedor" Type="varchar" MaxLength="15" />
+          <Property Name="foliofactura" Type="varchar" MaxLength="15" />
+          <Property Name="fechafactura" Type="datetime" />
+          <Property Name="cancelado" Type="bit" />
+          <Property Name="fechavencimiento" Type="datetime" />
+          <Property Name="usuariocancelo" Type="varchar" MaxLength="15" />
+          <Property Name="usuario" Type="varchar" MaxLength="15" />
+          <Property Name="referencia" Type="varchar" MaxLength="50" />
+          <Property Name="descuento" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="subtotal" Type="money" />
+          <Property Name="impuesto1" Type="money" />
+          <Property Name="impuesto2" Type="money" />
+          <Property Name="impuesto3" Type="money" />
+          <Property Name="total" Type="money" />
+          <Property Name="fiscal" Type="bit" />
+        </EntityType>
         <EntityType Name="insumos">
           <Key>
             <PropertyRef Name="idinsumo" />
@@ -30,14 +55,33 @@
           <Property Name="idgruposi" Type="varchar" MaxLength="5" />
           <Property Name="rendimiento" Type="numeric" Precision="12" Scale="4" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+        <!--Se encontraron errores durante la generación:
+      advertencia 6013: La tabla o vista 'softrestaurant8Pro.dbo.movsinv' no tiene una clave principal definida y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+      
+      <EntityType Name="movsinv">
+        <Property Name="fecha" Type="datetime" />
+        <Property Name="foliocheque" Type="numeric" Precision="8" />
+        <Property Name="movto" Type="numeric" Precision="8" />
+        <Property Name="idcompra" Type="numeric" Precision="10" />
+        <Property Name="traspaso" Type="numeric" Precision="8" />
+        <Property Name="invfisico" Type="numeric" Precision="8" />
+        <Property Name="idconcepto" Type="varchar" MaxLength="5" />
+        <Property Name="idinsumo" Type="varchar" MaxLength="15" />
+        <Property Name="costo" Type="money" />
+        <Property Name="cantidad" Type="numeric" Precision="14" Scale="4" />
+        <Property Name="idalmacen" Type="varchar" MaxLength="5" />
+        <Property Name="idturno" Type="numeric" Precision="6" />
+        <Property Name="presentaciondestino" Type="varchar" MaxLength="15" />
+        <Property Name="idpedido" Type="numeric" Precision="8" Scale="2" />
+      </EntityType>-->
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SoftRestaurantModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="SoftRestaurantEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="insumos" EntityType="SoftRestaurantModel.insumos" />
           <EntitySet Name="insumospresentaciones" EntityType="SoftRestaurantModel.insumospresentaciones" />
+          <EntitySet Name="compras" EntityType="SoftRestaurantModel.compras" />
         </EntityContainer>
         <EntityType Name="insumos">
           <Key>
@@ -59,6 +103,30 @@
           <Property Name="idinsumo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
           <Property Name="idgruposi" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
           <Property Name="rendimiento" Type="Decimal" Precision="12" Scale="4" />
+        </EntityType>
+        <EntityType Name="compras">
+          <Key>
+            <PropertyRef Name="idcompra" />
+          </Key>
+          <Property Type="Int64" Name="idcompra" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="idempresa" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="folio" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="fechaaplicacion" />
+          <Property Type="String" Name="idproveedor" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="foliofactura" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="fechafactura" />
+          <Property Type="Boolean" Name="cancelado" />
+          <Property Type="DateTime" Name="fechavencimiento" />
+          <Property Type="String" Name="usuariocancelo" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="usuario" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="referencia" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="descuento" Precision="5" Scale="2" />
+          <Property Type="Decimal" Name="subtotal" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="impuesto1" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="impuesto2" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="impuesto3" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="total" Precision="19" Scale="4" />
+          <Property Type="Boolean" Name="fiscal" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -89,6 +157,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="compras">
+            <EntityTypeMapping TypeName="SoftRestaurantModel.compras">
+              <MappingFragment StoreEntitySet="compras">
+                <ScalarProperty Name="fiscal" ColumnName="fiscal" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="impuesto3" ColumnName="impuesto3" />
+                <ScalarProperty Name="impuesto2" ColumnName="impuesto2" />
+                <ScalarProperty Name="impuesto1" ColumnName="impuesto1" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="referencia" ColumnName="referencia" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="usuariocancelo" ColumnName="usuariocancelo" />
+                <ScalarProperty Name="fechavencimiento" ColumnName="fechavencimiento" />
+                <ScalarProperty Name="cancelado" ColumnName="cancelado" />
+                <ScalarProperty Name="fechafactura" ColumnName="fechafactura" />
+                <ScalarProperty Name="foliofactura" ColumnName="foliofactura" />
+                <ScalarProperty Name="idproveedor" ColumnName="idproveedor" />
+                <ScalarProperty Name="fechaaplicacion" ColumnName="fechaaplicacion" />
+                <ScalarProperty Name="folio" ColumnName="folio" />
+                <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+                <ScalarProperty Name="idcompra" ColumnName="idcompra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -104,7 +197,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
@@ -112,6 +205,7 @@
       <Diagram Name="SoftRestaurantModelo">
         <EntityTypeShape EntityType="SoftRestaurantModel.insumos" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9210009765625" IsExpanded="true" />
         <EntityTypeShape EntityType="SoftRestaurantModel.insumospresentaciones" Width="1.5" PointX="2.75" PointY="0.75" Height="1.7566536458333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="SoftRestaurantModel.compras" Width="1.5" PointX="0.75" PointY="3.75" Height="4.0575162760416656" />
       </Diagram>
     </Diagrams>
   </Designer>

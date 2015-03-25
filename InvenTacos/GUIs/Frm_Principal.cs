@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using InvenTacos.Entity.MySQL;
 using InvenTacos.Modelos;
 using System.Collections.Specialized;
+using MSSQL = InvenTacos.Entity.MSSQL;
 
 namespace InvenTacos.GUIs
 {
@@ -213,7 +214,10 @@ namespace InvenTacos.GUIs
             }
 
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Nota: Las Compras del día también serán exportadas. Asegurese de haberlas capturado.");
+            sb.AppendLine();
             sb.AppendLine("¿Los datos son correctos?");
+
             sb.AppendLine(string.Format("FECHA: {0}",dtpFecha.Value.ToString("dddd dd/MMMM/yyyy").ToUpper()));
             DialogResult dr =
                 MessageBox.Show(sb.ToString(), "Validar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -229,6 +233,7 @@ namespace InvenTacos.GUIs
             {
                 if (Validar() == true)
                 {
+                    GuardarCompras();
                     GuardarInventario();
 
                     StringBuilder sb = new StringBuilder();
@@ -293,10 +298,61 @@ namespace InvenTacos.GUIs
                 throw ex;
             }
         }
+        private void GuardarCompras()
+        {
+            DateTime dtFecha = dtpFecha.Value;
+            List<Compras> lstCompras = ObtenerCompras(dtFecha);
+
+            TacosInventarioEntities MySQLContexto = new TacosInventarioEntities(ConnectionStrings.MySQL);
+
+            MySQLContexto.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 0;");
+            MySQLContexto.ExecuteStoreCommand("DELETE FROM inventario_compras WHERE fecha = '{0}'", dtFecha.ToString("yyyy-MM-dd"));
+            MySQLContexto.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 1;");
+            MySQLContexto.SaveChanges();
+
+            inventario_compras compra;
+            foreach (Compras c in lstCompras)
+            {
+                compra = new inventario_compras();
+                compra.idcompra = Convert.ToInt64(c.ID_Compra);
+                compra.idinsumo = c.ID_Insumo;
+                compra.cantidad = c.Cantidad;
+                compra.fecha = c.dtFecha;
+
+                MySQLContexto.inventario_compras.AddObject(compra);
+                MySQLContexto.SaveChanges();
+            }
+        }
+        private List<Compras> ObtenerCompras(DateTime fecha)
+        {
+            MSSQL.SoftRestaurantEntities MSContexto = new MSSQL.SoftRestaurantEntities();
+            string sFecha = fecha.ToString("yyyy-MM-dd");
+            string sFechaMasUno = fecha.AddDays(1).ToString("yyyy-MM-dd");
+
+            string sConsulta =
+                string.Format(
+                    @"SELECT 
+                      idcompra ID_Compra, idinsumo ID_Insumo, cantidad Cantidad, '{0}' Fecha
+                    FROM
+                      movsinv
+                    WHERE
+                      movsinv.idcompra IN 
+                          (SELECT c.idcompra 
+                             FROM compras c 
+                            WHERE 
+                                  (c.cancelado = 0 OR c.cancelado IS NULL) AND (c.fechaaplicacion BETWEEN '{0}' AND '{1}')) 
+                      AND movsinv.idconcepto = 'EPC'", sFecha, sFechaMasUno);
+
+            List<Compras> lstCompras = MSContexto.ExecuteStoreQuery<Compras>(sConsulta).ToList();
+            MSContexto.Dispose();
+
+            return lstCompras;
+        }
 
         private void Frm_Principal_Load(object sender, EventArgs e)
         {
             ValidarListaDeInsumosConfigurados();
         }
+
     }
 }

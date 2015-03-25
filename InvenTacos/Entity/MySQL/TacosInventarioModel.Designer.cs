@@ -96,6 +96,22 @@ namespace InvenTacos.Entity.MySQL
             }
         }
         private ObjectSet<inventario_insumos> _inventario_insumos;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<inventario_compras> inventario_compras
+        {
+            get
+            {
+                if ((_inventario_compras == null))
+                {
+                    _inventario_compras = base.CreateObjectSet<inventario_compras>("inventario_compras");
+                }
+                return _inventario_compras;
+            }
+        }
+        private ObjectSet<inventario_compras> _inventario_compras;
 
         #endregion
 
@@ -116,6 +132,14 @@ namespace InvenTacos.Entity.MySQL
         {
             base.AddObject("inventario_insumos", inventario_insumos);
         }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet inventario_compras. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToinventario_compras(inventario_compras inventario_compras)
+        {
+            base.AddObject("inventario_compras", inventario_compras);
+        }
 
         #endregion
 
@@ -124,6 +148,150 @@ namespace InvenTacos.Entity.MySQL
     #endregion
 
     #region Entidades
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="inventario_compras")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class inventario_compras : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto inventario_compras.
+        /// </summary>
+        /// <param name="idcompra">Valor inicial de la propiedad idcompra.</param>
+        /// <param name="idinsumo">Valor inicial de la propiedad idinsumo.</param>
+        /// <param name="cantidad">Valor inicial de la propiedad cantidad.</param>
+        /// <param name="fecha">Valor inicial de la propiedad fecha.</param>
+        public static inventario_compras Createinventario_compras(global::System.Int64 idcompra, global::System.String idinsumo, global::System.Decimal cantidad, global::System.DateTime fecha)
+        {
+            inventario_compras inventario_compras = new inventario_compras();
+            inventario_compras.idcompra = idcompra;
+            inventario_compras.idinsumo = idinsumo;
+            inventario_compras.cantidad = cantidad;
+            inventario_compras.fecha = fecha;
+            return inventario_compras;
+        }
+
+        #endregion
+
+        #region Propiedades primitivas
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 idcompra
+        {
+            get
+            {
+                return _idcompra;
+            }
+            set
+            {
+                if (_idcompra != value)
+                {
+                    OnidcompraChanging(value);
+                    ReportPropertyChanging("idcompra");
+                    _idcompra = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("idcompra");
+                    OnidcompraChanged();
+                }
+            }
+        }
+        private global::System.Int64 _idcompra;
+        partial void OnidcompraChanging(global::System.Int64 value);
+        partial void OnidcompraChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String idinsumo
+        {
+            get
+            {
+                return _idinsumo;
+            }
+            set
+            {
+                if (_idinsumo != value)
+                {
+                    OnidinsumoChanging(value);
+                    ReportPropertyChanging("idinsumo");
+                    _idinsumo = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("idinsumo");
+                    OnidinsumoChanged();
+                }
+            }
+        }
+        private global::System.String _idinsumo;
+        partial void OnidinsumoChanging(global::System.String value);
+        partial void OnidinsumoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal cantidad
+        {
+            get
+            {
+                return _cantidad;
+            }
+            set
+            {
+                if (_cantidad != value)
+                {
+                    OncantidadChanging(value);
+                    ReportPropertyChanging("cantidad");
+                    _cantidad = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("cantidad");
+                    OncantidadChanged();
+                }
+            }
+        }
+        private global::System.Decimal _cantidad;
+        partial void OncantidadChanging(global::System.Decimal value);
+        partial void OncantidadChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime fecha
+        {
+            get
+            {
+                return _fecha;
+            }
+            set
+            {
+                if (_fecha != value)
+                {
+                    OnfechaChanging(value);
+                    ReportPropertyChanging("fecha");
+                    _fecha = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("fecha");
+                    OnfechaChanged();
+                }
+            }
+        }
+        private global::System.DateTime _fecha;
+        partial void OnfechaChanging(global::System.DateTime value);
+        partial void OnfechaChanged();
+
+        #endregion
+
+    
+    }
     
     /// <summary>
     /// No hay documentación de metadatos disponible.

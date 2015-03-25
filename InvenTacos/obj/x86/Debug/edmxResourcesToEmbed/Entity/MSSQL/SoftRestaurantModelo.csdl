@@ -3,6 +3,7 @@
   <EntityContainer Name="SoftRestaurantEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="insumos" EntityType="SoftRestaurantModel.insumos" />
     <EntitySet Name="insumospresentaciones" EntityType="SoftRestaurantModel.insumospresentaciones" />
+    <EntitySet Name="compras" EntityType="SoftRestaurantModel.compras" />
   </EntityContainer>
   <EntityType Name="insumos">
     <Key>
@@ -24,5 +25,29 @@
     <Property Name="idinsumo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
     <Property Name="idgruposi" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
     <Property Name="rendimiento" Type="Decimal" Precision="12" Scale="4" />
+  </EntityType>
+  <EntityType Name="compras">
+    <Key>
+      <PropertyRef Name="idcompra" />
+    </Key>
+    <Property Type="Int64" Name="idcompra" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="idempresa" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="folio" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="fechaaplicacion" />
+    <Property Type="String" Name="idproveedor" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="foliofactura" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="fechafactura" />
+    <Property Type="Boolean" Name="cancelado" />
+    <Property Type="DateTime" Name="fechavencimiento" />
+    <Property Type="String" Name="usuariocancelo" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="usuario" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="referencia" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="descuento" Precision="5" Scale="2" />
+    <Property Type="Decimal" Name="subtotal" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="impuesto1" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="impuesto2" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="impuesto3" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="total" Precision="19" Scale="4" />
+    <Property Type="Boolean" Name="fiscal" />
   </EntityType>
 </Schema>

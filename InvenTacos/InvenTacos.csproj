@@ -99,6 +99,7 @@
       <DependentUpon>Frm_Principal.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelos\CapturaDeinventario.cs" />
+    <Compile Include="Modelos\Compras.cs" />
     <Compile Include="Modelos\ConnectionStrings.cs" />
     <Compile Include="Modelos\Tipos.cs" />
     <Compile Include="Program.cs" />
@@ -129,7 +130,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="Entity\MSSQL\SoftRestaurantModelo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SoftRestaurantModelo.Designer.cs</LastGenOutput>

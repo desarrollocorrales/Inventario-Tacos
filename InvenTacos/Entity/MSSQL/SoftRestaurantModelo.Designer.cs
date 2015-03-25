@@ -96,6 +96,22 @@ namespace InvenTacos.Entity.MSSQL
             }
         }
         private ObjectSet<insumospresentaciones> _insumospresentaciones;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<compras> compras
+        {
+            get
+            {
+                if ((_compras == null))
+                {
+                    _compras = base.CreateObjectSet<compras>("compras");
+                }
+                return _compras;
+            }
+        }
+        private ObjectSet<compras> _compras;
 
         #endregion
 
@@ -116,6 +132,14 @@ namespace InvenTacos.Entity.MSSQL
         {
             base.AddObject("insumospresentaciones", insumospresentaciones);
         }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet compras. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddTocompras(compras compras)
+        {
+            base.AddObject("compras", compras);
+        }
 
         #endregion
 
@@ -124,6 +148,495 @@ namespace InvenTacos.Entity.MSSQL
     #endregion
 
     #region Entidades
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SoftRestaurantModel", Name="compras")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class compras : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto compras.
+        /// </summary>
+        /// <param name="idcompra">Valor inicial de la propiedad idcompra.</param>
+        public static compras Createcompras(global::System.Int64 idcompra)
+        {
+            compras compras = new compras();
+            compras.idcompra = idcompra;
+            return compras;
+        }
+
+        #endregion
+
+        #region Propiedades primitivas
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 idcompra
+        {
+            get
+            {
+                return _idcompra;
+            }
+            set
+            {
+                if (_idcompra != value)
+                {
+                    OnidcompraChanging(value);
+                    ReportPropertyChanging("idcompra");
+                    _idcompra = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("idcompra");
+                    OnidcompraChanged();
+                }
+            }
+        }
+        private global::System.Int64 _idcompra;
+        partial void OnidcompraChanging(global::System.Int64 value);
+        partial void OnidcompraChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String idempresa
+        {
+            get
+            {
+                return _idempresa;
+            }
+            set
+            {
+                OnidempresaChanging(value);
+                ReportPropertyChanging("idempresa");
+                _idempresa = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("idempresa");
+                OnidempresaChanged();
+            }
+        }
+        private global::System.String _idempresa;
+        partial void OnidempresaChanging(global::System.String value);
+        partial void OnidempresaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String folio
+        {
+            get
+            {
+                return _folio;
+            }
+            set
+            {
+                OnfolioChanging(value);
+                ReportPropertyChanging("folio");
+                _folio = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("folio");
+                OnfolioChanged();
+            }
+        }
+        private global::System.String _folio;
+        partial void OnfolioChanging(global::System.String value);
+        partial void OnfolioChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> fechaaplicacion
+        {
+            get
+            {
+                return _fechaaplicacion;
+            }
+            set
+            {
+                OnfechaaplicacionChanging(value);
+                ReportPropertyChanging("fechaaplicacion");
+                _fechaaplicacion = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("fechaaplicacion");
+                OnfechaaplicacionChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _fechaaplicacion;
+        partial void OnfechaaplicacionChanging(Nullable<global::System.DateTime> value);
+        partial void OnfechaaplicacionChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String idproveedor
+        {
+            get
+            {
+                return _idproveedor;
+            }
+            set
+            {
+                OnidproveedorChanging(value);
+                ReportPropertyChanging("idproveedor");
+                _idproveedor = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("idproveedor");
+                OnidproveedorChanged();
+            }
+        }
+        private global::System.String _idproveedor;
+        partial void OnidproveedorChanging(global::System.String value);
+        partial void OnidproveedorChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String foliofactura
+        {
+            get
+            {
+                return _foliofactura;
+            }
+            set
+            {
+                OnfoliofacturaChanging(value);
+                ReportPropertyChanging("foliofactura");
+                _foliofactura = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("foliofactura");
+                OnfoliofacturaChanged();
+            }
+        }
+        private global::System.String _foliofactura;
+        partial void OnfoliofacturaChanging(global::System.String value);
+        partial void OnfoliofacturaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> fechafactura
+        {
+            get
+            {
+                return _fechafactura;
+            }
+            set
+            {
+                OnfechafacturaChanging(value);
+                ReportPropertyChanging("fechafactura");
+                _fechafactura = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("fechafactura");
+                OnfechafacturaChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _fechafactura;
+        partial void OnfechafacturaChanging(Nullable<global::System.DateTime> value);
+        partial void OnfechafacturaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> cancelado
+        {
+            get
+            {
+                return _cancelado;
+            }
+            set
+            {
+                OncanceladoChanging(value);
+                ReportPropertyChanging("cancelado");
+                _cancelado = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("cancelado");
+                OncanceladoChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _cancelado;
+        partial void OncanceladoChanging(Nullable<global::System.Boolean> value);
+        partial void OncanceladoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> fechavencimiento
+        {
+            get
+            {
+                return _fechavencimiento;
+            }
+            set
+            {
+                OnfechavencimientoChanging(value);
+                ReportPropertyChanging("fechavencimiento");
+                _fechavencimiento = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("fechavencimiento");
+                OnfechavencimientoChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _fechavencimiento;
+        partial void OnfechavencimientoChanging(Nullable<global::System.DateTime> value);
+        partial void OnfechavencimientoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String usuariocancelo
+        {
+            get
+            {
+                return _usuariocancelo;
+            }
+            set
+            {
+                OnusuariocanceloChanging(value);
+                ReportPropertyChanging("usuariocancelo");
+                _usuariocancelo = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("usuariocancelo");
+                OnusuariocanceloChanged();
+            }
+        }
+        private global::System.String _usuariocancelo;
+        partial void OnusuariocanceloChanging(global::System.String value);
+        partial void OnusuariocanceloChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String usuario
+        {
+            get
+            {
+                return _usuario;
+            }
+            set
+            {
+                OnusuarioChanging(value);
+                ReportPropertyChanging("usuario");
+                _usuario = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("usuario");
+                OnusuarioChanged();
+            }
+        }
+        private global::System.String _usuario;
+        partial void OnusuarioChanging(global::System.String value);
+        partial void OnusuarioChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String referencia
+        {
+            get
+            {
+                return _referencia;
+            }
+            set
+            {
+                OnreferenciaChanging(value);
+                ReportPropertyChanging("referencia");
+                _referencia = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("referencia");
+                OnreferenciaChanged();
+            }
+        }
+        private global::System.String _referencia;
+        partial void OnreferenciaChanging(global::System.String value);
+        partial void OnreferenciaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> descuento
+        {
+            get
+            {
+                return _descuento;
+            }
+            set
+            {
+                OndescuentoChanging(value);
+                ReportPropertyChanging("descuento");
+                _descuento = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("descuento");
+                OndescuentoChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _descuento;
+        partial void OndescuentoChanging(Nullable<global::System.Decimal> value);
+        partial void OndescuentoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> subtotal
+        {
+            get
+            {
+                return _subtotal;
+            }
+            set
+            {
+                OnsubtotalChanging(value);
+                ReportPropertyChanging("subtotal");
+                _subtotal = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("subtotal");
+                OnsubtotalChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _subtotal;
+        partial void OnsubtotalChanging(Nullable<global::System.Decimal> value);
+        partial void OnsubtotalChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> impuesto1
+        {
+            get
+            {
+                return _impuesto1;
+            }
+            set
+            {
+                Onimpuesto1Changing(value);
+                ReportPropertyChanging("impuesto1");
+                _impuesto1 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("impuesto1");
+                Onimpuesto1Changed();
+            }
+        }
+        private Nullable<global::System.Decimal> _impuesto1;
+        partial void Onimpuesto1Changing(Nullable<global::System.Decimal> value);
+        partial void Onimpuesto1Changed();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> impuesto2
+        {
+            get
+            {
+                return _impuesto2;
+            }
+            set
+            {
+                Onimpuesto2Changing(value);
+                ReportPropertyChanging("impuesto2");
+                _impuesto2 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("impuesto2");
+                Onimpuesto2Changed();
+            }
+        }
+        private Nullable<global::System.Decimal> _impuesto2;
+        partial void Onimpuesto2Changing(Nullable<global::System.Decimal> value);
+        partial void Onimpuesto2Changed();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> impuesto3
+        {
+            get
+            {
+                return _impuesto3;
+            }
+            set
+            {
+                Onimpuesto3Changing(value);
+                ReportPropertyChanging("impuesto3");
+                _impuesto3 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("impuesto3");
+                Onimpuesto3Changed();
+            }
+        }
+        private Nullable<global::System.Decimal> _impuesto3;
+        partial void Onimpuesto3Changing(Nullable<global::System.Decimal> value);
+        partial void Onimpuesto3Changed();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> total
+        {
+            get
+            {
+                return _total;
+            }
+            set
+            {
+                OntotalChanging(value);
+                ReportPropertyChanging("total");
+                _total = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("total");
+                OntotalChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _total;
+        partial void OntotalChanging(Nullable<global::System.Decimal> value);
+        partial void OntotalChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> fiscal
+        {
+            get
+            {
+                return _fiscal;
+            }
+            set
+            {
+                OnfiscalChanging(value);
+                ReportPropertyChanging("fiscal");
+                _fiscal = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("fiscal");
+                OnfiscalChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _fiscal;
+        partial void OnfiscalChanging(Nullable<global::System.Boolean> value);
+        partial void OnfiscalChanged();
+
+        #endregion
+
+    
+    }
     
     /// <summary>
     /// No hay documentación de metadatos disponible.

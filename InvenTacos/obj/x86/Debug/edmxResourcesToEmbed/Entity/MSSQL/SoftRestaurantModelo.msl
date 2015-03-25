@@ -24,5 +24,30 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="compras">
+      <EntityTypeMapping TypeName="SoftRestaurantModel.compras">
+        <MappingFragment StoreEntitySet="compras">
+          <ScalarProperty Name="fiscal" ColumnName="fiscal" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="impuesto3" ColumnName="impuesto3" />
+          <ScalarProperty Name="impuesto2" ColumnName="impuesto2" />
+          <ScalarProperty Name="impuesto1" ColumnName="impuesto1" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="descuento" ColumnName="descuento" />
+          <ScalarProperty Name="referencia" ColumnName="referencia" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="usuariocancelo" ColumnName="usuariocancelo" />
+          <ScalarProperty Name="fechavencimiento" ColumnName="fechavencimiento" />
+          <ScalarProperty Name="cancelado" ColumnName="cancelado" />
+          <ScalarProperty Name="fechafactura" ColumnName="fechafactura" />
+          <ScalarProperty Name="foliofactura" ColumnName="foliofactura" />
+          <ScalarProperty Name="idproveedor" ColumnName="idproveedor" />
+          <ScalarProperty Name="fechaaplicacion" ColumnName="fechaaplicacion" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idcompra" ColumnName="idcompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

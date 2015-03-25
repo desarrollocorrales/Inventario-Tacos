@@ -313,6 +313,8 @@
             // 
             this.colCantidadCrudo.AppearanceHeader.Options.UseTextOptions = true;
             this.colCantidadCrudo.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.colCantidadCrudo.DisplayFormat.FormatString = "n";
+            this.colCantidadCrudo.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colCantidadCrudo.FieldName = "CantidadCrudo";
             this.colCantidadCrudo.Name = "colCantidadCrudo";
             this.colCantidadCrudo.Visible = true;
@@ -322,6 +324,8 @@
             // 
             this.colRendimiento.AppearanceHeader.Options.UseTextOptions = true;
             this.colRendimiento.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.colRendimiento.DisplayFormat.FormatString = "n";
+            this.colRendimiento.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colRendimiento.FieldName = "Rendimiento";
             this.colRendimiento.Name = "colRendimiento";
             this.colRendimiento.OptionsColumn.AllowEdit = false;
@@ -332,6 +336,8 @@
             // 
             this.colCantidadCocido.AppearanceHeader.Options.UseTextOptions = true;
             this.colCantidadCocido.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.colCantidadCocido.DisplayFormat.FormatString = "n";
+            this.colCantidadCocido.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colCantidadCocido.FieldName = "CantidadCocido";
             this.colCantidadCocido.Name = "colCantidadCocido";
             this.colCantidadCocido.Visible = true;
@@ -341,6 +347,8 @@
             // 
             this.colCantidadTotal.AppearanceHeader.Options.UseTextOptions = true;
             this.colCantidadTotal.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.colCantidadTotal.DisplayFormat.FormatString = "n";
+            this.colCantidadTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colCantidadTotal.FieldName = "CantidadTotal";
             this.colCantidadTotal.Name = "colCantidadTotal";
             this.colCantidadTotal.OptionsColumn.AllowEdit = false;
