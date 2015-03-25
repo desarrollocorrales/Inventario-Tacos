@@ -6,81 +6,81 @@
     <edmx:StorageModels>
     <Schema Namespace="TacosInventariosModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="TacosInventariosModelStoreContainer">
-          <EntitySet Name="inventario_compras" EntityType="TacosInventariosModel.Store.inventario_compras" store:Type="Tables" Schema="corrales_controltacos_dolores" />
-          <EntitySet Name="inventario_diarios" EntityType="TacosInventariosModel.Store.inventario_diarios" store:Type="Tables" Schema="corrales_controltacos_dolores" />
-          <EntitySet Name="inventario_insumos" EntityType="TacosInventariosModel.Store.inventario_insumos" store:Type="Tables" Schema="corrales_controltacos_dolores" />
+          <EntitySet Name="compras" EntityType="TacosInventariosModel.Store.compras" store:Type="Tables" Schema="corrales_controltacos_dolores" />
+          <EntitySet Name="insumos" EntityType="TacosInventariosModel.Store.insumos" store:Type="Tables" Schema="corrales_controltacos_dolores" />
+          <EntitySet Name="inventarios_diarios" EntityType="TacosInventariosModel.Store.inventarios_diarios" store:Type="Tables" Schema="corrales_controltacos_dolores" />
         </EntityContainer>
-        <EntityType Name="inventario_compras">
+        <EntityType Name="compras">
           <Key>
-            <PropertyRef Name="idcompra" />
-            <PropertyRef Name="idinsumo" />
+            <PropertyRef Name="id_compra" />
+            <PropertyRef Name="id_insumo" />
             <PropertyRef Name="cantidad" />
             <PropertyRef Name="fecha" />
           </Key>
-          <Property Name="idcompra" Type="bigint" Nullable="false" />
-          <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="id_compra" Type="bigint" Nullable="false" />
+          <Property Name="id_insumo" Type="varchar" Nullable="false" MaxLength="15" />
           <Property Name="cantidad" Type="decimal" Nullable="false" Precision="7" Scale="3" />
           <Property Name="fecha" Type="date" Nullable="false" />
         </EntityType>
-        <EntityType Name="inventario_diarios">
+        <EntityType Name="insumos">
           <Key>
-            <PropertyRef Name="idinsumo" />
+            <PropertyRef Name="id_insumo" />
+          </Key>
+          <Property Name="id_insumo" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="descripcion" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="unidad" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="rendimiento" Type="decimal" Precision="7" Scale="3" />
+        </EntityType>
+        <EntityType Name="inventarios_diarios">
+          <Key>
+            <PropertyRef Name="id_insumo" />
             <PropertyRef Name="fecha" />
           </Key>
-          <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="id_insumo" Type="varchar" Nullable="false" MaxLength="15" />
           <Property Name="cantidad_crudo" Type="decimal" Nullable="false" Precision="7" Scale="3" />
           <Property Name="cantidad_cocido" Type="decimal" Nullable="false" Precision="7" Scale="3" />
           <Property Name="cantidad_total" Type="decimal" Nullable="false" Precision="7" Scale="3" />
           <Property Name="fecha" Type="date" Nullable="false" />
-        </EntityType>
-        <EntityType Name="inventario_insumos">
-          <Key>
-            <PropertyRef Name="idinsumo" />
-          </Key>
-          <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
-          <Property Name="descripcion" Type="varchar" Nullable="false" MaxLength="60" />
-          <Property Name="unidad" Type="varchar" Nullable="false" MaxLength="10" />
-          <Property Name="rendimiento" Type="decimal" Precision="7" Scale="3" />
         </EntityType>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TacosInventariosModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="TacosInventarioEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="inventario_diarios" EntityType="TacosInventariosModel.inventario_diarios" />
-          <EntitySet Name="inventario_insumos" EntityType="TacosInventariosModel.inventario_insumos" />
-          <EntitySet Name="inventario_compras" EntityType="TacosInventariosModel.inventario_compras" />
+          <EntitySet Name="compras" EntityType="TacosInventariosModel.compras" />
+          <EntitySet Name="insumos" EntityType="TacosInventariosModel.insumos" />
+          <EntitySet Name="inventarios_diarios" EntityType="TacosInventariosModel.inventarios_diarios" />
         </EntityContainer>
-        <EntityType Name="inventario_diarios">
+        <EntityType Name="compras">
           <Key>
-            <PropertyRef Name="idinsumo" />
+            <PropertyRef Name="id_compra" />
+            <PropertyRef Name="id_insumo" />
+            <PropertyRef Name="cantidad" />
             <PropertyRef Name="fecha" />
           </Key>
-          <Property Type="String" Name="idinsumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="cantidad_crudo" Nullable="false" />
-          <Property Type="Decimal" Name="cantidad_cocido" Nullable="false" />
-          <Property Type="Decimal" Name="cantidad_total" Nullable="false" />
+          <Property Type="Int64" Name="id_compra" Nullable="false" />
+          <Property Type="String" Name="id_insumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="cantidad" Nullable="false" />
           <Property Type="DateTime" Name="fecha" Nullable="false" />
         </EntityType>
-        <EntityType Name="inventario_insumos">
+        <EntityType Name="insumos">
           <Key>
-            <PropertyRef Name="idinsumo" />
+            <PropertyRef Name="id_insumo" />
           </Key>
-          <Property Type="String" Name="idinsumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="id_insumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="descripcion" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="unidad" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Type="Decimal" Name="rendimiento" />
         </EntityType>
-        <EntityType Name="inventario_compras">
+        <EntityType Name="inventarios_diarios">
           <Key>
-            <PropertyRef Name="idcompra" />
-            <PropertyRef Name="idinsumo" />
-            <PropertyRef Name="cantidad" />
+            <PropertyRef Name="id_insumo" />
             <PropertyRef Name="fecha" />
           </Key>
-          <Property Type="Int64" Name="idcompra" Nullable="false" />
-          <Property Type="String" Name="idinsumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="cantidad" Nullable="false" />
+          <Property Type="String" Name="id_insumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="cantidad_crudo" Nullable="false" />
+          <Property Type="Decimal" Name="cantidad_cocido" Nullable="false" />
+          <Property Type="Decimal" Name="cantidad_total" Nullable="false" />
           <Property Type="DateTime" Name="fecha" Nullable="false" />
         </EntityType>
         </Schema>
@@ -89,34 +89,34 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TacosInventariosModelStoreContainer" CdmEntityContainer="TacosInventarioEntities">
-          <EntitySetMapping Name="inventario_diarios">
-            <EntityTypeMapping TypeName="TacosInventariosModel.inventario_diarios">
-              <MappingFragment StoreEntitySet="inventario_diarios">
+          <EntitySetMapping Name="compras">
+            <EntityTypeMapping TypeName="TacosInventariosModel.compras">
+              <MappingFragment StoreEntitySet="compras">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
+                <ScalarProperty Name="id_compra" ColumnName="id_compra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="insumos">
+            <EntityTypeMapping TypeName="TacosInventariosModel.insumos">
+              <MappingFragment StoreEntitySet="insumos">
+                <ScalarProperty Name="rendimiento" ColumnName="rendimiento" />
+                <ScalarProperty Name="unidad" ColumnName="unidad" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inventarios_diarios">
+            <EntityTypeMapping TypeName="TacosInventariosModel.inventarios_diarios">
+              <MappingFragment StoreEntitySet="inventarios_diarios">
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="cantidad_total" ColumnName="cantidad_total" />
                 <ScalarProperty Name="cantidad_cocido" ColumnName="cantidad_cocido" />
                 <ScalarProperty Name="cantidad_crudo" ColumnName="cantidad_crudo" />
-                <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="inventario_insumos">
-            <EntityTypeMapping TypeName="TacosInventariosModel.inventario_insumos">
-              <MappingFragment StoreEntitySet="inventario_insumos">
-                <ScalarProperty Name="rendimiento" ColumnName="rendimiento" />
-                <ScalarProperty Name="unidad" ColumnName="unidad" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="inventario_compras">
-            <EntityTypeMapping TypeName="TacosInventariosModel.inventario_compras">
-              <MappingFragment StoreEntitySet="inventario_compras">
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
-                <ScalarProperty Name="idcompra" ColumnName="idcompra" />
+                <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -141,9 +141,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="TacosInventarioModel">
-        <EntityTypeShape EntityType="TacosInventariosModel.inventario_diarios" Width="2.125" PointX="0.75" PointY="4.25" Height="1.7566536458333317" />
-        <EntityTypeShape EntityType="TacosInventariosModel.inventario_insumos" Width="2.125" PointX="0.75" PointY="2.375" Height="1.592306315104167" />
-        <EntityTypeShape EntityType="TacosInventariosModel.inventario_compras" Width="2.125" PointX="0.75" PointY="0.5" Height="1.5923063151041657" />
+        <EntityTypeShape EntityType="TacosInventariosModel.compras" Width="1.5" PointX="0.625" PointY="0.5" Height="1.5923063151041657" />
+        <EntityTypeShape EntityType="TacosInventariosModel.insumos" Width="1.5" PointX="2.625" PointY="0.5" Height="1.5923063151041674" />
+        <EntityTypeShape EntityType="TacosInventariosModel.inventarios_diarios" Width="2.125" PointX="4.75" PointY="0.5" Height="1.7566536458333322" />
       </Diagram>
     </Diagrams>
   </Designer>

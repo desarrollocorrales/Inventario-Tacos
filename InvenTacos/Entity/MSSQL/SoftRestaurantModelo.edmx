@@ -36,9 +36,9 @@
         </EntityType>
         <EntityType Name="insumos">
           <Key>
-            <PropertyRef Name="idinsumo" />
+            <PropertyRef Name="id_insumo" />
           </Key>
-          <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="id_insumo" Type="varchar" Nullable="false" MaxLength="15" />
           <Property Name="descripcion" Type="varchar" MaxLength="60" />
           <Property Name="idgruposi" Type="varchar" MaxLength="5" />
           <Property Name="unidad" Type="varchar" MaxLength="10" />
@@ -47,11 +47,11 @@
         </EntityType>
         <EntityType Name="insumospresentaciones">
           <Key>
-            <PropertyRef Name="idinsumospresentaciones" />
+            <PropertyRef Name="id_insumospresentaciones" />
           </Key>
-          <Property Name="idinsumospresentaciones" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="id_insumospresentaciones" Type="varchar" Nullable="false" MaxLength="15" />
           <Property Name="descripcion" Type="varchar" MaxLength="60" />
-          <Property Name="idinsumo" Type="varchar" MaxLength="15" />
+          <Property Name="id_insumo" Type="varchar" MaxLength="15" />
           <Property Name="idgruposi" Type="varchar" MaxLength="5" />
           <Property Name="rendimiento" Type="numeric" Precision="12" Scale="4" />
         </EntityType>
@@ -66,7 +66,7 @@
         <Property Name="traspaso" Type="numeric" Precision="8" />
         <Property Name="invfisico" Type="numeric" Precision="8" />
         <Property Name="idconcepto" Type="varchar" MaxLength="5" />
-        <Property Name="idinsumo" Type="varchar" MaxLength="15" />
+        <Property Name="id_insumo" Type="varchar" MaxLength="15" />
         <Property Name="costo" Type="money" />
         <Property Name="cantidad" Type="numeric" Precision="14" Scale="4" />
         <Property Name="idalmacen" Type="varchar" MaxLength="5" />
@@ -85,9 +85,9 @@
         </EntityContainer>
         <EntityType Name="insumos">
           <Key>
-            <PropertyRef Name="idinsumo" />
+            <PropertyRef Name="id_insumo" />
           </Key>
-          <Property Name="idinsumo" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="id_insumo" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
           <Property Name="descripcion" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
           <Property Name="idgruposi" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
           <Property Name="unidad" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
@@ -96,11 +96,11 @@
         </EntityType>
         <EntityType Name="insumospresentaciones">
           <Key>
-            <PropertyRef Name="idinsumospresentaciones" />
+            <PropertyRef Name="id_insumospresentaciones" />
           </Key>
-          <Property Name="idinsumospresentaciones" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="id_insumospresentaciones" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
           <Property Name="descripcion" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
-          <Property Name="idinsumo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="id_insumo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
           <Property Name="idgruposi" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
           <Property Name="rendimiento" Type="Decimal" Precision="12" Scale="4" />
         </EntityType>
@@ -137,7 +137,7 @@
           <EntitySetMapping Name="insumos">
             <EntityTypeMapping TypeName="SoftRestaurantModel.insumos">
               <MappingFragment StoreEntitySet="insumos">
-                <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
+                <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="idgruposi" ColumnName="idgruposi" />
                 <ScalarProperty Name="unidad" ColumnName="unidad" />
@@ -149,9 +149,9 @@
           <EntitySetMapping Name="insumospresentaciones">
             <EntityTypeMapping TypeName="SoftRestaurantModel.insumospresentaciones">
               <MappingFragment StoreEntitySet="insumospresentaciones">
-                <ScalarProperty Name="idinsumospresentaciones" ColumnName="idinsumospresentaciones" />
+                <ScalarProperty Name="id_insumospresentaciones" ColumnName="id_insumospresentaciones" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
+                <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
                 <ScalarProperty Name="idgruposi" ColumnName="idgruposi" />
                 <ScalarProperty Name="rendimiento" ColumnName="rendimiento" />
               </MappingFragment>

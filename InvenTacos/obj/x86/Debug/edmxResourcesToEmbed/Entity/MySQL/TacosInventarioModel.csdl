@@ -1,40 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TacosInventariosModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
   <EntityContainer Name="TacosInventarioEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="inventario_diarios" EntityType="TacosInventariosModel.inventario_diarios" />
-    <EntitySet Name="inventario_insumos" EntityType="TacosInventariosModel.inventario_insumos" />
-    <EntitySet Name="inventario_compras" EntityType="TacosInventariosModel.inventario_compras" />
+    <EntitySet Name="compras" EntityType="TacosInventariosModel.compras" />
+    <EntitySet Name="insumos" EntityType="TacosInventariosModel.insumos" />
+    <EntitySet Name="inventarios_diarios" EntityType="TacosInventariosModel.inventarios_diarios" />
   </EntityContainer>
-  <EntityType Name="inventario_diarios">
+  <EntityType Name="compras">
     <Key>
-      <PropertyRef Name="idinsumo" />
+      <PropertyRef Name="id_compra" />
+      <PropertyRef Name="id_insumo" />
+      <PropertyRef Name="cantidad" />
       <PropertyRef Name="fecha" />
     </Key>
-    <Property Type="String" Name="idinsumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Type="Decimal" Name="cantidad_crudo" Nullable="false" />
-    <Property Type="Decimal" Name="cantidad_cocido" Nullable="false" />
-    <Property Type="Decimal" Name="cantidad_total" Nullable="false" />
+    <Property Type="Int64" Name="id_compra" Nullable="false" />
+    <Property Type="String" Name="id_insumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="cantidad" Nullable="false" />
     <Property Type="DateTime" Name="fecha" Nullable="false" />
   </EntityType>
-  <EntityType Name="inventario_insumos">
+  <EntityType Name="insumos">
     <Key>
-      <PropertyRef Name="idinsumo" />
+      <PropertyRef Name="id_insumo" />
     </Key>
-    <Property Type="String" Name="idinsumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="id_insumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="descripcion" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="unidad" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Type="Decimal" Name="rendimiento" />
   </EntityType>
-  <EntityType Name="inventario_compras">
+  <EntityType Name="inventarios_diarios">
     <Key>
-      <PropertyRef Name="idcompra" />
-      <PropertyRef Name="idinsumo" />
-      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="id_insumo" />
       <PropertyRef Name="fecha" />
     </Key>
-    <Property Type="Int64" Name="idcompra" Nullable="false" />
-    <Property Type="String" Name="idinsumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Type="Decimal" Name="cantidad" Nullable="false" />
+    <Property Type="String" Name="id_insumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="cantidad_crudo" Nullable="false" />
+    <Property Type="Decimal" Name="cantidad_cocido" Nullable="false" />
+    <Property Type="Decimal" Name="cantidad_total" Nullable="false" />
     <Property Type="DateTime" Name="fecha" Nullable="false" />
   </EntityType>
 </Schema>

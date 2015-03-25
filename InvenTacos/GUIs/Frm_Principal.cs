@@ -70,18 +70,18 @@ namespace InvenTacos.GUIs
             }
         }
 
-        private List<inventario_insumos> ObtenerInsumosConfigurados()
+        private List<insumos> ObtenerInsumosConfigurados()
         {
             TacosInventarioEntities MyContext = new TacosInventarioEntities(ConnectionStrings.MySQL);
             
-            List<inventario_insumos> lstInsumosSeleccionados = new List<inventario_insumos>();            
+            List<insumos> lstInsumosSeleccionados = new List<insumos>();            
             List<string> lstIDsConfigurados = ObtenerIDsConfigurados();
 
-            var InsumosConfigurados = from buscaInsumos in MyContext.inventario_insumos
-                                      where (lstIDsConfigurados.Contains(buscaInsumos.idinsumo))
+            var InsumosConfigurados = from buscaInsumos in MyContext.insumos
+                                      where (lstIDsConfigurados.Contains(buscaInsumos.id_insumo))
                                       select buscaInsumos;
             
-            lstInsumosSeleccionados = InsumosConfigurados.OrderBy(o => o.idinsumo).ToList();
+            lstInsumosSeleccionados = InsumosConfigurados.OrderBy(o => o.id_insumo).ToList();
       
             MyContext.Dispose();
 
@@ -117,7 +117,7 @@ namespace InvenTacos.GUIs
 
                 TacosInventarioEntities MyContext = new TacosInventarioEntities(ConnectionStrings.MySQL);
 
-                List<inventario_insumos> lstInsumos = ObtenerInsumosConfigurados();
+                List<insumos> lstInsumos = ObtenerInsumosConfigurados();
                 
                 if (lstInsumos.Count == 0)
                 {
@@ -130,10 +130,10 @@ namespace InvenTacos.GUIs
                 List<CapturaDeinventario> lstGridPRD = new List<CapturaDeinventario>();
 
                 CapturaDeinventario filaCaptura;
-                foreach (inventario_insumos myInsumo in lstInsumos)
+                foreach (insumos myInsumo in lstInsumos)
                 {
                     filaCaptura = new CapturaDeinventario();
-                    filaCaptura.ClaveInsumo = myInsumo.idinsumo;
+                    filaCaptura.ClaveInsumo = myInsumo.id_insumo;
                     filaCaptura.NombreInsumo = myInsumo.descripcion;
                     filaCaptura.Rendimiento = Convert.ToDecimal(myInsumo.rendimiento);
                     filaCaptura.Unidad = myInsumo.unidad;
@@ -182,7 +182,7 @@ namespace InvenTacos.GUIs
                 {
                     pbCargando.Visible = true;
                     Application.DoEvents();
-                    List<inventario_insumos> lstInsumostodos = ObtenerTodosLosInsumos();
+                    List<insumos> lstInsumostodos = ObtenerTodosLosInsumos();
                     new Frm_ConfigrarInsumos(lstInsumostodos).ShowDialog();
                     pbCargando.Visible = false;
                 }
@@ -197,10 +197,10 @@ namespace InvenTacos.GUIs
             }              
         }
         
-        private List<inventario_insumos> ObtenerTodosLosInsumos()
+        private List<insumos> ObtenerTodosLosInsumos()
         {
             TacosInventarioEntities MyContext = new TacosInventarioEntities(ConnectionStrings.MySQL);
-            List<inventario_insumos> lstInsumos = MyContext.inventario_insumos.ToList();
+            List<insumos> lstInsumos = MyContext.insumos.ToList();
             MyContext.Dispose();
             return lstInsumos;
         }
@@ -261,17 +261,17 @@ namespace InvenTacos.GUIs
             {
                 List<CapturaDeinventario> lstInventarioCapturado = (List<CapturaDeinventario>)gridCapturaInventario.DataSource;
 
-                inventario_diarios RegistroBD;
+                inventarios_diarios RegistroBD;
                 foreach (CapturaDeinventario Registro in lstInventarioCapturado)
                 {
-                    RegistroBD = new inventario_diarios();
-                    RegistroBD.idinsumo = Registro.ClaveInsumo;
+                    RegistroBD = new inventarios_diarios();
+                    RegistroBD.id_insumo = Registro.ClaveInsumo;
                     RegistroBD.cantidad_cocido = Registro.CantidadCocido;
                     RegistroBD.cantidad_crudo = Registro.CantidadCrudo;
                     RegistroBD.cantidad_total = Registro.CantidadTotal;
                     RegistroBD.fecha = dtpFecha.Value.Date;
 
-                    MyContext.inventario_diarios.AddObject(RegistroBD);
+                    MyContext.inventarios_diarios.AddObject(RegistroBD);
                     MyContext.SaveChanges();
                 }
 
@@ -306,20 +306,20 @@ namespace InvenTacos.GUIs
             TacosInventarioEntities MySQLContexto = new TacosInventarioEntities(ConnectionStrings.MySQL);
 
             MySQLContexto.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 0;");
-            MySQLContexto.ExecuteStoreCommand("DELETE FROM inventario_compras WHERE fecha = '{0}'", dtFecha.ToString("yyyy-MM-dd"));
+            MySQLContexto.ExecuteStoreCommand("DELETE FROM compras WHERE fecha = '{0}'", dtFecha.ToString("yyyy-MM-dd"));
             MySQLContexto.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 1;");
             MySQLContexto.SaveChanges();
 
-            inventario_compras compra;
+            compras compra;
             foreach (Compras c in lstCompras)
             {
-                compra = new inventario_compras();
-                compra.idcompra = Convert.ToInt64(c.ID_Compra);
-                compra.idinsumo = c.ID_Insumo;
+                compra = new compras();
+                compra.id_compra = Convert.ToInt64(c.ID_Compra);
+                compra.id_insumo = c.ID_Insumo;
                 compra.cantidad = c.Cantidad;
                 compra.fecha = c.dtFecha;
 
-                MySQLContexto.inventario_compras.AddObject(compra);
+                MySQLContexto.compras.AddObject(compra);
                 MySQLContexto.SaveChanges();
             }
         }
@@ -341,7 +341,7 @@ namespace InvenTacos.GUIs
                              FROM compras c 
                             WHERE 
                                   (c.cancelado = 0 OR c.cancelado IS NULL) AND (c.fechaaplicacion BETWEEN '{0}' AND '{1}')) 
-                      AND movsinv.idconcepto = 'EPC'", sFecha, sFechaMasUno);
+                                  AND movsinv.idconcepto = 'EPC'", sFecha, sFechaMasUno);
 
             List<Compras> lstCompras = MSContexto.ExecuteStoreQuery<Compras>(sConsulta).ToList();
             MSContexto.Dispose();

@@ -32,31 +32,31 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_ConfigrarInsumos));
             this.lblTitulo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.gridInsumosTodos = new DevExpress.XtraGrid.GridControl();
+            this.grid_insumosTodos = new DevExpress.XtraGrid.GridControl();
             this.InsumosTodos = new System.Windows.Forms.BindingSource(this.components);
             this.gvInsumosTodos = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colidinsumo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colid_insumo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coldescripcion = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.gridInsumosSeleccionados = new DevExpress.XtraGrid.GridControl();
+            this.grid_insumosSeleccionados = new DevExpress.XtraGrid.GridControl();
             this.InsumosConfigurados = new System.Windows.Forms.BindingSource(this.components);
             this.gvInsumosSeleccionados = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colidinsumo1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colid_insumo1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coldescripcion1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.btnQuitar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.gridInsumosTodos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_insumosTodos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsumosTodos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInsumosTodos)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridInsumosSeleccionados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_insumosSeleccionados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsumosConfigurados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInsumosSeleccionados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -91,23 +91,23 @@
             this.label1.Text = "En esta ventana podra seleccionar los insumos que se utilizarán para realizar el " +
     "inventario";
             // 
-            // gridInsumosTodos
+            // grid_insumosTodos
             // 
-            this.gridInsumosTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.grid_insumosTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridInsumosTodos.DataSource = this.InsumosTodos;
-            this.gridInsumosTodos.Location = new System.Drawing.Point(3, 29);
-            this.gridInsumosTodos.MainView = this.gvInsumosTodos;
-            this.gridInsumosTodos.Name = "gridInsumosTodos";
-            this.gridInsumosTodos.Size = new System.Drawing.Size(366, 383);
-            this.gridInsumosTodos.TabIndex = 2;
-            this.gridInsumosTodos.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grid_insumosTodos.DataSource = this.InsumosTodos;
+            this.grid_insumosTodos.Location = new System.Drawing.Point(3, 29);
+            this.grid_insumosTodos.MainView = this.gvInsumosTodos;
+            this.grid_insumosTodos.Name = "grid_insumosTodos";
+            this.grid_insumosTodos.Size = new System.Drawing.Size(366, 383);
+            this.grid_insumosTodos.TabIndex = 2;
+            this.grid_insumosTodos.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInsumosTodos});
             // 
             // InsumosTodos
             // 
-            this.InsumosTodos.DataSource = typeof(InvenTacos.Entity.MySQL.inventario_insumos);
+            this.InsumosTodos.DataSource = typeof(InvenTacos.Entity.MySQL.insumos);
             // 
             // gvInsumosTodos
             // 
@@ -247,9 +247,9 @@
             this.gvInsumosTodos.Appearance.VertLine.BackColor = System.Drawing.Color.Silver;
             this.gvInsumosTodos.Appearance.VertLine.Options.UseBackColor = true;
             this.gvInsumosTodos.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colidinsumo,
+            this.colid_insumo,
             this.coldescripcion});
-            this.gvInsumosTodos.GridControl = this.gridInsumosTodos;
+            this.gvInsumosTodos.GridControl = this.grid_insumosTodos;
             this.gvInsumosTodos.Name = "gvInsumosTodos";
             this.gvInsumosTodos.OptionsBehavior.Editable = false;
             this.gvInsumosTodos.OptionsCustomization.AllowGroup = false;
@@ -259,13 +259,13 @@
             this.gvInsumosTodos.OptionsView.ShowGroupPanel = false;
             this.gvInsumosTodos.DoubleClick += new System.EventHandler(this.gvInsumosTodos_DoubleClick);
             // 
-            // colidinsumo
+            // colid_insumo
             // 
-            this.colidinsumo.Caption = "ID";
-            this.colidinsumo.FieldName = "idinsumo";
-            this.colidinsumo.Name = "colidinsumo";
-            this.colidinsumo.Visible = true;
-            this.colidinsumo.VisibleIndex = 0;
+            this.colid_insumo.Caption = "ID";
+            this.colid_insumo.FieldName = "id_insumo";
+            this.colid_insumo.Name = "colid_insumo";
+            this.colid_insumo.Visible = true;
+            this.colid_insumo.VisibleIndex = 0;
             // 
             // coldescripcion
             // 
@@ -278,7 +278,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.gridInsumosTodos);
+            this.panel1.Controls.Add(this.grid_insumosTodos);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -298,7 +298,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.gridInsumosSeleccionados);
+            this.panel2.Controls.Add(this.grid_insumosSeleccionados);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -315,23 +315,23 @@
             this.label3.Text = "Insumos Seleccionados";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // gridInsumosSeleccionados
+            // grid_insumosSeleccionados
             // 
-            this.gridInsumosSeleccionados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.grid_insumosSeleccionados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridInsumosSeleccionados.DataSource = this.InsumosConfigurados;
-            this.gridInsumosSeleccionados.Location = new System.Drawing.Point(3, 29);
-            this.gridInsumosSeleccionados.MainView = this.gvInsumosSeleccionados;
-            this.gridInsumosSeleccionados.Name = "gridInsumosSeleccionados";
-            this.gridInsumosSeleccionados.Size = new System.Drawing.Size(355, 383);
-            this.gridInsumosSeleccionados.TabIndex = 2;
-            this.gridInsumosSeleccionados.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grid_insumosSeleccionados.DataSource = this.InsumosConfigurados;
+            this.grid_insumosSeleccionados.Location = new System.Drawing.Point(3, 29);
+            this.grid_insumosSeleccionados.MainView = this.gvInsumosSeleccionados;
+            this.grid_insumosSeleccionados.Name = "grid_insumosSeleccionados";
+            this.grid_insumosSeleccionados.Size = new System.Drawing.Size(355, 383);
+            this.grid_insumosSeleccionados.TabIndex = 2;
+            this.grid_insumosSeleccionados.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInsumosSeleccionados});
             // 
             // InsumosConfigurados
             // 
-            this.InsumosConfigurados.DataSource = typeof(InvenTacos.Entity.MySQL.inventario_insumos);
+            this.InsumosConfigurados.DataSource = typeof(InvenTacos.Entity.MySQL.insumos);
             // 
             // gvInsumosSeleccionados
             // 
@@ -471,9 +471,9 @@
             this.gvInsumosSeleccionados.Appearance.VertLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(208)))), ((int)(((byte)(200)))));
             this.gvInsumosSeleccionados.Appearance.VertLine.Options.UseBackColor = true;
             this.gvInsumosSeleccionados.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colidinsumo1,
+            this.colid_insumo1,
             this.coldescripcion1});
-            this.gvInsumosSeleccionados.GridControl = this.gridInsumosSeleccionados;
+            this.gvInsumosSeleccionados.GridControl = this.grid_insumosSeleccionados;
             this.gvInsumosSeleccionados.Name = "gvInsumosSeleccionados";
             this.gvInsumosSeleccionados.OptionsBehavior.Editable = false;
             this.gvInsumosSeleccionados.OptionsCustomization.AllowFilter = false;
@@ -482,16 +482,16 @@
             this.gvInsumosSeleccionados.OptionsView.EnableAppearanceOddRow = true;
             this.gvInsumosSeleccionados.OptionsView.ShowGroupPanel = false;
             this.gvInsumosSeleccionados.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colidinsumo1, DevExpress.Data.ColumnSortOrder.Ascending)});
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colid_insumo1, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gvInsumosSeleccionados.DoubleClick += new System.EventHandler(this.gvInsumosSeleccionados_DoubleClick);
             // 
-            // colidinsumo1
+            // colid_insumo1
             // 
-            this.colidinsumo1.Caption = "ID";
-            this.colidinsumo1.FieldName = "idinsumo";
-            this.colidinsumo1.Name = "colidinsumo1";
-            this.colidinsumo1.Visible = true;
-            this.colidinsumo1.VisibleIndex = 0;
+            this.colid_insumo1.Caption = "ID";
+            this.colid_insumo1.FieldName = "id_insumo";
+            this.colid_insumo1.Name = "colid_insumo1";
+            this.colid_insumo1.Visible = true;
+            this.colid_insumo1.VisibleIndex = 0;
             // 
             // coldescripcion1
             // 
@@ -587,12 +587,12 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Configrar Insumos";
             this.Load += new System.EventHandler(this.Frm_ConfigrarInsumos_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gridInsumosTodos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_insumosTodos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsumosTodos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInsumosTodos)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridInsumosSeleccionados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_insumosSeleccionados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsumosConfigurados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInsumosSeleccionados)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -612,13 +612,13 @@
 
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label label1;
-        private DevExpress.XtraGrid.GridControl gridInsumosTodos;
+        private DevExpress.XtraGrid.GridControl grid_insumosTodos;
         private DevExpress.XtraGrid.Views.Grid.GridView gvInsumosTodos;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
-        private DevExpress.XtraGrid.GridControl gridInsumosSeleccionados;
+        private DevExpress.XtraGrid.GridControl grid_insumosSeleccionados;
         private DevExpress.XtraGrid.Views.Grid.GridView gvInsumosSeleccionados;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -626,10 +626,10 @@
         private System.Windows.Forms.Button btnQuitar;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.BindingSource InsumosTodos;
-        private DevExpress.XtraGrid.Columns.GridColumn colidinsumo;
+        private DevExpress.XtraGrid.Columns.GridColumn colid_insumo;
         private DevExpress.XtraGrid.Columns.GridColumn coldescripcion;
         private System.Windows.Forms.BindingSource InsumosConfigurados;
-        private DevExpress.XtraGrid.Columns.GridColumn colidinsumo1;
+        private DevExpress.XtraGrid.Columns.GridColumn colid_insumo1;
         private DevExpress.XtraGrid.Columns.GridColumn coldescripcion1;
     }
 }

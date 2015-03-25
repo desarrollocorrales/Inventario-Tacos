@@ -68,77 +68,77 @@ namespace InvenTacos.Entity.MySQL
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        public ObjectSet<inventario_diarios> inventario_diarios
+        public ObjectSet<compras> compras
         {
             get
             {
-                if ((_inventario_diarios == null))
+                if ((_compras == null))
                 {
-                    _inventario_diarios = base.CreateObjectSet<inventario_diarios>("inventario_diarios");
+                    _compras = base.CreateObjectSet<compras>("compras");
                 }
-                return _inventario_diarios;
+                return _compras;
             }
         }
-        private ObjectSet<inventario_diarios> _inventario_diarios;
+        private ObjectSet<compras> _compras;
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        public ObjectSet<inventario_insumos> inventario_insumos
+        public ObjectSet<insumos> insumos
         {
             get
             {
-                if ((_inventario_insumos == null))
+                if ((_insumos == null))
                 {
-                    _inventario_insumos = base.CreateObjectSet<inventario_insumos>("inventario_insumos");
+                    _insumos = base.CreateObjectSet<insumos>("insumos");
                 }
-                return _inventario_insumos;
+                return _insumos;
             }
         }
-        private ObjectSet<inventario_insumos> _inventario_insumos;
+        private ObjectSet<insumos> _insumos;
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        public ObjectSet<inventario_compras> inventario_compras
+        public ObjectSet<inventarios_diarios> inventarios_diarios
         {
             get
             {
-                if ((_inventario_compras == null))
+                if ((_inventarios_diarios == null))
                 {
-                    _inventario_compras = base.CreateObjectSet<inventario_compras>("inventario_compras");
+                    _inventarios_diarios = base.CreateObjectSet<inventarios_diarios>("inventarios_diarios");
                 }
-                return _inventario_compras;
+                return _inventarios_diarios;
             }
         }
-        private ObjectSet<inventario_compras> _inventario_compras;
+        private ObjectSet<inventarios_diarios> _inventarios_diarios;
 
         #endregion
 
         #region Métodos AddTo
     
         /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet inventario_diarios. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// Método desusado para agregar un nuevo objeto al EntitySet compras. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
         /// </summary>
-        public void AddToinventario_diarios(inventario_diarios inventario_diarios)
+        public void AddTocompras(compras compras)
         {
-            base.AddObject("inventario_diarios", inventario_diarios);
+            base.AddObject("compras", compras);
         }
     
         /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet inventario_insumos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// Método desusado para agregar un nuevo objeto al EntitySet insumos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
         /// </summary>
-        public void AddToinventario_insumos(inventario_insumos inventario_insumos)
+        public void AddToinsumos(insumos insumos)
         {
-            base.AddObject("inventario_insumos", inventario_insumos);
+            base.AddObject("insumos", insumos);
         }
     
         /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet inventario_compras. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// Método desusado para agregar un nuevo objeto al EntitySet inventarios_diarios. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
         /// </summary>
-        public void AddToinventario_compras(inventario_compras inventario_compras)
+        public void AddToinventarios_diarios(inventarios_diarios inventarios_diarios)
         {
-            base.AddObject("inventario_compras", inventario_compras);
+            base.AddObject("inventarios_diarios", inventarios_diarios);
         }
 
         #endregion
@@ -152,28 +152,28 @@ namespace InvenTacos.Entity.MySQL
     /// <summary>
     /// No hay documentación de metadatos disponible.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="inventario_compras")]
+    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="compras")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class inventario_compras : EntityObject
+    public partial class compras : EntityObject
     {
         #region Método de generador
     
         /// <summary>
-        /// Crear un nuevo objeto inventario_compras.
+        /// Crear un nuevo objeto compras.
         /// </summary>
-        /// <param name="idcompra">Valor inicial de la propiedad idcompra.</param>
-        /// <param name="idinsumo">Valor inicial de la propiedad idinsumo.</param>
+        /// <param name="id_compra">Valor inicial de la propiedad id_compra.</param>
+        /// <param name="id_insumo">Valor inicial de la propiedad id_insumo.</param>
         /// <param name="cantidad">Valor inicial de la propiedad cantidad.</param>
         /// <param name="fecha">Valor inicial de la propiedad fecha.</param>
-        public static inventario_compras Createinventario_compras(global::System.Int64 idcompra, global::System.String idinsumo, global::System.Decimal cantidad, global::System.DateTime fecha)
+        public static compras Createcompras(global::System.Int64 id_compra, global::System.String id_insumo, global::System.Decimal cantidad, global::System.DateTime fecha)
         {
-            inventario_compras inventario_compras = new inventario_compras();
-            inventario_compras.idcompra = idcompra;
-            inventario_compras.idinsumo = idinsumo;
-            inventario_compras.cantidad = cantidad;
-            inventario_compras.fecha = fecha;
-            return inventario_compras;
+            compras compras = new compras();
+            compras.id_compra = id_compra;
+            compras.id_insumo = id_insumo;
+            compras.cantidad = cantidad;
+            compras.fecha = fecha;
+            return compras;
         }
 
         #endregion
@@ -185,54 +185,54 @@ namespace InvenTacos.Entity.MySQL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 idcompra
+        public global::System.Int64 id_compra
         {
             get
             {
-                return _idcompra;
+                return _id_compra;
             }
             set
             {
-                if (_idcompra != value)
+                if (_id_compra != value)
                 {
-                    OnidcompraChanging(value);
-                    ReportPropertyChanging("idcompra");
-                    _idcompra = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("idcompra");
-                    OnidcompraChanged();
+                    Onid_compraChanging(value);
+                    ReportPropertyChanging("id_compra");
+                    _id_compra = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id_compra");
+                    Onid_compraChanged();
                 }
             }
         }
-        private global::System.Int64 _idcompra;
-        partial void OnidcompraChanging(global::System.Int64 value);
-        partial void OnidcompraChanged();
+        private global::System.Int64 _id_compra;
+        partial void Onid_compraChanging(global::System.Int64 value);
+        partial void Onid_compraChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String idinsumo
+        public global::System.String id_insumo
         {
             get
             {
-                return _idinsumo;
+                return _id_insumo;
             }
             set
             {
-                if (_idinsumo != value)
+                if (_id_insumo != value)
                 {
-                    OnidinsumoChanging(value);
-                    ReportPropertyChanging("idinsumo");
-                    _idinsumo = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("idinsumo");
-                    OnidinsumoChanged();
+                    Onid_insumoChanging(value);
+                    ReportPropertyChanging("id_insumo");
+                    _id_insumo = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("id_insumo");
+                    Onid_insumoChanged();
                 }
             }
         }
-        private global::System.String _idinsumo;
-        partial void OnidinsumoChanging(global::System.String value);
-        partial void OnidinsumoChanged();
+        private global::System.String _id_insumo;
+        partial void Onid_insumoChanging(global::System.String value);
+        partial void Onid_insumoChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -296,30 +296,26 @@ namespace InvenTacos.Entity.MySQL
     /// <summary>
     /// No hay documentación de metadatos disponible.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="inventario_diarios")]
+    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="insumos")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class inventario_diarios : EntityObject
+    public partial class insumos : EntityObject
     {
         #region Método de generador
     
         /// <summary>
-        /// Crear un nuevo objeto inventario_diarios.
+        /// Crear un nuevo objeto insumos.
         /// </summary>
-        /// <param name="idinsumo">Valor inicial de la propiedad idinsumo.</param>
-        /// <param name="cantidad_crudo">Valor inicial de la propiedad cantidad_crudo.</param>
-        /// <param name="cantidad_cocido">Valor inicial de la propiedad cantidad_cocido.</param>
-        /// <param name="cantidad_total">Valor inicial de la propiedad cantidad_total.</param>
-        /// <param name="fecha">Valor inicial de la propiedad fecha.</param>
-        public static inventario_diarios Createinventario_diarios(global::System.String idinsumo, global::System.Decimal cantidad_crudo, global::System.Decimal cantidad_cocido, global::System.Decimal cantidad_total, global::System.DateTime fecha)
+        /// <param name="id_insumo">Valor inicial de la propiedad id_insumo.</param>
+        /// <param name="descripcion">Valor inicial de la propiedad descripcion.</param>
+        /// <param name="unidad">Valor inicial de la propiedad unidad.</param>
+        public static insumos Createinsumos(global::System.String id_insumo, global::System.String descripcion, global::System.String unidad)
         {
-            inventario_diarios inventario_diarios = new inventario_diarios();
-            inventario_diarios.idinsumo = idinsumo;
-            inventario_diarios.cantidad_crudo = cantidad_crudo;
-            inventario_diarios.cantidad_cocido = cantidad_cocido;
-            inventario_diarios.cantidad_total = cantidad_total;
-            inventario_diarios.fecha = fecha;
-            return inventario_diarios;
+            insumos insumos = new insumos();
+            insumos.id_insumo = id_insumo;
+            insumos.descripcion = descripcion;
+            insumos.unidad = unidad;
+            return insumos;
         }
 
         #endregion
@@ -331,27 +327,164 @@ namespace InvenTacos.Entity.MySQL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String idinsumo
+        public global::System.String id_insumo
         {
             get
             {
-                return _idinsumo;
+                return _id_insumo;
             }
             set
             {
-                if (_idinsumo != value)
+                if (_id_insumo != value)
                 {
-                    OnidinsumoChanging(value);
-                    ReportPropertyChanging("idinsumo");
-                    _idinsumo = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("idinsumo");
-                    OnidinsumoChanged();
+                    Onid_insumoChanging(value);
+                    ReportPropertyChanging("id_insumo");
+                    _id_insumo = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("id_insumo");
+                    Onid_insumoChanged();
                 }
             }
         }
-        private global::System.String _idinsumo;
-        partial void OnidinsumoChanging(global::System.String value);
-        partial void OnidinsumoChanged();
+        private global::System.String _id_insumo;
+        partial void Onid_insumoChanging(global::System.String value);
+        partial void Onid_insumoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String descripcion
+        {
+            get
+            {
+                return _descripcion;
+            }
+            set
+            {
+                OndescripcionChanging(value);
+                ReportPropertyChanging("descripcion");
+                _descripcion = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("descripcion");
+                OndescripcionChanged();
+            }
+        }
+        private global::System.String _descripcion;
+        partial void OndescripcionChanging(global::System.String value);
+        partial void OndescripcionChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String unidad
+        {
+            get
+            {
+                return _unidad;
+            }
+            set
+            {
+                OnunidadChanging(value);
+                ReportPropertyChanging("unidad");
+                _unidad = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("unidad");
+                OnunidadChanged();
+            }
+        }
+        private global::System.String _unidad;
+        partial void OnunidadChanging(global::System.String value);
+        partial void OnunidadChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> rendimiento
+        {
+            get
+            {
+                return _rendimiento;
+            }
+            set
+            {
+                OnrendimientoChanging(value);
+                ReportPropertyChanging("rendimiento");
+                _rendimiento = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("rendimiento");
+                OnrendimientoChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _rendimiento;
+        partial void OnrendimientoChanging(Nullable<global::System.Decimal> value);
+        partial void OnrendimientoChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="inventarios_diarios")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class inventarios_diarios : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto inventarios_diarios.
+        /// </summary>
+        /// <param name="id_insumo">Valor inicial de la propiedad id_insumo.</param>
+        /// <param name="cantidad_crudo">Valor inicial de la propiedad cantidad_crudo.</param>
+        /// <param name="cantidad_cocido">Valor inicial de la propiedad cantidad_cocido.</param>
+        /// <param name="cantidad_total">Valor inicial de la propiedad cantidad_total.</param>
+        /// <param name="fecha">Valor inicial de la propiedad fecha.</param>
+        public static inventarios_diarios Createinventarios_diarios(global::System.String id_insumo, global::System.Decimal cantidad_crudo, global::System.Decimal cantidad_cocido, global::System.Decimal cantidad_total, global::System.DateTime fecha)
+        {
+            inventarios_diarios inventarios_diarios = new inventarios_diarios();
+            inventarios_diarios.id_insumo = id_insumo;
+            inventarios_diarios.cantidad_crudo = cantidad_crudo;
+            inventarios_diarios.cantidad_cocido = cantidad_cocido;
+            inventarios_diarios.cantidad_total = cantidad_total;
+            inventarios_diarios.fecha = fecha;
+            return inventarios_diarios;
+        }
+
+        #endregion
+
+        #region Propiedades primitivas
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String id_insumo
+        {
+            get
+            {
+                return _id_insumo;
+            }
+            set
+            {
+                if (_id_insumo != value)
+                {
+                    Onid_insumoChanging(value);
+                    ReportPropertyChanging("id_insumo");
+                    _id_insumo = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("id_insumo");
+                    Onid_insumoChanged();
+                }
+            }
+        }
+        private global::System.String _id_insumo;
+        partial void Onid_insumoChanging(global::System.String value);
+        partial void Onid_insumoChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -451,139 +584,6 @@ namespace InvenTacos.Entity.MySQL
         private global::System.DateTime _fecha;
         partial void OnfechaChanging(global::System.DateTime value);
         partial void OnfechaChanged();
-
-        #endregion
-
-    
-    }
-    
-    /// <summary>
-    /// No hay documentación de metadatos disponible.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="inventario_insumos")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class inventario_insumos : EntityObject
-    {
-        #region Método de generador
-    
-        /// <summary>
-        /// Crear un nuevo objeto inventario_insumos.
-        /// </summary>
-        /// <param name="idinsumo">Valor inicial de la propiedad idinsumo.</param>
-        /// <param name="descripcion">Valor inicial de la propiedad descripcion.</param>
-        /// <param name="unidad">Valor inicial de la propiedad unidad.</param>
-        public static inventario_insumos Createinventario_insumos(global::System.String idinsumo, global::System.String descripcion, global::System.String unidad)
-        {
-            inventario_insumos inventario_insumos = new inventario_insumos();
-            inventario_insumos.idinsumo = idinsumo;
-            inventario_insumos.descripcion = descripcion;
-            inventario_insumos.unidad = unidad;
-            return inventario_insumos;
-        }
-
-        #endregion
-
-        #region Propiedades primitivas
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String idinsumo
-        {
-            get
-            {
-                return _idinsumo;
-            }
-            set
-            {
-                if (_idinsumo != value)
-                {
-                    OnidinsumoChanging(value);
-                    ReportPropertyChanging("idinsumo");
-                    _idinsumo = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("idinsumo");
-                    OnidinsumoChanged();
-                }
-            }
-        }
-        private global::System.String _idinsumo;
-        partial void OnidinsumoChanging(global::System.String value);
-        partial void OnidinsumoChanged();
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String descripcion
-        {
-            get
-            {
-                return _descripcion;
-            }
-            set
-            {
-                OndescripcionChanging(value);
-                ReportPropertyChanging("descripcion");
-                _descripcion = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("descripcion");
-                OndescripcionChanged();
-            }
-        }
-        private global::System.String _descripcion;
-        partial void OndescripcionChanging(global::System.String value);
-        partial void OndescripcionChanged();
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String unidad
-        {
-            get
-            {
-                return _unidad;
-            }
-            set
-            {
-                OnunidadChanging(value);
-                ReportPropertyChanging("unidad");
-                _unidad = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("unidad");
-                OnunidadChanged();
-            }
-        }
-        private global::System.String _unidad;
-        partial void OnunidadChanging(global::System.String value);
-        partial void OnunidadChanged();
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> rendimiento
-        {
-            get
-            {
-                return _rendimiento;
-            }
-            set
-            {
-                OnrendimientoChanging(value);
-                ReportPropertyChanging("rendimiento");
-                _rendimiento = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("rendimiento");
-                OnrendimientoChanged();
-            }
-        }
-        private Nullable<global::System.Decimal> _rendimiento;
-        partial void OnrendimientoChanging(Nullable<global::System.Decimal> value);
-        partial void OnrendimientoChanged();
 
         #endregion
 

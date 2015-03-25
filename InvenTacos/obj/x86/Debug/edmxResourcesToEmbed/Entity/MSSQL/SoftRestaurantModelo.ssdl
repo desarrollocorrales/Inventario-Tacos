@@ -31,9 +31,9 @@
   </EntityType>
   <EntityType Name="insumos">
     <Key>
-      <PropertyRef Name="idinsumo" />
+      <PropertyRef Name="id_insumo" />
     </Key>
-    <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="id_insumo" Type="varchar" Nullable="false" MaxLength="15" />
     <Property Name="descripcion" Type="varchar" MaxLength="60" />
     <Property Name="idgruposi" Type="varchar" MaxLength="5" />
     <Property Name="unidad" Type="varchar" MaxLength="10" />
@@ -42,11 +42,11 @@
   </EntityType>
   <EntityType Name="insumospresentaciones">
     <Key>
-      <PropertyRef Name="idinsumospresentaciones" />
+      <PropertyRef Name="id_insumospresentaciones" />
     </Key>
-    <Property Name="idinsumospresentaciones" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="id_insumospresentaciones" Type="varchar" Nullable="false" MaxLength="15" />
     <Property Name="descripcion" Type="varchar" MaxLength="60" />
-    <Property Name="idinsumo" Type="varchar" MaxLength="15" />
+    <Property Name="id_insumo" Type="varchar" MaxLength="15" />
     <Property Name="idgruposi" Type="varchar" MaxLength="5" />
     <Property Name="rendimiento" Type="numeric" Precision="12" Scale="4" />
   </EntityType>
@@ -61,7 +61,7 @@
         <Property Name="traspaso" Type="numeric" Precision="8" />
         <Property Name="invfisico" Type="numeric" Precision="8" />
         <Property Name="idconcepto" Type="varchar" MaxLength="5" />
-        <Property Name="idinsumo" Type="varchar" MaxLength="15" />
+        <Property Name="id_insumo" Type="varchar" MaxLength="15" />
         <Property Name="costo" Type="money" />
         <Property Name="cantidad" Type="numeric" Precision="14" Scale="4" />
         <Property Name="idalmacen" Type="varchar" MaxLength="5" />

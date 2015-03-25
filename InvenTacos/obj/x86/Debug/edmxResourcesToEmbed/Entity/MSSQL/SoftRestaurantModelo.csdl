@@ -7,9 +7,9 @@
   </EntityContainer>
   <EntityType Name="insumos">
     <Key>
-      <PropertyRef Name="idinsumo" />
+      <PropertyRef Name="id_insumo" />
     </Key>
-    <Property Name="idinsumo" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="id_insumo" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
     <Property Name="descripcion" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
     <Property Name="idgruposi" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
     <Property Name="unidad" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
@@ -18,11 +18,11 @@
   </EntityType>
   <EntityType Name="insumospresentaciones">
     <Key>
-      <PropertyRef Name="idinsumospresentaciones" />
+      <PropertyRef Name="id_insumospresentaciones" />
     </Key>
-    <Property Name="idinsumospresentaciones" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="id_insumospresentaciones" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
     <Property Name="descripcion" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
-    <Property Name="idinsumo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="id_insumo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
     <Property Name="idgruposi" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
     <Property Name="rendimiento" Type="Decimal" Precision="12" Scale="4" />
   </EntityType>
