@@ -1,5 +1,4 @@
 D:\Github\Inventario-Tacos\DatosInvenTacos\bin\Debug\DatosInvenTacos.dll
 D:\Github\Inventario-Tacos\DatosInvenTacos\bin\Debug\DatosInvenTacos.pdb
-D:\Github\Inventario-Tacos\DatosInvenTacos\obj\Debug\DatosInvenTacos.csprojResolveAssemblyReference.cache
 D:\Github\Inventario-Tacos\DatosInvenTacos\obj\Debug\DatosInvenTacos.dll
 D:\Github\Inventario-Tacos\DatosInvenTacos\obj\Debug\DatosInvenTacos.pdb

@@ -13,10 +13,10 @@ namespace InvenTacos.Modelos
             "res://*/Entity.MSSQL.SoftRestaurantModelo.msl;" +
             "provider=System.Data.SqlClient;" +
             "provider connection string=" +
-            string.Format("'data source={0};", Properties.Settings.Default.MSSQL.Servidor) +
+            string.Format("\"data source={0};", Properties.Settings.Default.MSSQL.Servidor) +
             string.Format(" initial catalog={0};", Properties.Settings.Default.MSSQL.BaseDeDatos) +
             string.Format(" user id={0};", Properties.Settings.Default.MSSQL.Usuario) +
-            string.Format(" password={0};'", Properties.Settings.Default.MSSQL.Contraseña);
+            string.Format(" password={0};\"", Properties.Settings.Default.MSSQL.Contraseña);
 
         public static string MySQL =
             "metadata=res://*/Entity.MySQL.TacosInventarioModel.csdl|" +
@@ -24,10 +24,10 @@ namespace InvenTacos.Modelos
             "res://*/Entity.MySQL.TacosInventarioModel.msl;" +
             "provider=MySql.Data.MySqlClient;" +
             "provider connection string=" +
-            string.Format("'server={0};", Properties.Settings.Default.MySQL.Servidor) +
+            string.Format("\"server={0};", Properties.Settings.Default.MySQL.Servidor) +
             string.Format(" user id={0};", Properties.Settings.Default.MySQL.Usuario) +
             string.Format(" port={0};", Properties.Settings.Default.MySQL.Puerto) +
             string.Format(" database={0};", Properties.Settings.Default.MySQL.BaseDeDatos) +
-            string.Format(" password={0};'", Properties.Settings.Default.MySQL.Contraseña);
+            string.Format(" password={0};\"", Properties.Settings.Default.MySQL.Contraseña);
     }
 }

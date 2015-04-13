@@ -14,6 +14,8 @@ namespace InvenTacos.GUIs
 {
     public partial class Frm_ConfigDB : Form
     {
+        private string MSStringDeConexion, MySQLStringDeConexion;
+
         public Frm_ConfigDB()
         {
             InitializeComponent();
@@ -86,20 +88,21 @@ namespace InvenTacos.GUIs
         
         private void ProbarMSSQL()
         {
-            StringBuilder ConnectionString = new StringBuilder();
-
-            ConnectionString.Append("metadata=res://*/Entity.MSSQL.SoftRestaurantModelo.csdl|");
-            ConnectionString.Append("res://*/Entity.MSSQL.SoftRestaurantModelo.ssdl|");
-            ConnectionString.Append("res://*/Entity.MSSQL.SoftRestaurantModelo.msl;");
-            ConnectionString.Append("provider=System.Data.SqlClient;");
-            ConnectionString.Append("provider connection string=");
-            ConnectionString.Append(string.Format("'data source={0};", txbServerMSSQL.Text));
-            ConnectionString.Append(string.Format(" user id={0};", txbUserMSSQL.Text));
-            ConnectionString.Append(string.Format(" password={0};'", txbPassMSSQL.Text));
-
             try
             {
-                Entity.MSSQL.SoftRestaurantEntities MSContext = new Entity.MSSQL.SoftRestaurantEntities(ConnectionString.ToString());
+                StringBuilder sb = new StringBuilder();
+                sb.Append("metadata=res://*/Entity.MSSQL.SoftRestaurantModelo.csdl|");
+                sb.Append("res://*/Entity.MSSQL.SoftRestaurantModelo.ssdl|");
+                sb.Append("res://*/Entity.MSSQL.SoftRestaurantModelo.msl;");
+                sb.Append("provider=System.Data.SqlClient;");
+                sb.Append("provider connection string=\"");
+                sb.Append(string.Format("data source={0};",txbServerMSSQL.Text));
+                sb.Append(string.Format("user id={0};password={1};",txbUserMSSQL.Text, txbPassMSSQL.Text));
+                sb.Append("multipleactiveresultsets=True;App=EntityFramework\"");
+
+                MSStringDeConexion = sb.ToString();
+
+                Entity.MSSQL.SoftRestaurantEntities MSContext = new Entity.MSSQL.SoftRestaurantEntities(MSStringDeConexion);
                 MSContext.Connection.Open();
                 MSContext.Connection.Close();
 
@@ -115,21 +118,20 @@ namespace InvenTacos.GUIs
         }
 
         private void ProbarMySQL()
-        {
-            StringBuilder ConnectionString = new StringBuilder();
-            ConnectionString.Append("metadata=res://*/Entity.MySQL.TacosInventarioModel.csdl|");
-            ConnectionString.Append("res://*/Entity.MySQL.TacosInventarioModel.ssdl|");
-            ConnectionString.Append("res://*/Entity.MySQL.TacosInventarioModel.msl;");
-            ConnectionString.Append("provider=MySql.Data.MySqlClient;");
-            ConnectionString.Append("provider connection string=");
-            ConnectionString.Append(string.Format("'server={0};", txbServerMySQL.Text));
-            ConnectionString.Append(string.Format(" user id={0};", txbUserMySQL.Text));
-            ConnectionString.Append(string.Format(" port={0};",  nudPuertoMySQL.Value));
-            ConnectionString.Append(string.Format(" password={0};'", txbPassMySQL.Text));
-
+        {           
             try
             {
-                Entity.MySQL.TacosInventarioEntities MyContext = new Entity.MySQL.TacosInventarioEntities(ConnectionString.ToString());
+                StringBuilder sb = new StringBuilder();               
+                sb.Append("metadata=res://*/Entity.MySQL.TacosInventarioModel.csdl|");
+                sb.Append("res://*/Entity.MySQL.TacosInventarioModel.ssdl|");
+                sb.Append("res://*/Entity.MySQL.TacosInventarioModel.msl;");
+                sb.Append("provider=MySql.Data.MySqlClient;provider connection string=\"");
+                sb.Append(string.Format("server={0};user id={1};",txbServerMySQL.Text, txbUserMySQL.Text));
+                sb.Append(string.Format("password={0};\"",txbPassMySQL.Text));
+
+                MySQLStringDeConexion = sb.ToString();
+
+                Entity.MySQL.TacosInventarioEntities MyContext = new Entity.MySQL.TacosInventarioEntities(MySQLStringDeConexion);
                 MyContext.Connection.Open();
                 MyContext.Connection.Close();
 
@@ -208,7 +210,7 @@ namespace InvenTacos.GUIs
         private void ObtenerBasesDeDatosMSSQL()
         {
             List<string> lstBasesDeDatos = new List<string>();
-            Entity.MSSQL.SoftRestaurantEntities MSContext = new Entity.MSSQL.SoftRestaurantEntities(ConnectionStrings.MSSQL);
+            Entity.MSSQL.SoftRestaurantEntities MSContext = new Entity.MSSQL.SoftRestaurantEntities(MSStringDeConexion);
 
             lstBasesDeDatos = MSContext.ExecuteStoreQuery<string>("SELECT name FROM master..sysdatabases").ToList();
 
@@ -224,7 +226,7 @@ namespace InvenTacos.GUIs
         private void ObtenerBasesDeDatosMySQL()
         {
             List<string> lstBasesDeDatos = new List<string>();
-            Entity.MySQL.TacosInventarioEntities MyContext = new Entity.MySQL.TacosInventarioEntities(ConnectionStrings.MySQL);
+            Entity.MySQL.TacosInventarioEntities MyContext = new Entity.MySQL.TacosInventarioEntities(MySQLStringDeConexion);
 
             lstBasesDeDatos = MyContext.ExecuteStoreQuery<string>("Show Databases").ToList();
 
