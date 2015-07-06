@@ -55,14 +55,15 @@ namespace InvenTacos.GUIs
                 SqlServer.insumospresentaciones presentacion;
                 MostrarAccion("Inicia la importación....");
                 BorrarInsumos(MyContexto);
+
                 foreach (SqlServer.insumos MsSqlInsumo in lstMSInsumos)
                 {
                     myInsumo = new Mysql.insumos();
-                    myInsumo.id_insumo = MsSqlInsumo.id_insumo;
+                    myInsumo.id_insumo = MsSqlInsumo.idinsumo;
                     myInsumo.descripcion = MsSqlInsumo.descripcion;
                     myInsumo.unidad = MsSqlInsumo.unidad;
 
-                    presentacion = lstMSPresentaciones.FirstOrDefault(o => o.id_insumo == MsSqlInsumo.id_insumo);
+                    presentacion = lstMSPresentaciones.FirstOrDefault(o => o.idinsumo == MsSqlInsumo.idinsumo);
                     myInsumo.rendimiento = presentacion == null ? null : presentacion.rendimiento; 
 
                     MyContexto.insumos.AddObject(myInsumo);

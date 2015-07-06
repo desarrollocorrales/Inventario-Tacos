@@ -7,6 +7,7 @@
     <Schema Namespace="SoftRestaurantModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SoftRestaurantModelStoreContainer">
           <EntitySet Name="compras" EntityType="SoftRestaurantModel.Store.compras" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="conceptos" EntityType="SoftRestaurantModel.Store.conceptos" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="insumos" EntityType="SoftRestaurantModel.Store.insumos" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="insumospresentaciones" EntityType="SoftRestaurantModel.Store.insumospresentaciones" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
@@ -34,11 +35,21 @@
           <Property Name="total" Type="money" />
           <Property Name="fiscal" Type="bit" />
         </EntityType>
+        <EntityType Name="conceptos">
+          <Key>
+            <PropertyRef Name="idconcepto" />
+          </Key>
+          <Property Name="idconcepto" Type="varchar" Nullable="false" MaxLength="5" />
+          <Property Name="descripcion" Type="varchar" MaxLength="40" />
+          <Property Name="tipo" Type="numeric" Precision="1" />
+          <Property Name="autorizacion" Type="bit" />
+          <Property Name="visible" Type="bit" />
+        </EntityType>
         <EntityType Name="insumos">
           <Key>
-            <PropertyRef Name="id_insumo" />
+            <PropertyRef Name="idinsumo" />
           </Key>
-          <Property Name="id_insumo" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
           <Property Name="descripcion" Type="varchar" MaxLength="60" />
           <Property Name="idgruposi" Type="varchar" MaxLength="5" />
           <Property Name="unidad" Type="varchar" MaxLength="10" />
@@ -47,63 +58,24 @@
         </EntityType>
         <EntityType Name="insumospresentaciones">
           <Key>
-            <PropertyRef Name="id_insumospresentaciones" />
+            <PropertyRef Name="idinsumospresentaciones" />
           </Key>
-          <Property Name="id_insumospresentaciones" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="idinsumospresentaciones" Type="varchar" Nullable="false" MaxLength="15" />
           <Property Name="descripcion" Type="varchar" MaxLength="60" />
-          <Property Name="id_insumo" Type="varchar" MaxLength="15" />
+          <Property Name="idinsumo" Type="varchar" MaxLength="15" />
           <Property Name="idgruposi" Type="varchar" MaxLength="5" />
           <Property Name="rendimiento" Type="numeric" Precision="12" Scale="4" />
         </EntityType>
-        <!--Se encontraron errores durante la generación:
-      advertencia 6013: La tabla o vista 'softrestaurant8Pro.dbo.movsinv' no tiene una clave principal definida y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-      
-      <EntityType Name="movsinv">
-        <Property Name="fecha" Type="datetime" />
-        <Property Name="foliocheque" Type="numeric" Precision="8" />
-        <Property Name="movto" Type="numeric" Precision="8" />
-        <Property Name="idcompra" Type="numeric" Precision="10" />
-        <Property Name="traspaso" Type="numeric" Precision="8" />
-        <Property Name="invfisico" Type="numeric" Precision="8" />
-        <Property Name="idconcepto" Type="varchar" MaxLength="5" />
-        <Property Name="id_insumo" Type="varchar" MaxLength="15" />
-        <Property Name="costo" Type="money" />
-        <Property Name="cantidad" Type="numeric" Precision="14" Scale="4" />
-        <Property Name="idalmacen" Type="varchar" MaxLength="5" />
-        <Property Name="idturno" Type="numeric" Precision="6" />
-        <Property Name="presentaciondestino" Type="varchar" MaxLength="15" />
-        <Property Name="idpedido" Type="numeric" Precision="8" Scale="2" />
-      </EntityType>-->
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SoftRestaurantModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="SoftRestaurantEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="compras" EntityType="SoftRestaurantModel.compras" />
           <EntitySet Name="insumos" EntityType="SoftRestaurantModel.insumos" />
           <EntitySet Name="insumospresentaciones" EntityType="SoftRestaurantModel.insumospresentaciones" />
-          <EntitySet Name="compras" EntityType="SoftRestaurantModel.compras" />
+          <EntitySet Name="conceptos" EntityType="SoftRestaurantModel.conceptos" />
         </EntityContainer>
-        <EntityType Name="insumos">
-          <Key>
-            <PropertyRef Name="id_insumo" />
-          </Key>
-          <Property Name="id_insumo" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
-          <Property Name="descripcion" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
-          <Property Name="idgruposi" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
-          <Property Name="unidad" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="elaborado" Type="Boolean" />
-          <Property Name="rendimientoelaborado" Type="Decimal" Precision="10" Scale="4" />
-        </EntityType>
-        <EntityType Name="insumospresentaciones">
-          <Key>
-            <PropertyRef Name="id_insumospresentaciones" />
-          </Key>
-          <Property Name="id_insumospresentaciones" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
-          <Property Name="descripcion" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
-          <Property Name="id_insumo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
-          <Property Name="idgruposi" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
-          <Property Name="rendimiento" Type="Decimal" Precision="12" Scale="4" />
-        </EntityType>
         <EntityType Name="compras">
           <Key>
             <PropertyRef Name="idcompra" />
@@ -128,35 +100,43 @@
           <Property Type="Decimal" Name="total" Precision="19" Scale="4" />
           <Property Type="Boolean" Name="fiscal" />
         </EntityType>
+        <EntityType Name="insumos">
+          <Key>
+            <PropertyRef Name="idinsumo" />
+          </Key>
+          <Property Type="String" Name="idinsumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="descripcion" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="idgruposi" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="unidad" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="elaborado" />
+          <Property Type="Decimal" Name="rendimientoelaborado" Precision="10" Scale="4" />
+        </EntityType>
+        <EntityType Name="insumospresentaciones">
+          <Key>
+            <PropertyRef Name="idinsumospresentaciones" />
+          </Key>
+          <Property Type="String" Name="idinsumospresentaciones" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="descripcion" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="idinsumo" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="idgruposi" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="rendimiento" Precision="12" Scale="4" />
+        </EntityType>
+        <EntityType Name="conceptos">
+          <Key>
+            <PropertyRef Name="idconcepto" />
+          </Key>
+          <Property Type="String" Name="idconcepto" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="descripcion" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="tipo" Precision="1" Scale="0" />
+          <Property Type="Boolean" Name="autorizacion" />
+          <Property Type="Boolean" Name="visible" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SoftRestaurantModelStoreContainer" CdmEntityContainer="SoftRestaurantEntities">
-          <EntitySetMapping Name="insumos">
-            <EntityTypeMapping TypeName="SoftRestaurantModel.insumos">
-              <MappingFragment StoreEntitySet="insumos">
-                <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="idgruposi" ColumnName="idgruposi" />
-                <ScalarProperty Name="unidad" ColumnName="unidad" />
-                <ScalarProperty Name="elaborado" ColumnName="elaborado" />
-                <ScalarProperty Name="rendimientoelaborado" ColumnName="rendimientoelaborado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="insumospresentaciones">
-            <EntityTypeMapping TypeName="SoftRestaurantModel.insumospresentaciones">
-              <MappingFragment StoreEntitySet="insumospresentaciones">
-                <ScalarProperty Name="id_insumospresentaciones" ColumnName="id_insumospresentaciones" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
-                <ScalarProperty Name="idgruposi" ColumnName="idgruposi" />
-                <ScalarProperty Name="rendimiento" ColumnName="rendimiento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="compras">
             <EntityTypeMapping TypeName="SoftRestaurantModel.compras">
               <MappingFragment StoreEntitySet="compras">
@@ -182,6 +162,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="insumos">
+            <EntityTypeMapping TypeName="SoftRestaurantModel.insumos">
+              <MappingFragment StoreEntitySet="insumos">
+                <ScalarProperty Name="rendimientoelaborado" ColumnName="rendimientoelaborado" />
+                <ScalarProperty Name="elaborado" ColumnName="elaborado" />
+                <ScalarProperty Name="unidad" ColumnName="unidad" />
+                <ScalarProperty Name="idgruposi" ColumnName="idgruposi" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="insumospresentaciones">
+            <EntityTypeMapping TypeName="SoftRestaurantModel.insumospresentaciones">
+              <MappingFragment StoreEntitySet="insumospresentaciones">
+                <ScalarProperty Name="rendimiento" ColumnName="rendimiento" />
+                <ScalarProperty Name="idgruposi" ColumnName="idgruposi" />
+                <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idinsumospresentaciones" ColumnName="idinsumospresentaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="conceptos">
+            <EntityTypeMapping TypeName="SoftRestaurantModel.conceptos">
+              <MappingFragment StoreEntitySet="conceptos">
+                <ScalarProperty Name="visible" ColumnName="visible" />
+                <ScalarProperty Name="autorizacion" ColumnName="autorizacion" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idconcepto" ColumnName="idconcepto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -197,15 +211,16 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="SoftRestaurantModelo">
-        <EntityTypeShape EntityType="SoftRestaurantModel.insumos" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9210009765625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SoftRestaurantModel.insumospresentaciones" Width="1.5" PointX="2.75" PointY="0.75" Height="1.7566536458333335" IsExpanded="true" />
-        <EntityTypeShape EntityType="SoftRestaurantModel.compras" Width="1.5" PointX="0.75" PointY="3.75" Height="4.0575162760416656" />
+        <EntityTypeShape EntityType="SoftRestaurantModel.compras" Width="1.5" PointX="0.5" PointY="0.5" Height="4.0575162760416656" />
+        <EntityTypeShape EntityType="SoftRestaurantModel.insumos" Width="1.5" PointX="2.75" PointY="0.5" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="SoftRestaurantModel.insumospresentaciones" Width="1.5" PointX="2.75" PointY="2.75" Height="1.7566536458333322" />
+        <EntityTypeShape EntityType="SoftRestaurantModel.conceptos" Width="1.5" PointX="4.875" PointY="0.5" Height="1.7566536458333335" />
       </Diagram>
     </Diagrams>
   </Designer>

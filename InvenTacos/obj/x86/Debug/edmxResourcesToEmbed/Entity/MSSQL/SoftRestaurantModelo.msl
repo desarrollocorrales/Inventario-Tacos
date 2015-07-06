@@ -1,29 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="SoftRestaurantModelStoreContainer" CdmEntityContainer="SoftRestaurantEntities">
-    <EntitySetMapping Name="insumos">
-      <EntityTypeMapping TypeName="SoftRestaurantModel.insumos">
-        <MappingFragment StoreEntitySet="insumos">
-          <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="idgruposi" ColumnName="idgruposi" />
-          <ScalarProperty Name="unidad" ColumnName="unidad" />
-          <ScalarProperty Name="elaborado" ColumnName="elaborado" />
-          <ScalarProperty Name="rendimientoelaborado" ColumnName="rendimientoelaborado" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="insumospresentaciones">
-      <EntityTypeMapping TypeName="SoftRestaurantModel.insumospresentaciones">
-        <MappingFragment StoreEntitySet="insumospresentaciones">
-          <ScalarProperty Name="id_insumospresentaciones" ColumnName="id_insumospresentaciones" />
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
-          <ScalarProperty Name="idgruposi" ColumnName="idgruposi" />
-          <ScalarProperty Name="rendimiento" ColumnName="rendimiento" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="compras">
       <EntityTypeMapping TypeName="SoftRestaurantModel.compras">
         <MappingFragment StoreEntitySet="compras">
@@ -46,6 +23,40 @@
           <ScalarProperty Name="folio" ColumnName="folio" />
           <ScalarProperty Name="idempresa" ColumnName="idempresa" />
           <ScalarProperty Name="idcompra" ColumnName="idcompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insumos">
+      <EntityTypeMapping TypeName="SoftRestaurantModel.insumos">
+        <MappingFragment StoreEntitySet="insumos">
+          <ScalarProperty Name="rendimientoelaborado" ColumnName="rendimientoelaborado" />
+          <ScalarProperty Name="elaborado" ColumnName="elaborado" />
+          <ScalarProperty Name="unidad" ColumnName="unidad" />
+          <ScalarProperty Name="idgruposi" ColumnName="idgruposi" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insumospresentaciones">
+      <EntityTypeMapping TypeName="SoftRestaurantModel.insumospresentaciones">
+        <MappingFragment StoreEntitySet="insumospresentaciones">
+          <ScalarProperty Name="rendimiento" ColumnName="rendimiento" />
+          <ScalarProperty Name="idgruposi" ColumnName="idgruposi" />
+          <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idinsumospresentaciones" ColumnName="idinsumospresentaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="conceptos">
+      <EntityTypeMapping TypeName="SoftRestaurantModel.conceptos">
+        <MappingFragment StoreEntitySet="conceptos">
+          <ScalarProperty Name="visible" ColumnName="visible" />
+          <ScalarProperty Name="autorizacion" ColumnName="autorizacion" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idconcepto" ColumnName="idconcepto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -17,6 +17,16 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
+#region Metadatos de relaciones en EDM
+
+[assembly: EdmRelationshipAttribute("TacosInventariosModel", "fk_conceptos", "conceptos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(InvenTacos.Entity.MySQL.conceptos), "prestamos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(InvenTacos.Entity.MySQL.prestamos), true)]
+[assembly: EdmRelationshipAttribute("TacosInventariosModel", "FK_insum", "insumos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(InvenTacos.Entity.MySQL.insumos), "recetas", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(InvenTacos.Entity.MySQL.recetas), true)]
+[assembly: EdmRelationshipAttribute("TacosInventariosModel", "fk_insumos", "insumos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(InvenTacos.Entity.MySQL.insumos), "prestamos", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(InvenTacos.Entity.MySQL.prestamos), true)]
+[assembly: EdmRelationshipAttribute("TacosInventariosModel", "FK_prod", "productos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(InvenTacos.Entity.MySQL.productos), "recetas", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(InvenTacos.Entity.MySQL.recetas), true)]
+[assembly: EdmRelationshipAttribute("TacosInventariosModel", "FK_productos", "productos", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(InvenTacos.Entity.MySQL.productos), "ventas", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(InvenTacos.Entity.MySQL.ventas), true)]
+
+#endregion
+
 namespace InvenTacos.Entity.MySQL
 {
     #region Contextos
@@ -84,6 +94,22 @@ namespace InvenTacos.Entity.MySQL
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
+        public ObjectSet<conceptos> conceptos
+        {
+            get
+            {
+                if ((_conceptos == null))
+                {
+                    _conceptos = base.CreateObjectSet<conceptos>("conceptos");
+                }
+                return _conceptos;
+            }
+        }
+        private ObjectSet<conceptos> _conceptos;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
         public ObjectSet<insumos> insumos
         {
             get
@@ -100,6 +126,22 @@ namespace InvenTacos.Entity.MySQL
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
+        public ObjectSet<insumos_seleccionados> insumos_seleccionados
+        {
+            get
+            {
+                if ((_insumos_seleccionados == null))
+                {
+                    _insumos_seleccionados = base.CreateObjectSet<insumos_seleccionados>("insumos_seleccionados");
+                }
+                return _insumos_seleccionados;
+            }
+        }
+        private ObjectSet<insumos_seleccionados> _insumos_seleccionados;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
         public ObjectSet<inventarios_diarios> inventarios_diarios
         {
             get
@@ -112,6 +154,70 @@ namespace InvenTacos.Entity.MySQL
             }
         }
         private ObjectSet<inventarios_diarios> _inventarios_diarios;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<prestamos> prestamos
+        {
+            get
+            {
+                if ((_prestamos == null))
+                {
+                    _prestamos = base.CreateObjectSet<prestamos>("prestamos");
+                }
+                return _prestamos;
+            }
+        }
+        private ObjectSet<prestamos> _prestamos;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<productos> productos
+        {
+            get
+            {
+                if ((_productos == null))
+                {
+                    _productos = base.CreateObjectSet<productos>("productos");
+                }
+                return _productos;
+            }
+        }
+        private ObjectSet<productos> _productos;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<recetas> recetas
+        {
+            get
+            {
+                if ((_recetas == null))
+                {
+                    _recetas = base.CreateObjectSet<recetas>("recetas");
+                }
+                return _recetas;
+            }
+        }
+        private ObjectSet<recetas> _recetas;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<ventas> ventas
+        {
+            get
+            {
+                if ((_ventas == null))
+                {
+                    _ventas = base.CreateObjectSet<ventas>("ventas");
+                }
+                return _ventas;
+            }
+        }
+        private ObjectSet<ventas> _ventas;
 
         #endregion
 
@@ -126,6 +232,14 @@ namespace InvenTacos.Entity.MySQL
         }
     
         /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet conceptos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToconceptos(conceptos conceptos)
+        {
+            base.AddObject("conceptos", conceptos);
+        }
+    
+        /// <summary>
         /// Método desusado para agregar un nuevo objeto al EntitySet insumos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
         /// </summary>
         public void AddToinsumos(insumos insumos)
@@ -134,11 +248,51 @@ namespace InvenTacos.Entity.MySQL
         }
     
         /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet insumos_seleccionados. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToinsumos_seleccionados(insumos_seleccionados insumos_seleccionados)
+        {
+            base.AddObject("insumos_seleccionados", insumos_seleccionados);
+        }
+    
+        /// <summary>
         /// Método desusado para agregar un nuevo objeto al EntitySet inventarios_diarios. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
         /// </summary>
         public void AddToinventarios_diarios(inventarios_diarios inventarios_diarios)
         {
             base.AddObject("inventarios_diarios", inventarios_diarios);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet prestamos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToprestamos(prestamos prestamos)
+        {
+            base.AddObject("prestamos", prestamos);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet productos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToproductos(productos productos)
+        {
+            base.AddObject("productos", productos);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet recetas. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddTorecetas(recetas recetas)
+        {
+            base.AddObject("recetas", recetas);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet ventas. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToventas(ventas ventas)
+        {
+            base.AddObject("ventas", ventas);
         }
 
         #endregion
@@ -296,6 +450,167 @@ namespace InvenTacos.Entity.MySQL
     /// <summary>
     /// No hay documentación de metadatos disponible.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="conceptos")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class conceptos : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto conceptos.
+        /// </summary>
+        /// <param name="idconcepto">Valor inicial de la propiedad idconcepto.</param>
+        /// <param name="descripcion">Valor inicial de la propiedad descripcion.</param>
+        /// <param name="tipo">Valor inicial de la propiedad tipo.</param>
+        /// <param name="descripciontipo">Valor inicial de la propiedad descripciontipo.</param>
+        public static conceptos Createconceptos(global::System.String idconcepto, global::System.String descripcion, global::System.Byte tipo, global::System.String descripciontipo)
+        {
+            conceptos conceptos = new conceptos();
+            conceptos.idconcepto = idconcepto;
+            conceptos.descripcion = descripcion;
+            conceptos.tipo = tipo;
+            conceptos.descripciontipo = descripciontipo;
+            return conceptos;
+        }
+
+        #endregion
+
+        #region Propiedades primitivas
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String idconcepto
+        {
+            get
+            {
+                return _idconcepto;
+            }
+            set
+            {
+                if (_idconcepto != value)
+                {
+                    OnidconceptoChanging(value);
+                    ReportPropertyChanging("idconcepto");
+                    _idconcepto = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("idconcepto");
+                    OnidconceptoChanged();
+                }
+            }
+        }
+        private global::System.String _idconcepto;
+        partial void OnidconceptoChanging(global::System.String value);
+        partial void OnidconceptoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String descripcion
+        {
+            get
+            {
+                return _descripcion;
+            }
+            set
+            {
+                OndescripcionChanging(value);
+                ReportPropertyChanging("descripcion");
+                _descripcion = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("descripcion");
+                OndescripcionChanged();
+            }
+        }
+        private global::System.String _descripcion;
+        partial void OndescripcionChanging(global::System.String value);
+        partial void OndescripcionChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte tipo
+        {
+            get
+            {
+                return _tipo;
+            }
+            set
+            {
+                OntipoChanging(value);
+                ReportPropertyChanging("tipo");
+                _tipo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("tipo");
+                OntipoChanged();
+            }
+        }
+        private global::System.Byte _tipo;
+        partial void OntipoChanging(global::System.Byte value);
+        partial void OntipoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String descripciontipo
+        {
+            get
+            {
+                return _descripciontipo;
+            }
+            set
+            {
+                OndescripciontipoChanging(value);
+                ReportPropertyChanging("descripciontipo");
+                _descripciontipo = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("descripciontipo");
+                OndescripciontipoChanged();
+            }
+        }
+        private global::System.String _descripciontipo;
+        partial void OndescripciontipoChanging(global::System.String value);
+        partial void OndescripciontipoChanged();
+
+        #endregion
+
+    
+        #region Propiedades de navegación
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TacosInventariosModel", "fk_conceptos", "prestamos")]
+        public EntityCollection<prestamos> prestamos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<prestamos>("TacosInventariosModel.fk_conceptos", "prestamos");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<prestamos>("TacosInventariosModel.fk_conceptos", "prestamos", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="insumos")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -420,6 +735,111 @@ namespace InvenTacos.Entity.MySQL
         private Nullable<global::System.Decimal> _rendimiento;
         partial void OnrendimientoChanging(Nullable<global::System.Decimal> value);
         partial void OnrendimientoChanged();
+
+        #endregion
+
+    
+        #region Propiedades de navegación
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TacosInventariosModel", "FK_insum", "recetas")]
+        public EntityCollection<recetas> recetas
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<recetas>("TacosInventariosModel.FK_insum", "recetas");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<recetas>("TacosInventariosModel.FK_insum", "recetas", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TacosInventariosModel", "fk_insumos", "prestamos")]
+        public EntityCollection<prestamos> prestamos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<prestamos>("TacosInventariosModel.fk_insumos", "prestamos");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<prestamos>("TacosInventariosModel.fk_insumos", "prestamos", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="insumos_seleccionados")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class insumos_seleccionados : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto insumos_seleccionados.
+        /// </summary>
+        /// <param name="id_insumo">Valor inicial de la propiedad id_insumo.</param>
+        public static insumos_seleccionados Createinsumos_seleccionados(global::System.String id_insumo)
+        {
+            insumos_seleccionados insumos_seleccionados = new insumos_seleccionados();
+            insumos_seleccionados.id_insumo = id_insumo;
+            return insumos_seleccionados;
+        }
+
+        #endregion
+
+        #region Propiedades primitivas
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String id_insumo
+        {
+            get
+            {
+                return _id_insumo;
+            }
+            set
+            {
+                if (_id_insumo != value)
+                {
+                    Onid_insumoChanging(value);
+                    ReportPropertyChanging("id_insumo");
+                    _id_insumo = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("id_insumo");
+                    Onid_insumoChanged();
+                }
+            }
+        }
+        private global::System.String _id_insumo;
+        partial void Onid_insumoChanging(global::System.String value);
+        partial void Onid_insumoChanged();
 
         #endregion
 
@@ -588,6 +1008,713 @@ namespace InvenTacos.Entity.MySQL
         #endregion
 
     
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="prestamos")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class prestamos : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto prestamos.
+        /// </summary>
+        /// <param name="idinsumo">Valor inicial de la propiedad idinsumo.</param>
+        /// <param name="idconcepto">Valor inicial de la propiedad idconcepto.</param>
+        /// <param name="cantidad">Valor inicial de la propiedad cantidad.</param>
+        /// <param name="fecha">Valor inicial de la propiedad fecha.</param>
+        public static prestamos Createprestamos(global::System.String idinsumo, global::System.String idconcepto, global::System.Decimal cantidad, global::System.DateTime fecha)
+        {
+            prestamos prestamos = new prestamos();
+            prestamos.idinsumo = idinsumo;
+            prestamos.idconcepto = idconcepto;
+            prestamos.cantidad = cantidad;
+            prestamos.fecha = fecha;
+            return prestamos;
+        }
+
+        #endregion
+
+        #region Propiedades primitivas
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String idinsumo
+        {
+            get
+            {
+                return _idinsumo;
+            }
+            set
+            {
+                if (_idinsumo != value)
+                {
+                    OnidinsumoChanging(value);
+                    ReportPropertyChanging("idinsumo");
+                    _idinsumo = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("idinsumo");
+                    OnidinsumoChanged();
+                }
+            }
+        }
+        private global::System.String _idinsumo;
+        partial void OnidinsumoChanging(global::System.String value);
+        partial void OnidinsumoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String idconcepto
+        {
+            get
+            {
+                return _idconcepto;
+            }
+            set
+            {
+                if (_idconcepto != value)
+                {
+                    OnidconceptoChanging(value);
+                    ReportPropertyChanging("idconcepto");
+                    _idconcepto = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("idconcepto");
+                    OnidconceptoChanged();
+                }
+            }
+        }
+        private global::System.String _idconcepto;
+        partial void OnidconceptoChanging(global::System.String value);
+        partial void OnidconceptoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal cantidad
+        {
+            get
+            {
+                return _cantidad;
+            }
+            set
+            {
+                if (_cantidad != value)
+                {
+                    OncantidadChanging(value);
+                    ReportPropertyChanging("cantidad");
+                    _cantidad = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("cantidad");
+                    OncantidadChanged();
+                }
+            }
+        }
+        private global::System.Decimal _cantidad;
+        partial void OncantidadChanging(global::System.Decimal value);
+        partial void OncantidadChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime fecha
+        {
+            get
+            {
+                return _fecha;
+            }
+            set
+            {
+                if (_fecha != value)
+                {
+                    OnfechaChanging(value);
+                    ReportPropertyChanging("fecha");
+                    _fecha = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("fecha");
+                    OnfechaChanged();
+                }
+            }
+        }
+        private global::System.DateTime _fecha;
+        partial void OnfechaChanging(global::System.DateTime value);
+        partial void OnfechaChanged();
+
+        #endregion
+
+    
+        #region Propiedades de navegación
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TacosInventariosModel", "fk_conceptos", "conceptos")]
+        public conceptos conceptos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<conceptos>("TacosInventariosModel.fk_conceptos", "conceptos").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<conceptos>("TacosInventariosModel.fk_conceptos", "conceptos").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<conceptos> conceptosReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<conceptos>("TacosInventariosModel.fk_conceptos", "conceptos");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<conceptos>("TacosInventariosModel.fk_conceptos", "conceptos", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TacosInventariosModel", "fk_insumos", "insumos")]
+        public insumos insumos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<insumos>("TacosInventariosModel.fk_insumos", "insumos").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<insumos>("TacosInventariosModel.fk_insumos", "insumos").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<insumos> insumosReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<insumos>("TacosInventariosModel.fk_insumos", "insumos");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<insumos>("TacosInventariosModel.fk_insumos", "insumos", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="productos")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class productos : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto productos.
+        /// </summary>
+        /// <param name="id_producto">Valor inicial de la propiedad id_producto.</param>
+        /// <param name="producto">Valor inicial de la propiedad producto.</param>
+        public static productos Createproductos(global::System.String id_producto, global::System.String producto)
+        {
+            productos productos = new productos();
+            productos.id_producto = id_producto;
+            productos.producto = producto;
+            return productos;
+        }
+
+        #endregion
+
+        #region Propiedades primitivas
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String id_producto
+        {
+            get
+            {
+                return _id_producto;
+            }
+            set
+            {
+                if (_id_producto != value)
+                {
+                    Onid_productoChanging(value);
+                    ReportPropertyChanging("id_producto");
+                    _id_producto = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("id_producto");
+                    Onid_productoChanged();
+                }
+            }
+        }
+        private global::System.String _id_producto;
+        partial void Onid_productoChanging(global::System.String value);
+        partial void Onid_productoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String producto
+        {
+            get
+            {
+                return _producto;
+            }
+            set
+            {
+                OnproductoChanging(value);
+                ReportPropertyChanging("producto");
+                _producto = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("producto");
+                OnproductoChanged();
+            }
+        }
+        private global::System.String _producto;
+        partial void OnproductoChanging(global::System.String value);
+        partial void OnproductoChanged();
+
+        #endregion
+
+    
+        #region Propiedades de navegación
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TacosInventariosModel", "FK_prod", "recetas")]
+        public EntityCollection<recetas> recetas
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<recetas>("TacosInventariosModel.FK_prod", "recetas");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<recetas>("TacosInventariosModel.FK_prod", "recetas", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TacosInventariosModel", "FK_productos", "ventas")]
+        public EntityCollection<ventas> ventas
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ventas>("TacosInventariosModel.FK_productos", "ventas");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ventas>("TacosInventariosModel.FK_productos", "ventas", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="recetas")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class recetas : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto recetas.
+        /// </summary>
+        /// <param name="id_producto">Valor inicial de la propiedad id_producto.</param>
+        /// <param name="id_insumo">Valor inicial de la propiedad id_insumo.</param>
+        /// <param name="cantidad">Valor inicial de la propiedad cantidad.</param>
+        public static recetas Createrecetas(global::System.String id_producto, global::System.String id_insumo, global::System.Decimal cantidad)
+        {
+            recetas recetas = new recetas();
+            recetas.id_producto = id_producto;
+            recetas.id_insumo = id_insumo;
+            recetas.cantidad = cantidad;
+            return recetas;
+        }
+
+        #endregion
+
+        #region Propiedades primitivas
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String id_producto
+        {
+            get
+            {
+                return _id_producto;
+            }
+            set
+            {
+                if (_id_producto != value)
+                {
+                    Onid_productoChanging(value);
+                    ReportPropertyChanging("id_producto");
+                    _id_producto = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("id_producto");
+                    Onid_productoChanged();
+                }
+            }
+        }
+        private global::System.String _id_producto;
+        partial void Onid_productoChanging(global::System.String value);
+        partial void Onid_productoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String id_insumo
+        {
+            get
+            {
+                return _id_insumo;
+            }
+            set
+            {
+                if (_id_insumo != value)
+                {
+                    Onid_insumoChanging(value);
+                    ReportPropertyChanging("id_insumo");
+                    _id_insumo = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("id_insumo");
+                    Onid_insumoChanged();
+                }
+            }
+        }
+        private global::System.String _id_insumo;
+        partial void Onid_insumoChanging(global::System.String value);
+        partial void Onid_insumoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal cantidad
+        {
+            get
+            {
+                return _cantidad;
+            }
+            set
+            {
+                if (_cantidad != value)
+                {
+                    OncantidadChanging(value);
+                    ReportPropertyChanging("cantidad");
+                    _cantidad = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("cantidad");
+                    OncantidadChanged();
+                }
+            }
+        }
+        private global::System.Decimal _cantidad;
+        partial void OncantidadChanging(global::System.Decimal value);
+        partial void OncantidadChanged();
+
+        #endregion
+
+    
+        #region Propiedades de navegación
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TacosInventariosModel", "FK_insum", "insumos")]
+        public insumos insumos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<insumos>("TacosInventariosModel.FK_insum", "insumos").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<insumos>("TacosInventariosModel.FK_insum", "insumos").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<insumos> insumosReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<insumos>("TacosInventariosModel.FK_insum", "insumos");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<insumos>("TacosInventariosModel.FK_insum", "insumos", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TacosInventariosModel", "FK_prod", "productos")]
+        public productos productos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<productos>("TacosInventariosModel.FK_prod", "productos").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<productos>("TacosInventariosModel.FK_prod", "productos").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<productos> productosReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<productos>("TacosInventariosModel.FK_prod", "productos");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<productos>("TacosInventariosModel.FK_prod", "productos", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="TacosInventariosModel", Name="ventas")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ventas : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto ventas.
+        /// </summary>
+        /// <param name="id_producto">Valor inicial de la propiedad id_producto.</param>
+        /// <param name="cantidad">Valor inicial de la propiedad cantidad.</param>
+        /// <param name="fecha">Valor inicial de la propiedad fecha.</param>
+        public static ventas Createventas(global::System.String id_producto, global::System.Int32 cantidad, global::System.DateTime fecha)
+        {
+            ventas ventas = new ventas();
+            ventas.id_producto = id_producto;
+            ventas.cantidad = cantidad;
+            ventas.fecha = fecha;
+            return ventas;
+        }
+
+        #endregion
+
+        #region Propiedades primitivas
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String id_producto
+        {
+            get
+            {
+                return _id_producto;
+            }
+            set
+            {
+                if (_id_producto != value)
+                {
+                    Onid_productoChanging(value);
+                    ReportPropertyChanging("id_producto");
+                    _id_producto = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("id_producto");
+                    Onid_productoChanged();
+                }
+            }
+        }
+        private global::System.String _id_producto;
+        partial void Onid_productoChanging(global::System.String value);
+        partial void Onid_productoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 cantidad
+        {
+            get
+            {
+                return _cantidad;
+            }
+            set
+            {
+                if (_cantidad != value)
+                {
+                    OncantidadChanging(value);
+                    ReportPropertyChanging("cantidad");
+                    _cantidad = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("cantidad");
+                    OncantidadChanged();
+                }
+            }
+        }
+        private global::System.Int32 _cantidad;
+        partial void OncantidadChanging(global::System.Int32 value);
+        partial void OncantidadChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime fecha
+        {
+            get
+            {
+                return _fecha;
+            }
+            set
+            {
+                if (_fecha != value)
+                {
+                    OnfechaChanging(value);
+                    ReportPropertyChanging("fecha");
+                    _fecha = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("fecha");
+                    OnfechaChanged();
+                }
+            }
+        }
+        private global::System.DateTime _fecha;
+        partial void OnfechaChanging(global::System.DateTime value);
+        partial void OnfechaChanged();
+
+        #endregion
+
+    
+        #region Propiedades de navegación
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TacosInventariosModel", "FK_productos", "productos")]
+        public productos productos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<productos>("TacosInventariosModel.FK_productos", "productos").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<productos>("TacosInventariosModel.FK_productos", "productos").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<productos> productosReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<productos>("TacosInventariosModel.FK_productos", "productos");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<productos>("TacosInventariosModel.FK_productos", "productos", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
 
     #endregion

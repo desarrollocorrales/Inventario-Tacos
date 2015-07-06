@@ -68,6 +68,22 @@ namespace InvenTacos.Entity.MSSQL
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
+        public ObjectSet<compras> compras
+        {
+            get
+            {
+                if ((_compras == null))
+                {
+                    _compras = base.CreateObjectSet<compras>("compras");
+                }
+                return _compras;
+            }
+        }
+        private ObjectSet<compras> _compras;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
         public ObjectSet<insumos> insumos
         {
             get
@@ -100,22 +116,30 @@ namespace InvenTacos.Entity.MSSQL
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        public ObjectSet<compras> compras
+        public ObjectSet<conceptos> conceptos
         {
             get
             {
-                if ((_compras == null))
+                if ((_conceptos == null))
                 {
-                    _compras = base.CreateObjectSet<compras>("compras");
+                    _conceptos = base.CreateObjectSet<conceptos>("conceptos");
                 }
-                return _compras;
+                return _conceptos;
             }
         }
-        private ObjectSet<compras> _compras;
+        private ObjectSet<conceptos> _conceptos;
 
         #endregion
 
         #region Métodos AddTo
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet compras. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddTocompras(compras compras)
+        {
+            base.AddObject("compras", compras);
+        }
     
         /// <summary>
         /// Método desusado para agregar un nuevo objeto al EntitySet insumos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
@@ -134,11 +158,11 @@ namespace InvenTacos.Entity.MSSQL
         }
     
         /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet compras. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// Método desusado para agregar un nuevo objeto al EntitySet conceptos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
         /// </summary>
-        public void AddTocompras(compras compras)
+        public void AddToconceptos(conceptos conceptos)
         {
-            base.AddObject("compras", compras);
+            base.AddObject("conceptos", conceptos);
         }
 
         #endregion
@@ -641,6 +665,159 @@ namespace InvenTacos.Entity.MSSQL
     /// <summary>
     /// No hay documentación de metadatos disponible.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SoftRestaurantModel", Name="conceptos")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class conceptos : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto conceptos.
+        /// </summary>
+        /// <param name="idconcepto">Valor inicial de la propiedad idconcepto.</param>
+        public static conceptos Createconceptos(global::System.String idconcepto)
+        {
+            conceptos conceptos = new conceptos();
+            conceptos.idconcepto = idconcepto;
+            return conceptos;
+        }
+
+        #endregion
+
+        #region Propiedades primitivas
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String idconcepto
+        {
+            get
+            {
+                return _idconcepto;
+            }
+            set
+            {
+                if (_idconcepto != value)
+                {
+                    OnidconceptoChanging(value);
+                    ReportPropertyChanging("idconcepto");
+                    _idconcepto = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("idconcepto");
+                    OnidconceptoChanged();
+                }
+            }
+        }
+        private global::System.String _idconcepto;
+        partial void OnidconceptoChanging(global::System.String value);
+        partial void OnidconceptoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String descripcion
+        {
+            get
+            {
+                return _descripcion;
+            }
+            set
+            {
+                OndescripcionChanging(value);
+                ReportPropertyChanging("descripcion");
+                _descripcion = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("descripcion");
+                OndescripcionChanged();
+            }
+        }
+        private global::System.String _descripcion;
+        partial void OndescripcionChanging(global::System.String value);
+        partial void OndescripcionChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> tipo
+        {
+            get
+            {
+                return _tipo;
+            }
+            set
+            {
+                OntipoChanging(value);
+                ReportPropertyChanging("tipo");
+                _tipo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("tipo");
+                OntipoChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _tipo;
+        partial void OntipoChanging(Nullable<global::System.Decimal> value);
+        partial void OntipoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> autorizacion
+        {
+            get
+            {
+                return _autorizacion;
+            }
+            set
+            {
+                OnautorizacionChanging(value);
+                ReportPropertyChanging("autorizacion");
+                _autorizacion = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("autorizacion");
+                OnautorizacionChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _autorizacion;
+        partial void OnautorizacionChanging(Nullable<global::System.Boolean> value);
+        partial void OnautorizacionChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> visible
+        {
+            get
+            {
+                return _visible;
+            }
+            set
+            {
+                OnvisibleChanging(value);
+                ReportPropertyChanging("visible");
+                _visible = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("visible");
+                OnvisibleChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _visible;
+        partial void OnvisibleChanging(Nullable<global::System.Boolean> value);
+        partial void OnvisibleChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="SoftRestaurantModel", Name="insumos")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -651,11 +828,11 @@ namespace InvenTacos.Entity.MSSQL
         /// <summary>
         /// Crear un nuevo objeto insumos.
         /// </summary>
-        /// <param name="id_insumo">Valor inicial de la propiedad id_insumo.</param>
-        public static insumos Createinsumos(global::System.String id_insumo)
+        /// <param name="idinsumo">Valor inicial de la propiedad idinsumo.</param>
+        public static insumos Createinsumos(global::System.String idinsumo)
         {
             insumos insumos = new insumos();
-            insumos.id_insumo = id_insumo;
+            insumos.idinsumo = idinsumo;
             return insumos;
         }
 
@@ -668,27 +845,27 @@ namespace InvenTacos.Entity.MSSQL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String id_insumo
+        public global::System.String idinsumo
         {
             get
             {
-                return _id_insumo;
+                return _idinsumo;
             }
             set
             {
-                if (_id_insumo != value)
+                if (_idinsumo != value)
                 {
-                    Onid_insumoChanging(value);
-                    ReportPropertyChanging("id_insumo");
-                    _id_insumo = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("id_insumo");
-                    Onid_insumoChanged();
+                    OnidinsumoChanging(value);
+                    ReportPropertyChanging("idinsumo");
+                    _idinsumo = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("idinsumo");
+                    OnidinsumoChanged();
                 }
             }
         }
-        private global::System.String _id_insumo;
-        partial void Onid_insumoChanging(global::System.String value);
-        partial void Onid_insumoChanged();
+        private global::System.String _idinsumo;
+        partial void OnidinsumoChanging(global::System.String value);
+        partial void OnidinsumoChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -828,11 +1005,11 @@ namespace InvenTacos.Entity.MSSQL
         /// <summary>
         /// Crear un nuevo objeto insumospresentaciones.
         /// </summary>
-        /// <param name="id_insumospresentaciones">Valor inicial de la propiedad id_insumospresentaciones.</param>
-        public static insumospresentaciones Createinsumospresentaciones(global::System.String id_insumospresentaciones)
+        /// <param name="idinsumospresentaciones">Valor inicial de la propiedad idinsumospresentaciones.</param>
+        public static insumospresentaciones Createinsumospresentaciones(global::System.String idinsumospresentaciones)
         {
             insumospresentaciones insumospresentaciones = new insumospresentaciones();
-            insumospresentaciones.id_insumospresentaciones = id_insumospresentaciones;
+            insumospresentaciones.idinsumospresentaciones = idinsumospresentaciones;
             return insumospresentaciones;
         }
 
@@ -845,27 +1022,27 @@ namespace InvenTacos.Entity.MSSQL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String id_insumospresentaciones
+        public global::System.String idinsumospresentaciones
         {
             get
             {
-                return _id_insumospresentaciones;
+                return _idinsumospresentaciones;
             }
             set
             {
-                if (_id_insumospresentaciones != value)
+                if (_idinsumospresentaciones != value)
                 {
-                    Onid_insumospresentacionesChanging(value);
-                    ReportPropertyChanging("id_insumospresentaciones");
-                    _id_insumospresentaciones = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("id_insumospresentaciones");
-                    Onid_insumospresentacionesChanged();
+                    OnidinsumospresentacionesChanging(value);
+                    ReportPropertyChanging("idinsumospresentaciones");
+                    _idinsumospresentaciones = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("idinsumospresentaciones");
+                    OnidinsumospresentacionesChanged();
                 }
             }
         }
-        private global::System.String _id_insumospresentaciones;
-        partial void Onid_insumospresentacionesChanging(global::System.String value);
-        partial void Onid_insumospresentacionesChanged();
+        private global::System.String _idinsumospresentaciones;
+        partial void OnidinsumospresentacionesChanging(global::System.String value);
+        partial void OnidinsumospresentacionesChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -896,24 +1073,24 @@ namespace InvenTacos.Entity.MSSQL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String id_insumo
+        public global::System.String idinsumo
         {
             get
             {
-                return _id_insumo;
+                return _idinsumo;
             }
             set
             {
-                Onid_insumoChanging(value);
-                ReportPropertyChanging("id_insumo");
-                _id_insumo = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("id_insumo");
-                Onid_insumoChanged();
+                OnidinsumoChanging(value);
+                ReportPropertyChanging("idinsumo");
+                _idinsumo = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("idinsumo");
+                OnidinsumoChanged();
             }
         }
-        private global::System.String _id_insumo;
-        partial void Onid_insumoChanging(global::System.String value);
-        partial void Onid_insumoChanged();
+        private global::System.String _idinsumo;
+        partial void OnidinsumoChanging(global::System.String value);
+        partial void OnidinsumoChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.

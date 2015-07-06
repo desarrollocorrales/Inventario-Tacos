@@ -36,6 +36,7 @@
             this.configurarInsumosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarInsumosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpcConfigurar = new System.Windows.Forms.ToolStripMenuItem();
+            this.configuracionPrestamosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridCapturaInventario = new DevExpress.XtraGrid.GridControl();
             this.capturaDeinventarioBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gvCapturaInventario = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -91,7 +92,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.configurarInsumosToolStripMenuItem,
             this.importarInsumosToolStripMenuItem,
-            this.OpcConfigurar});
+            this.OpcConfigurar,
+            this.configuracionPrestamosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(892, 24);
@@ -121,6 +123,14 @@
             this.OpcConfigurar.Size = new System.Drawing.Size(142, 20);
             this.OpcConfigurar.Text = "Configurar Base de Datos";
             this.OpcConfigurar.Click += new System.EventHandler(this.OpcConfigurar_Click);
+            // 
+            // configuracionPrestamosToolStripMenuItem
+            // 
+            this.configuracionPrestamosToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.configuracionPrestamosToolStripMenuItem.Name = "configuracionPrestamosToolStripMenuItem";
+            this.configuracionPrestamosToolStripMenuItem.Size = new System.Drawing.Size(138, 20);
+            this.configuracionPrestamosToolStripMenuItem.Text = "Configuracion prestamos";
+            this.configuracionPrestamosToolStripMenuItem.Click += new System.EventHandler(this.configuracionPrestamosToolStripMenuItem_Click);
             // 
             // gridCapturaInventario
             // 
@@ -518,5 +528,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.BindingSource capturaDeinventarioBindingSource;
         private DevExpress.XtraGrid.Columns.GridColumn colUnidad;
+        private System.Windows.Forms.ToolStripMenuItem configuracionPrestamosToolStripMenuItem;
     }
 }

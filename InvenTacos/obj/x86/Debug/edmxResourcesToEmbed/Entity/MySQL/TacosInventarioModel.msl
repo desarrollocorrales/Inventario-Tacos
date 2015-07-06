@@ -11,12 +11,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="conceptos">
+      <EntityTypeMapping TypeName="TacosInventariosModel.conceptos">
+        <MappingFragment StoreEntitySet="conceptos">
+          <ScalarProperty Name="descripciontipo" ColumnName="descripciontipo" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idconcepto" ColumnName="idconcepto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="insumos">
       <EntityTypeMapping TypeName="TacosInventariosModel.insumos">
         <MappingFragment StoreEntitySet="insumos">
           <ScalarProperty Name="rendimiento" ColumnName="rendimiento" />
           <ScalarProperty Name="unidad" ColumnName="unidad" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insumos_seleccionados">
+      <EntityTypeMapping TypeName="TacosInventariosModel.insumos_seleccionados">
+        <MappingFragment StoreEntitySet="insumos_seleccionados">
           <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -29,6 +46,42 @@
           <ScalarProperty Name="cantidad_cocido" ColumnName="cantidad_cocido" />
           <ScalarProperty Name="cantidad_crudo" ColumnName="cantidad_crudo" />
           <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="prestamos">
+      <EntityTypeMapping TypeName="TacosInventariosModel.prestamos">
+        <MappingFragment StoreEntitySet="prestamos">
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idconcepto" ColumnName="idconcepto" />
+          <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="productos">
+      <EntityTypeMapping TypeName="TacosInventariosModel.productos">
+        <MappingFragment StoreEntitySet="productos">
+          <ScalarProperty Name="producto" ColumnName="producto" />
+          <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="recetas">
+      <EntityTypeMapping TypeName="TacosInventariosModel.recetas">
+        <MappingFragment StoreEntitySet="recetas">
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
+          <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ventas">
+      <EntityTypeMapping TypeName="TacosInventariosModel.ventas">
+        <MappingFragment StoreEntitySet="ventas">
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="id_producto" ColumnName="id_producto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -15,6 +15,7 @@ namespace InvenTacos.GUIs
 {
     public partial class Frm_Principal : Form
     {
+        TacosInventarioEntities MyContext;
         public Frm_Principal()
         {
             InitializeComponent();
@@ -214,7 +215,7 @@ namespace InvenTacos.GUIs
             }
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Nota: Las Compras del día también serán exportadas. Asegurese de haberlas capturado.");
+            sb.AppendLine("Nota: Los Prestamos y las Compras del día también serán exportadas. Asegurese de haberlas capturado.");
             sb.AppendLine();
             sb.AppendLine("¿Los datos son correctos?");
 
@@ -229,86 +230,82 @@ namespace InvenTacos.GUIs
         }
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            try
+            if (Validar() == true)
             {
-                if (Validar() == true)
+                pbCargando.Visible = true;
+                Application.DoEvents();
+                Application.DoEvents();
+
+                /* Inicia una transaccion aqui */
+                MyContext = new TacosInventarioEntities(ConnectionStrings.MySQL);
+                MyContext.Connection.Open();
+                IDbTransaction transaccion = MyContext.Connection.BeginTransaction();
+
+                try
                 {
                     GuardarCompras();
+                    GuardarPrestamos();
                     GuardarInventario();
+
+                    transaccion.Commit();
+                    /* Termina la transaccion */
+
+                    pbCargando.Visible = false;
 
                     StringBuilder sb = new StringBuilder();
                     sb.Append("¡¡¡El inventario para el dia ");
                     sb.Append(dtpFecha.Value.ToString("dddd dd/MMMM/yyyy"));
                     sb.Append(" ha sido guardado con exito!!!");
                     MessageBox.Show(sb.ToString(), "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
+                }
+                catch (Exception ex)
+                {
+                    transaccion.Rollback();
+                    /* Termina la transaccion */
+
+                    MostrarExcepcion(ex);
+                }
+
+                finally 
+                {
+                    if (MyContext.Connection.State != ConnectionState.Closed)
+                    {
+                        MyContext.Connection.Close();
+                    }
                 }
             }
-            catch (Exception ex)
-            {
-                MostrarExcepcion(ex);
-            }
-
             dtpFecha.Enabled = true;
         }
+
         private void GuardarInventario()
         {
-            TacosInventarioEntities MyContext = new TacosInventarioEntities(ConnectionStrings.MySQL);
-            MyContext.Connection.Open();
-            IDbTransaction Transaccion = MyContext.Connection.BeginTransaction();
+            List<CapturaDeinventario> lstInventarioCapturado = (List<CapturaDeinventario>)gridCapturaInventario.DataSource;
 
-            try
+            inventarios_diarios RegistroBD;
+            foreach (CapturaDeinventario Registro in lstInventarioCapturado)
             {
-                List<CapturaDeinventario> lstInventarioCapturado = (List<CapturaDeinventario>)gridCapturaInventario.DataSource;
+                RegistroBD = new inventarios_diarios();
+                RegistroBD.id_insumo = Registro.ClaveInsumo;
+                RegistroBD.cantidad_cocido = Registro.CantidadCocido;
+                RegistroBD.cantidad_crudo = Registro.CantidadCrudo;
+                RegistroBD.cantidad_total = Registro.CantidadTotal;
+                RegistroBD.fecha = dtpFecha.Value.Date;
 
-                inventarios_diarios RegistroBD;
-                foreach (CapturaDeinventario Registro in lstInventarioCapturado)
-                {
-                    RegistroBD = new inventarios_diarios();
-                    RegistroBD.id_insumo = Registro.ClaveInsumo;
-                    RegistroBD.cantidad_cocido = Registro.CantidadCocido;
-                    RegistroBD.cantidad_crudo = Registro.CantidadCrudo;
-                    RegistroBD.cantidad_total = Registro.CantidadTotal;
-                    RegistroBD.fecha = dtpFecha.Value.Date;
+                MyContext.inventarios_diarios.AddObject(RegistroBD);
 
-                    MyContext.inventarios_diarios.AddObject(RegistroBD);
-                    MyContext.SaveChanges();
-                }
-
-                Transaccion.Commit();
-
-                if (MyContext.Connection.State != ConnectionState.Closed)
-                {
-                    MyContext.Connection.Close();
-                }
-
-                MyContext.Dispose();
             }
-            catch(Exception ex)
-            {
-                Transaccion.Rollback();
-
-                if (MyContext.Connection.State != ConnectionState.Closed)
-                {
-                    MyContext.Connection.Close();
-                }
-
-                MyContext.Dispose();
-
-                throw ex;
-            }
+            MyContext.SaveChanges();
         }
+
         private void GuardarCompras()
         {
             DateTime dtFecha = dtpFecha.Value;
             List<Compras> lstCompras = ObtenerCompras(dtFecha);
 
-            TacosInventarioEntities MySQLContexto = new TacosInventarioEntities(ConnectionStrings.MySQL);
-
-            MySQLContexto.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 0;");
-            MySQLContexto.ExecuteStoreCommand("DELETE FROM compras WHERE fecha = '{0}'", dtFecha.ToString("yyyy-MM-dd"));
-            MySQLContexto.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 1;");
-            MySQLContexto.SaveChanges();
+            MyContext.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 0;");
+            MyContext.ExecuteStoreCommand("DELETE FROM compras WHERE fecha = '{0}'", dtFecha.ToString("yyyy-MM-dd"));
+            MyContext.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 1;");
+            MyContext.SaveChanges();
 
             compras compra;
             foreach (Compras c in lstCompras)
@@ -319,20 +316,21 @@ namespace InvenTacos.GUIs
                 compra.cantidad = c.Cantidad;
                 compra.fecha = c.dtFecha;
 
-                MySQLContexto.compras.AddObject(compra);
-                MySQLContexto.SaveChanges();
+                MyContext.compras.AddObject(compra);
+                MyContext.SaveChanges();
             }
         }
         private List<Compras> ObtenerCompras(DateTime fecha)
         {
-            MSSQL.SoftRestaurantEntities MSContexto = new MSSQL.SoftRestaurantEntities();
+            MSSQL.SoftRestaurantEntities MSContexto = new MSSQL.SoftRestaurantEntities(ConnectionStrings.MSSQL);
             string sFecha = fecha.ToString("yyyy-MM-dd");
             string sFechaMasUno = fecha.AddDays(1).ToString("yyyy-MM-dd");
 
             string sConsulta =
                 string.Format(
-                    @"SELECT 
-                      idcompra ID_Compra, idinsumo ID_Insumo, cantidad Cantidad, '{0}' Fecha
+                    @"SET DATEFORMAT ymd;
+                    SELECT 
+                      idcompra ID_Compra, idinsumo ID_Insumo, SUM(cantidad) Cantidad, '{0}' Fecha
                     FROM
                       movsinv
                     WHERE
@@ -341,7 +339,9 @@ namespace InvenTacos.GUIs
                              FROM compras c 
                             WHERE 
                                   (c.cancelado = 0 OR c.cancelado IS NULL) AND (c.fechaaplicacion BETWEEN '{0}' AND '{1}')) 
-                                  AND movsinv.idconcepto = 'EPC'", sFecha, sFechaMasUno);
+                                  AND movsinv.idconcepto = 'EPC'
+                    GROUP BY
+                      idcompra, idinsumo", sFecha, sFechaMasUno);
 
             List<Compras> lstCompras = MSContexto.ExecuteStoreQuery<Compras>(sConsulta).ToList();
             MSContexto.Dispose();
@@ -354,5 +354,73 @@ namespace InvenTacos.GUIs
             ValidarListaDeInsumosConfigurados();
         }
 
+        private List<Prestamo> ObtenerPrestamos(DateTime fecha)
+        {
+            MSSQL.SoftRestaurantEntities MSContexto = new MSSQL.SoftRestaurantEntities(ConnectionStrings.MSSQL);
+            string sFecha = fecha.ToString("yyyy-MM-dd");
+            string sFechaMasUno = fecha.AddDays(1).ToString("yyyy-MM-dd");
+
+            string sConsulta =
+                string.Format(
+                    @"SET DATEFORMAT ymd;
+                      SELECT 
+                          mi.idconcepto,
+                          SUM(mi.cantidad) AS cantidad,
+                          c.descripcion,
+                          mi.idinsumo,
+                          i.descripcion,
+                          convert(datetime, '{0}',20) AS fecha,
+                          fa.nota
+                        FROM
+                          dbo.conceptos c
+                          INNER JOIN dbo.movsinv mi ON (c.idconcepto = mi.idconcepto)
+                          INNER JOIN dbo.insumos i ON (mi.idinsumo = i.idinsumo)
+                          INNER JOIN dbo.foliosalmacen fa ON (fa.fecha=mi.fecha) 
+                        WHERE
+                          mi.idconcepto IN ({2}) AND 
+                          mi.fecha BETWEEN '{0}' AND '{1}'
+                        GROUP BY
+                          mi.idconcepto, c.descripcion, mi.idinsumo, i.descripcion, fa.nota", 
+                          sFecha, sFechaMasUno, Properties.Settings.Default.WhereConcepto);
+
+            List<Prestamo> lstPrestamos = MSContexto.ExecuteStoreQuery<Prestamo>(sConsulta).ToList();
+            MSContexto.Dispose();
+
+            return lstPrestamos;
+        }
+        private void GuardarPrestamos()
+        {
+            DateTime dtFecha = dtpFecha.Value;
+            List<Prestamo> lstPrestamos = ObtenerPrestamos(dtFecha);
+
+            MyContext = new TacosInventarioEntities(ConnectionStrings.MySQL);
+
+            MyContext.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 0;");
+            MyContext.ExecuteStoreCommand("DELETE FROM prestamos WHERE fecha = '{0}'", dtFecha.ToString("yyyy-MM-dd"));
+            MyContext.ExecuteStoreCommand("SET FOREIGN_KEY_CHECKS = 1;");
+            MyContext.SaveChanges();
+
+            prestamos pr = new prestamos();
+          
+            string sConsulta;
+            foreach (Prestamo p in lstPrestamos)
+            {
+                sConsulta =
+                    string.Format(
+                        @"INSERT INTO prestamos 
+                                  (idinsumo, idconcepto, cantidad, fecha, nota) 
+                               VALUES 
+                                  ('{0}','{1}',{2},'{3}', '{4}')",
+                                    p.idinsumo, p.idconcepto, p.cantidad, p.fecha.ToString("yyyy-MM-dd"), p.nota);
+
+                MyContext.ExecuteStoreCommand(sConsulta);
+            }
+            MyContext.SaveChanges();
+        }
+
+        private void configuracionPrestamosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Frm_ConfPrestamos().ShowDialog();
+        }
     }
 }

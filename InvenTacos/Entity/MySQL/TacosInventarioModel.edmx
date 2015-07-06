@@ -6,9 +6,54 @@
     <edmx:StorageModels>
     <Schema Namespace="TacosInventariosModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="TacosInventariosModelStoreContainer">
-          <EntitySet Name="compras" EntityType="TacosInventariosModel.Store.compras" store:Type="Tables" Schema="corrales_controltacos_dolores" />
-          <EntitySet Name="insumos" EntityType="TacosInventariosModel.Store.insumos" store:Type="Tables" Schema="corrales_controltacos_dolores" />
-          <EntitySet Name="inventarios_diarios" EntityType="TacosInventariosModel.Store.inventarios_diarios" store:Type="Tables" Schema="corrales_controltacos_dolores" />
+          <EntitySet Name="compras" EntityType="TacosInventariosModel.Store.compras" store:Type="Tables" Schema="controltacos" />
+          <EntitySet Name="conceptos" EntityType="TacosInventariosModel.Store.conceptos" store:Type="Tables" Schema="controltacos" />
+          <EntitySet Name="insumos" EntityType="TacosInventariosModel.Store.insumos" store:Type="Tables" Schema="controltacos" />
+          <EntitySet Name="insumos_seleccionados" EntityType="TacosInventariosModel.Store.insumos_seleccionados" store:Type="Tables" Schema="controltacos" />
+          <EntitySet Name="inventarios_diarios" EntityType="TacosInventariosModel.Store.inventarios_diarios" store:Type="Tables" Schema="controltacos" />
+          <EntitySet Name="prestamos" EntityType="TacosInventariosModel.Store.prestamos" store:Type="Tables" store:Schema="controltacos" store:Name="prestamos">
+            <DefiningQuery>SELECT
+      `prestamos`.`idinsumo`, 
+      `prestamos`.`idconcepto`, 
+      `prestamos`.`cantidad`, 
+      `prestamos`.`fecha`
+      FROM `prestamos` AS `prestamos`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="productos" EntityType="TacosInventariosModel.Store.productos" store:Type="Tables" Schema="controltacos" />
+          <EntitySet Name="recetas" EntityType="TacosInventariosModel.Store.recetas" store:Type="Tables" store:Schema="controltacos" store:Name="recetas">
+            <DefiningQuery>SELECT
+      `recetas`.`id_producto`, 
+      `recetas`.`id_insumo`, 
+      `recetas`.`cantidad`
+      FROM `recetas` AS `recetas`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ventas" EntityType="TacosInventariosModel.Store.ventas" store:Type="Tables" store:Schema="controltacos" store:Name="ventas">
+            <DefiningQuery>SELECT
+      `ventas`.`id_producto`, 
+      `ventas`.`cantidad`, 
+      `ventas`.`fecha`
+      FROM `ventas` AS `ventas`</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_conceptos" Association="TacosInventariosModel.Store.fk_conceptos">
+            <End Role="conceptos" EntitySet="conceptos" />
+            <End Role="prestamos" EntitySet="prestamos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_insum" Association="TacosInventariosModel.Store.FK_insum">
+            <End Role="insumos" EntitySet="insumos" />
+            <End Role="recetas" EntitySet="recetas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_insumos" Association="TacosInventariosModel.Store.fk_insumos">
+            <End Role="insumos" EntitySet="insumos" />
+            <End Role="prestamos" EntitySet="prestamos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prod" Association="TacosInventariosModel.Store.FK_prod">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="recetas" EntitySet="recetas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_productos" Association="TacosInventariosModel.Store.FK_productos">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="ventas" EntitySet="ventas" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="compras">
           <Key>
@@ -22,6 +67,15 @@
           <Property Name="cantidad" Type="decimal" Nullable="false" Precision="7" Scale="3" />
           <Property Name="fecha" Type="date" Nullable="false" />
         </EntityType>
+        <EntityType Name="conceptos">
+          <Key>
+            <PropertyRef Name="idconcepto" />
+          </Key>
+          <Property Name="idconcepto" Type="varchar" Nullable="false" MaxLength="5" />
+          <Property Name="descripcion" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="tipo" Type="utinyint" Nullable="false" />
+          <Property Name="descripciontipo" Type="varchar" Nullable="false" MaxLength="40" />
+        </EntityType>
         <EntityType Name="insumos">
           <Key>
             <PropertyRef Name="id_insumo" />
@@ -30,6 +84,12 @@
           <Property Name="descripcion" Type="varchar" Nullable="false" MaxLength="60" />
           <Property Name="unidad" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="rendimiento" Type="decimal" Precision="7" Scale="3" />
+        </EntityType>
+        <EntityType Name="insumos_seleccionados">
+          <Key>
+            <PropertyRef Name="id_insumo" />
+          </Key>
+          <Property Name="id_insumo" Type="varchar" Nullable="false" MaxLength="15" />
         </EntityType>
         <EntityType Name="inventarios_diarios">
           <Key>
@@ -42,14 +102,148 @@
           <Property Name="cantidad_total" Type="decimal" Nullable="false" Precision="7" Scale="3" />
           <Property Name="fecha" Type="date" Nullable="false" />
         </EntityType>
+        <!--Se encontraron errores durante la generación:
+      advertencia 6002: La tabla o vista 'controltacos.prestamos' no tiene ninguna clave principal definida. Se ha inferido la clave y la definición se creó como vista o tabla de solo lectura.
+      -->
+        <EntityType Name="prestamos">
+          <Key>
+            <PropertyRef Name="idinsumo" />
+            <PropertyRef Name="idconcepto" />
+            <PropertyRef Name="cantidad" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="idconcepto" Type="varchar" Nullable="false" MaxLength="5" />
+          <Property Name="cantidad" Type="decimal" Nullable="false" Precision="7" Scale="3" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_producto" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="producto" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <!--Se encontraron errores durante la generación:
+      advertencia 6002: La tabla o vista 'controltacos.recetas' no tiene ninguna clave principal definida. Se ha inferido la clave y la definición se creó como vista o tabla de solo lectura.
+      -->
+        <EntityType Name="recetas">
+          <Key>
+            <PropertyRef Name="id_producto" />
+            <PropertyRef Name="id_insumo" />
+            <PropertyRef Name="cantidad" />
+          </Key>
+          <Property Name="id_producto" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="id_insumo" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="cantidad" Type="decimal" Nullable="false" Precision="7" Scale="3" />
+        </EntityType>
+        <!--Se encontraron errores durante la generación:
+      advertencia 6002: La tabla o vista 'controltacos.ventas' no tiene ninguna clave principal definida. Se ha inferido la clave y la definición se creó como vista o tabla de solo lectura.
+      -->
+        <EntityType Name="ventas">
+          <Key>
+            <PropertyRef Name="id_producto" />
+            <PropertyRef Name="cantidad" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="id_producto" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_conceptos">
+          <End Role="conceptos" Type="TacosInventariosModel.Store.conceptos" Multiplicity="1" />
+          <End Role="prestamos" Type="TacosInventariosModel.Store.prestamos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conceptos">
+              <PropertyRef Name="idconcepto" />
+            </Principal>
+            <Dependent Role="prestamos">
+              <PropertyRef Name="idconcepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_insum">
+          <End Role="insumos" Type="TacosInventariosModel.Store.insumos" Multiplicity="1" />
+          <End Role="recetas" Type="TacosInventariosModel.Store.recetas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="insumos">
+              <PropertyRef Name="id_insumo" />
+            </Principal>
+            <Dependent Role="recetas">
+              <PropertyRef Name="id_insumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_insumos">
+          <End Role="insumos" Type="TacosInventariosModel.Store.insumos" Multiplicity="1" />
+          <End Role="prestamos" Type="TacosInventariosModel.Store.prestamos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="insumos">
+              <PropertyRef Name="id_insumo" />
+            </Principal>
+            <Dependent Role="prestamos">
+              <PropertyRef Name="idinsumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prod">
+          <End Role="productos" Type="TacosInventariosModel.Store.productos" Multiplicity="1" />
+          <End Role="recetas" Type="TacosInventariosModel.Store.recetas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="recetas">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_productos">
+          <End Role="productos" Type="TacosInventariosModel.Store.productos" Multiplicity="1" />
+          <End Role="ventas" Type="TacosInventariosModel.Store.ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="ventas">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TacosInventariosModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="TacosInventarioEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="compras" EntityType="TacosInventariosModel.compras" />
+          <EntitySet Name="conceptos" EntityType="TacosInventariosModel.conceptos" />
           <EntitySet Name="insumos" EntityType="TacosInventariosModel.insumos" />
+          <EntitySet Name="insumos_seleccionados" EntityType="TacosInventariosModel.insumos_seleccionados" />
           <EntitySet Name="inventarios_diarios" EntityType="TacosInventariosModel.inventarios_diarios" />
+          <EntitySet Name="prestamos" EntityType="TacosInventariosModel.prestamos" />
+          <EntitySet Name="productos" EntityType="TacosInventariosModel.productos" />
+          <EntitySet Name="recetas" EntityType="TacosInventariosModel.recetas" />
+          <EntitySet Name="ventas" EntityType="TacosInventariosModel.ventas" />
+          <AssociationSet Name="fk_conceptos" Association="TacosInventariosModel.fk_conceptos">
+            <End Role="conceptos" EntitySet="conceptos" />
+            <End Role="prestamos" EntitySet="prestamos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_insum" Association="TacosInventariosModel.FK_insum">
+            <End Role="insumos" EntitySet="insumos" />
+            <End Role="recetas" EntitySet="recetas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_insumos" Association="TacosInventariosModel.fk_insumos">
+            <End Role="insumos" EntitySet="insumos" />
+            <End Role="prestamos" EntitySet="prestamos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prod" Association="TacosInventariosModel.FK_prod">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="recetas" EntitySet="recetas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_productos" Association="TacosInventariosModel.FK_productos">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="ventas" EntitySet="ventas" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="compras">
           <Key>
@@ -63,6 +257,16 @@
           <Property Type="Decimal" Name="cantidad" Nullable="false" />
           <Property Type="DateTime" Name="fecha" Nullable="false" />
         </EntityType>
+        <EntityType Name="conceptos">
+          <Key>
+            <PropertyRef Name="idconcepto" />
+          </Key>
+          <Property Type="String" Name="idconcepto" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="descripcion" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="Byte" Name="tipo" Nullable="false" />
+          <Property Type="String" Name="descripciontipo" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="prestamos" Relationship="TacosInventariosModel.fk_conceptos" FromRole="conceptos" ToRole="prestamos" />
+        </EntityType>
         <EntityType Name="insumos">
           <Key>
             <PropertyRef Name="id_insumo" />
@@ -71,6 +275,14 @@
           <Property Type="String" Name="descripcion" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="unidad" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Type="Decimal" Name="rendimiento" />
+          <NavigationProperty Name="recetas" Relationship="TacosInventariosModel.FK_insum" FromRole="insumos" ToRole="recetas" />
+          <NavigationProperty Name="prestamos" Relationship="TacosInventariosModel.fk_insumos" FromRole="insumos" ToRole="prestamos" />
+        </EntityType>
+        <EntityType Name="insumos_seleccionados">
+          <Key>
+            <PropertyRef Name="id_insumo" />
+          </Key>
+          <Property Type="String" Name="id_insumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="inventarios_diarios">
           <Key>
@@ -83,6 +295,112 @@
           <Property Type="Decimal" Name="cantidad_total" Nullable="false" />
           <Property Type="DateTime" Name="fecha" Nullable="false" />
         </EntityType>
+        <EntityType Name="prestamos">
+          <Key>
+            <PropertyRef Name="idinsumo" />
+            <PropertyRef Name="idconcepto" />
+            <PropertyRef Name="cantidad" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Type="String" Name="idinsumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="idconcepto" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="cantidad" Nullable="false" />
+          <Property Type="DateTime" Name="fecha" Nullable="false" />
+          <NavigationProperty Name="conceptos" Relationship="TacosInventariosModel.fk_conceptos" FromRole="prestamos" ToRole="conceptos" />
+          <NavigationProperty Name="insumos" Relationship="TacosInventariosModel.fk_insumos" FromRole="prestamos" ToRole="insumos" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Type="String" Name="id_producto" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="producto" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="recetas" Relationship="TacosInventariosModel.FK_prod" FromRole="productos" ToRole="recetas" />
+          <NavigationProperty Name="ventas" Relationship="TacosInventariosModel.FK_productos" FromRole="productos" ToRole="ventas" />
+        </EntityType>
+        <EntityType Name="recetas">
+          <Key>
+            <PropertyRef Name="id_producto" />
+            <PropertyRef Name="id_insumo" />
+            <PropertyRef Name="cantidad" />
+          </Key>
+          <Property Type="String" Name="id_producto" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="id_insumo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="cantidad" Nullable="false" />
+          <NavigationProperty Name="insumos" Relationship="TacosInventariosModel.FK_insum" FromRole="recetas" ToRole="insumos" />
+          <NavigationProperty Name="productos" Relationship="TacosInventariosModel.FK_prod" FromRole="recetas" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="ventas">
+          <Key>
+            <PropertyRef Name="id_producto" />
+            <PropertyRef Name="cantidad" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Type="String" Name="id_producto" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="cantidad" Nullable="false" />
+          <Property Type="DateTime" Name="fecha" Nullable="false" />
+          <NavigationProperty Name="productos" Relationship="TacosInventariosModel.FK_productos" FromRole="ventas" ToRole="productos" />
+        </EntityType>
+        <Association Name="fk_conceptos">
+          <End Type="TacosInventariosModel.conceptos" Role="conceptos" Multiplicity="1" />
+          <End Type="TacosInventariosModel.prestamos" Role="prestamos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conceptos">
+              <PropertyRef Name="idconcepto" />
+            </Principal>
+            <Dependent Role="prestamos">
+              <PropertyRef Name="idconcepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_insum">
+          <End Type="TacosInventariosModel.insumos" Role="insumos" Multiplicity="1" />
+          <End Type="TacosInventariosModel.recetas" Role="recetas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="insumos">
+              <PropertyRef Name="id_insumo" />
+            </Principal>
+            <Dependent Role="recetas">
+              <PropertyRef Name="id_insumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_insumos">
+          <End Type="TacosInventariosModel.insumos" Role="insumos" Multiplicity="1" />
+          <End Type="TacosInventariosModel.prestamos" Role="prestamos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="insumos">
+              <PropertyRef Name="id_insumo" />
+            </Principal>
+            <Dependent Role="prestamos">
+              <PropertyRef Name="idinsumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prod">
+          <End Type="TacosInventariosModel.productos" Role="productos" Multiplicity="1" />
+          <End Type="TacosInventariosModel.recetas" Role="recetas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="recetas">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_productos">
+          <End Type="TacosInventariosModel.productos" Role="productos" Multiplicity="1" />
+          <End Type="TacosInventariosModel.ventas" Role="ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="ventas">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -99,12 +417,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="conceptos">
+            <EntityTypeMapping TypeName="TacosInventariosModel.conceptos">
+              <MappingFragment StoreEntitySet="conceptos">
+                <ScalarProperty Name="descripciontipo" ColumnName="descripciontipo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idconcepto" ColumnName="idconcepto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="insumos">
             <EntityTypeMapping TypeName="TacosInventariosModel.insumos">
               <MappingFragment StoreEntitySet="insumos">
                 <ScalarProperty Name="rendimiento" ColumnName="rendimiento" />
                 <ScalarProperty Name="unidad" ColumnName="unidad" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="insumos_seleccionados">
+            <EntityTypeMapping TypeName="TacosInventariosModel.insumos_seleccionados">
+              <MappingFragment StoreEntitySet="insumos_seleccionados">
                 <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -117,6 +452,42 @@
                 <ScalarProperty Name="cantidad_cocido" ColumnName="cantidad_cocido" />
                 <ScalarProperty Name="cantidad_crudo" ColumnName="cantidad_crudo" />
                 <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prestamos">
+            <EntityTypeMapping TypeName="TacosInventariosModel.prestamos">
+              <MappingFragment StoreEntitySet="prestamos">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="idconcepto" ColumnName="idconcepto" />
+                <ScalarProperty Name="idinsumo" ColumnName="idinsumo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productos">
+            <EntityTypeMapping TypeName="TacosInventariosModel.productos">
+              <MappingFragment StoreEntitySet="productos">
+                <ScalarProperty Name="producto" ColumnName="producto" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="recetas">
+            <EntityTypeMapping TypeName="TacosInventariosModel.recetas">
+              <MappingFragment StoreEntitySet="recetas">
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="id_insumo" ColumnName="id_insumo" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ventas">
+            <EntityTypeMapping TypeName="TacosInventariosModel.ventas">
+              <MappingFragment StoreEntitySet="ventas">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -141,9 +512,35 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="TacosInventarioModel">
-        <EntityTypeShape EntityType="TacosInventariosModel.compras" Width="1.5" PointX="0.625" PointY="0.5" Height="1.5923063151041657" />
-        <EntityTypeShape EntityType="TacosInventariosModel.insumos" Width="1.5" PointX="2.625" PointY="0.5" Height="1.5923063151041674" />
-        <EntityTypeShape EntityType="TacosInventariosModel.inventarios_diarios" Width="2.125" PointX="4.75" PointY="0.5" Height="1.7566536458333322" />
+        <EntityTypeShape EntityType="TacosInventariosModel.compras" Width="1.5" PointX="0.5" PointY="2.5" Height="1.5923063151041674" />
+        <EntityTypeShape EntityType="TacosInventariosModel.conceptos" Width="1.5" PointX="4.875" PointY="3.125" Height="1.7566536458333317" />
+        <EntityTypeShape EntityType="TacosInventariosModel.insumos" Width="1.5" PointX="6.75" PointY="0.5" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="TacosInventariosModel.insumos_seleccionados" Width="1.5" PointX="2.625" PointY="2.5" Height="1.0992643229166674" />
+        <EntityTypeShape EntityType="TacosInventariosModel.inventarios_diarios" Width="1.5" PointX="2.625" PointY="4.375" Height="1.7566536458333317" />
+        <EntityTypeShape EntityType="TacosInventariosModel.prestamos" Width="1.5" PointX="6.875" PointY="3.125" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="TacosInventariosModel.productos" Width="1.5" PointX="2.625" PointY="0.5" Height="1.5923063151041674" />
+        <EntityTypeShape EntityType="TacosInventariosModel.recetas" Width="1.5" PointX="4.75" PointY="0.5" Height="1.7566536458333317" />
+        <EntityTypeShape EntityType="TacosInventariosModel.ventas" Width="1.5" PointX="0.5" PointY="0.5" Height="1.5923063151041674" />
+        <AssociationConnector Association="TacosInventariosModel.fk_conceptos" >
+          <ConnectorPoint PointX="6.375" PointY="4.0033268229166659" />
+          <ConnectorPoint PointX="6.875" PointY="4.0033268229166659" />
+        </AssociationConnector>
+        <AssociationConnector Association="TacosInventariosModel.FK_insum" >
+          <ConnectorPoint PointX="6.75" PointY="1.3783268229166659" />
+          <ConnectorPoint PointX="6.25" PointY="1.3783268229166659" />
+        </AssociationConnector>
+        <AssociationConnector Association="TacosInventariosModel.fk_insumos" >
+          <ConnectorPoint PointX="7.5625" PointY="2.4210009765624996" />
+          <ConnectorPoint PointX="7.5625" PointY="3.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="TacosInventariosModel.FK_prod" >
+          <ConnectorPoint PointX="4.125" PointY="1.2961531575520837" />
+          <ConnectorPoint PointX="4.75" PointY="1.2961531575520837" />
+        </AssociationConnector>
+        <AssociationConnector Association="TacosInventariosModel.FK_productos" >
+          <ConnectorPoint PointX="2.625" PointY="1.2961531575520837" />
+          <ConnectorPoint PointX="2" PointY="1.2961531575520837" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>

@@ -2,6 +2,7 @@
 <Schema Namespace="SoftRestaurantModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="SoftRestaurantModelStoreContainer">
     <EntitySet Name="compras" EntityType="SoftRestaurantModel.Store.compras" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="conceptos" EntityType="SoftRestaurantModel.Store.conceptos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="insumos" EntityType="SoftRestaurantModel.Store.insumos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="insumospresentaciones" EntityType="SoftRestaurantModel.Store.insumospresentaciones" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
@@ -29,11 +30,21 @@
     <Property Name="total" Type="money" />
     <Property Name="fiscal" Type="bit" />
   </EntityType>
+  <EntityType Name="conceptos">
+    <Key>
+      <PropertyRef Name="idconcepto" />
+    </Key>
+    <Property Name="idconcepto" Type="varchar" Nullable="false" MaxLength="5" />
+    <Property Name="descripcion" Type="varchar" MaxLength="40" />
+    <Property Name="tipo" Type="numeric" Precision="1" />
+    <Property Name="autorizacion" Type="bit" />
+    <Property Name="visible" Type="bit" />
+  </EntityType>
   <EntityType Name="insumos">
     <Key>
-      <PropertyRef Name="id_insumo" />
+      <PropertyRef Name="idinsumo" />
     </Key>
-    <Property Name="id_insumo" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="idinsumo" Type="varchar" Nullable="false" MaxLength="15" />
     <Property Name="descripcion" Type="varchar" MaxLength="60" />
     <Property Name="idgruposi" Type="varchar" MaxLength="5" />
     <Property Name="unidad" Type="varchar" MaxLength="10" />
@@ -42,31 +53,12 @@
   </EntityType>
   <EntityType Name="insumospresentaciones">
     <Key>
-      <PropertyRef Name="id_insumospresentaciones" />
+      <PropertyRef Name="idinsumospresentaciones" />
     </Key>
-    <Property Name="id_insumospresentaciones" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="idinsumospresentaciones" Type="varchar" Nullable="false" MaxLength="15" />
     <Property Name="descripcion" Type="varchar" MaxLength="60" />
-    <Property Name="id_insumo" Type="varchar" MaxLength="15" />
+    <Property Name="idinsumo" Type="varchar" MaxLength="15" />
     <Property Name="idgruposi" Type="varchar" MaxLength="5" />
     <Property Name="rendimiento" Type="numeric" Precision="12" Scale="4" />
   </EntityType>
-  <!--Se encontraron errores durante la generación:
-      advertencia 6013: La tabla o vista 'softrestaurant8Pro.dbo.movsinv' no tiene una clave principal definida y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-      
-      <EntityType Name="movsinv">
-        <Property Name="fecha" Type="datetime" />
-        <Property Name="foliocheque" Type="numeric" Precision="8" />
-        <Property Name="movto" Type="numeric" Precision="8" />
-        <Property Name="idcompra" Type="numeric" Precision="10" />
-        <Property Name="traspaso" Type="numeric" Precision="8" />
-        <Property Name="invfisico" Type="numeric" Precision="8" />
-        <Property Name="idconcepto" Type="varchar" MaxLength="5" />
-        <Property Name="id_insumo" Type="varchar" MaxLength="15" />
-        <Property Name="costo" Type="money" />
-        <Property Name="cantidad" Type="numeric" Precision="14" Scale="4" />
-        <Property Name="idalmacen" Type="varchar" MaxLength="5" />
-        <Property Name="idturno" Type="numeric" Precision="6" />
-        <Property Name="presentaciondestino" Type="varchar" MaxLength="15" />
-        <Property Name="idpedido" Type="numeric" Precision="8" Scale="2" />
-      </EntityType>-->
 </Schema>
